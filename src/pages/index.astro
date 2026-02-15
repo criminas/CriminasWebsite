@@ -1,0 +1,396 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+	title="Criminas — Empowering Everyone to Change Their World"
+	description="Criminas is empowering everyone to change their world, by bringing open source software to the masses. Explore our open source projects in Linux, developer tools, and web services."
+	keywords="Criminas, open source, linux, software, community, developer tools, web services"
+	activePage="home"
+>
+	<!-- HERO -->
+	<section class="hero">
+		<div class="hero-bg">
+			<canvas id="heroCanvas"></canvas>
+			<div class="hero-glow hero-glow-1"></div>
+			<div class="hero-glow hero-glow-2"></div>
+			<div class="hero-glow hero-glow-3"></div>
+		</div>
+		<div class="hero-content fade-up">
+			<h1>Welcome to <span class="highlight">Criminas</span></h1>
+			<p class="hero-subtitle">
+				Empowering everyone to change their world, by bringing open
+				source software to the masses.
+			</p>
+			<div class="hero-actions">
+				<a href="/projects" class="btn-primary">
+					Explore Projects
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2.5"
+						><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+					>
+				</a>
+				<a href="/about" class="btn-secondary">Learn More</a>
+			</div>
+		</div>
+		<div class="hero-scroll-indicator">
+			<span>Scroll</span>
+			<div class="scroll-line"></div>
+		</div>
+	</section>
+
+	<!-- ABOUT -->
+	<section class="section about-section" id="about">
+		<div class="section-container">
+			<div class="section-number fade-up">00</div>
+			<div class="about-grid">
+				<div class="about-text fade-up">
+					<h2 class="section-title">Who are we?</h2>
+					<p class="section-desc">
+						Many things! We're a team, a movement, and a community.
+						Together, we have a shared mission of bringing open
+						source software to the mass market — the everyday
+						person. We work towards this goal by building software,
+						products, communities, and coalitions.
+					</p>
+					<p class="section-desc" style="margin-top: 1rem;">
+						Our current focus is in the Linux desktop, developer
+						tools, and web services space, but we take on any
+						endeavor that furthers our goals.
+					</p>
+					<a
+						href="/about"
+						class="about-link"
+						style="margin-top: 1.5rem; display: inline-flex;"
+					>
+						See what we build <span class="arrow">→</span>
+					</a>
+				</div>
+				<div class="about-visual fade-up">
+					<div class="about-card">
+						<div class="about-stats">
+							<div class="stat-item">
+								<div class="stat-number">100%</div>
+								<div class="stat-label">Open Source</div>
+							</div>
+							<div class="stat-item">
+								<div class="stat-number">∞</div>
+								<div class="stat-label">Possibilities</div>
+							</div>
+							<div class="stat-item">
+								<div class="stat-number">24/7</div>
+								<div class="stat-label">Community</div>
+							</div>
+							<div class="stat-item">
+								<div class="stat-number">0</div>
+								<div class="stat-label">Barriers</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- PROJECTS -->
+	<section class="section projects-section" id="projects">
+		<div class="section-container">
+			<div class="section-number fade-up">01</div>
+			<div class="projects-header fade-up">
+				<div>
+					<h2 class="section-title">What do we do?</h2>
+					<p class="section-desc">
+						We build products that innovate past the status quo.
+						Everything we build is open source and developed with
+						the community.
+					</p>
+				</div>
+				<a href="/projects" class="about-link"
+					>View all projects <span class="arrow">→</span></a
+				>
+			</div>
+			<div class="projects-grid">
+				<a
+					href="/projects/crimirepo"
+					class="project-card featured card-blue fade-up"
+				>
+					<div class="project-card-bg"></div>
+					<span class="dev-badge">In Development</span>
+					<div class="pattern-dots">
+						<span></span><span></span><span></span><span
+						></span><span></span>
+						<span></span><span></span><span></span><span
+						></span><span></span>
+						<span></span><span></span><span></span><span
+						></span><span></span>
+					</div>
+					<div class="project-card-content">
+						<h3>CrimiRepo</h3>
+						<p>
+							The community-driven package repository for
+							everyone.
+						</p>
+					</div>
+				</a>
+				<a
+					href="/projects/forge"
+					class="project-card card-light fade-up"
+				>
+					<div class="project-card-bg"></div>
+					<span class="dev-badge">In Development</span>
+					<div class="project-card-content">
+						<h3>Forge</h3>
+						<p>Developer tools that accelerate your workflow.</p>
+					</div>
+				</a>
+				<a
+					href="/projects/nexus"
+					class="project-card card-gradient fade-up"
+				>
+					<div class="project-card-bg"></div>
+					<span class="dev-badge">In Development</span>
+					<div class="pattern-circles">
+						<span></span><span></span><span></span>
+					</div>
+					<div class="project-card-content">
+						<h3>Nexus</h3>
+						<p>
+							Cloud infrastructure that just works. Deploy
+							anything, anywhere.
+						</p>
+					</div>
+				</a>
+				<a
+					href="/projects/sentinel"
+					class="project-card card-dark fade-up"
+				>
+					<div class="project-card-bg"></div>
+					<div class="project-card-content">
+						<h3>Sentinel</h3>
+						<p>Open source security tools for the modern web.</p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- CONTACT -->
+	<section class="section contact-section" id="contact">
+		<div class="section-container">
+			<div class="section-number fade-up">02</div>
+			<div class="contact-grid">
+				<div class="contact-info fade-up">
+					<h2 class="section-title">Questions?</h2>
+					<p class="section-desc">
+						Need support, want to ask questions, want to contribute,
+						or just want to say hello? Reach out to us through any
+						of these channels.
+					</p>
+					<div class="contact-channels">
+						<a href="#" class="contact-channel">
+							<div class="channel-icon">
+								<svg viewBox="0 0 24 24"
+									><path
+										d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"
+									></path></svg
+								>
+							</div>
+						</a>
+						<a
+							href="mailto:hello@criminas.org"
+							class="contact-channel"
+						>
+							<div class="channel-icon email">
+								<svg viewBox="0 0 24 24"
+									><path
+										d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+									></path></svg
+								>
+							</div>
+							<div class="channel-text">
+								<h4>Email</h4>
+								<p>hello@criminas.org</p>
+							</div>
+						</a>
+						<a
+							href="https://github.com/criminas"
+							target="_blank"
+							rel="noopener"
+							class="contact-channel"
+						>
+							<div class="channel-icon github">
+								<svg viewBox="0 0 24 24"
+									><path
+										d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+									></path></svg
+								>
+							</div>
+							<div class="channel-text">
+								<h4>GitHub</h4>
+								<p>Browse our repositories</p>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="contact-form-card fade-up">
+					<form id="contactForm">
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								placeholder="you@example.com"
+								required
+							/>
+						</div>
+						<div class="form-group">
+							<label for="subject">Subject</label>
+							<input
+								type="text"
+								id="subject"
+								name="subject"
+								placeholder="What's this about?"
+							/>
+						</div>
+						<div class="form-group">
+							<label for="message">Message</label>
+							<textarea
+								id="message"
+								name="message"
+								placeholder="Tell us what's on your mind..."
+								required></textarea>
+						</div>
+						<button type="submit" class="form-submit"
+							>Send Message</button
+						>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Hero Canvas Animation -->
+	<script>
+		const canvas = document.getElementById(
+			"heroCanvas",
+		) as HTMLCanvasElement;
+		if (canvas) {
+			const ctx = canvas.getContext("2d")!;
+			let particles: any[] = [];
+
+			function resizeCanvas() {
+				canvas.width = canvas.parentElement!.offsetWidth;
+				canvas.height = canvas.parentElement!.offsetHeight;
+			}
+
+			class Particle {
+				x: number;
+				y: number;
+				vx: number;
+				vy: number;
+				radius: number;
+				opacity: number;
+				constructor() {
+					this.x = 0;
+					this.y = 0;
+					this.vx = 0;
+					this.vy = 0;
+					this.radius = 0;
+					this.opacity = 0;
+					this.reset();
+				}
+				reset() {
+					this.x = Math.random() * canvas.width;
+					this.y = Math.random() * canvas.height;
+					this.vx = (Math.random() - 0.5) * 0.5;
+					this.vy = (Math.random() - 0.5) * 0.5;
+					this.radius = Math.random() * 2 + 0.5;
+					this.opacity = Math.random() * 0.5 + 0.1;
+				}
+				update() {
+					this.x += this.vx;
+					this.y += this.vy;
+					if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+					if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+				}
+				draw() {
+					ctx.beginPath();
+					ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+					ctx.fillStyle = `rgba(124, 58, 237, ${this.opacity})`;
+					ctx.fill();
+				}
+			}
+
+			function initParticles() {
+				const count = Math.min(
+					Math.floor((canvas.width * canvas.height) / 8000),
+					120,
+				);
+				particles = [];
+				for (let i = 0; i < count; i++) particles.push(new Particle());
+			}
+
+			function drawLines() {
+				const maxDist = 150;
+				for (let i = 0; i < particles.length; i++) {
+					for (let j = i + 1; j < particles.length; j++) {
+						const dx = particles[i].x - particles[j].x;
+						const dy = particles[i].y - particles[j].y;
+						const dist = Math.sqrt(dx * dx + dy * dy);
+						if (dist < maxDist) {
+							const opacity = (1 - dist / maxDist) * 0.15;
+							ctx.beginPath();
+							ctx.moveTo(particles[i].x, particles[i].y);
+							ctx.lineTo(particles[j].x, particles[j].y);
+							ctx.strokeStyle = `rgba(124, 58, 237, ${opacity})`;
+							ctx.lineWidth = 0.5;
+							ctx.stroke();
+						}
+					}
+				}
+			}
+
+			function animate() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				particles.forEach((p) => {
+					p.update();
+					p.draw();
+				});
+				drawLines();
+				requestAnimationFrame(animate);
+			}
+
+			window.addEventListener("resize", () => {
+				resizeCanvas();
+				initParticles();
+			});
+			resizeCanvas();
+			initParticles();
+			animate();
+		}
+
+		// Form handling
+		document
+			.getElementById("contactForm")
+			?.addEventListener("submit", (e) => {
+				e.preventDefault();
+				const btn = (e.target as HTMLFormElement).querySelector(
+					".form-submit",
+				) as HTMLButtonElement;
+				btn.textContent = "Message Sent!";
+				btn.style.background =
+					"linear-gradient(135deg, #059669, #047857)";
+				setTimeout(() => {
+					btn.textContent = "Send Message";
+					btn.style.background = "";
+					(e.target as HTMLFormElement).reset();
+				}, 3000);
+			});
+	</script>
+</Layout>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://criminas.org/sitemap-0.xml

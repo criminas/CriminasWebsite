@@ -1,0 +1,889 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="Documentation"
+    description="Comprehensive documentation for all Criminas projects. Get started with CrimiRepo, Forge, Nexus, and Sentinel."
+    keywords="documentation, docs, criminas, crimirepo, forge, nexus, sentinel, open source, guides"
+    activePage="docs"
+>
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="hero-glow glow-1"></div>
+        <div class="hero-glow glow-2"></div>
+        <div class="page-hero-content">
+            <h1 class="fade-up">
+                <span class="highlight">Documentation</span>
+            </h1>
+            <p class="fade-up">
+                Everything you need to get started with Criminas projects.
+                Guides, references, and resources — all in one place.
+            </p>
+        </div>
+    </section>
+
+    <!-- QUICK START -->
+    <section class="section docs-section">
+        <div class="section-container">
+            <div class="docs-nav-bar fade-up">
+                <a href="#getting-started" class="docs-nav-link active"
+                    >Getting Started</a
+                >
+                <a href="#crimirepo" class="docs-nav-link">CrimiRepo</a>
+                <a href="#forge" class="docs-nav-link">Forge</a>
+                <a href="#nexus" class="docs-nav-link">Nexus</a>
+                <a href="#sentinel" class="docs-nav-link">Sentinel</a>
+                <a href="#community" class="docs-nav-link">Community</a>
+            </div>
+
+            <!-- GETTING STARTED -->
+            <div id="getting-started" class="docs-block fade-up">
+                <div class="docs-block-header">
+                    <span class="docs-icon"
+                        ><svg
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><polyline points="13 17 18 12 13 7"
+                            ></polyline><polyline points="6 17 11 12 6 7"
+                            ></polyline></svg
+                        ></span
+                    >
+                    <h2>Getting Started</h2>
+                </div>
+                <p class="docs-intro">
+                    Welcome to Criminas! We build open source tools that empower
+                    developers and everyday users. Here's everything you need to
+                    get up and running.
+                </p>
+                <div class="docs-cards-grid">
+                    <div class="docs-card">
+                        <h3>Installation</h3>
+                        <p>
+                            Most Criminas tools are available through standard
+                            package managers or GitHub releases.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                                <button
+                                    class="docs-copy-btn"
+                                    data-code="git clone https://github.com/criminas/{project}.git"
+                                    >Copy</button
+                                >
+                            </div>
+                            <pre><code># Clone any Criminas project
+git clone https://github.com/criminas/&#123;project&#125;.git
+cd &#123;project&#125;
+
+# Follow project-specific setup
+cat README.md</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Contributing</h3>
+                        <p>
+                            All our projects are open source and we welcome
+                            contributions of all kinds.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                                <button
+                                    class="docs-copy-btn"
+                                    data-code="git checkout -b feature/my-feature"
+                                    >Copy</button
+                                >
+                            </div>
+                            <pre><code># Fork the repo, then:
+git checkout -b feature/my-feature
+
+# Make your changes, then submit a PR
+git push origin feature/my-feature</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRIMIREPO -->
+            <div id="crimirepo" class="docs-block fade-up">
+                <div class="docs-block-header">
+                    <span class="docs-icon"
+                        ><svg
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                            ></path><polyline
+                                points="3.27 6.96 12 12.01 20.73 6.96"
+                            ></polyline><line x1="12" y1="22.08" x2="12" y2="12"
+                            ></line></svg
+                        ></span
+                    >
+                    <h2>CrimiRepo</h2>
+                    <span class="dev-badge-inline">In Development</span>
+                </div>
+                <p class="docs-intro">
+                    The community-driven package repository for everyone.
+                    CrimiRepo is a universal package manager that makes
+                    installing, updating, and managing software simple.
+                </p>
+                <div class="docs-cards-grid">
+                    <div class="docs-card">
+                        <h3>Package Management</h3>
+                        <p>
+                            Search, install, and manage packages with simple
+                            commands.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># Search for a package
+crimirepo search &#123;package-name&#125;
+
+# Install a package
+crimirepo install &#123;package-name&#125;
+
+# Update all packages
+crimirepo update --all
+
+# Remove a package
+crimirepo remove &#123;package-name&#125;</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Publishing Packages</h3>
+                        <p>
+                            Share your software with the community by publishing
+                            to CrimiRepo.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># Initialize a package manifest
+crimirepo init
+
+# Validate your package
+crimirepo validate
+
+# Publish to the repository
+crimirepo publish</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Repository Configuration</h3>
+                        <p>Customize repositories and manage sources.</p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">yaml</span>
+                            </div>
+                            <pre><code># ~/.config/crimirepo/config.yaml
+repositories:
+  - name: official
+    url: https://repo.criminas.org
+    priority: 1
+  - name: community
+    url: https://community.criminas.org
+    priority: 2
+
+auto_update: true
+update_interval: 24h</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORGE -->
+            <div id="forge" class="docs-block fade-up">
+                <div class="docs-block-header">
+                    <span class="docs-icon"
+                        ><svg
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                            ></path></svg
+                        ></span
+                    >
+                    <h2>Forge</h2>
+                    <span class="dev-badge-inline">In Development</span>
+                </div>
+                <p class="docs-intro">
+                    Developer tools that accelerate your workflow. Forge
+                    provides a suite of CLI utilities, build tools, and project
+                    scaffolding for modern development.
+                </p>
+                <div class="docs-cards-grid">
+                    <div class="docs-card">
+                        <h3>Project Scaffolding</h3>
+                        <p>
+                            Bootstrap new projects with opinionated,
+                            production-ready templates.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># Create a new project
+forge new my-project --template web
+
+# Available templates
+forge templates list
+
+# Create from custom template
+forge new my-app --from github.com/user/template</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Build System</h3>
+                        <p>Unified build commands across all your projects.</p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># Build your project
+forge build
+
+# Run in development mode
+forge dev
+
+# Run tests
+forge test
+
+# Lint and format
+forge lint --fix</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Configuration</h3>
+                        <p>
+                            Configure Forge for your project with a simple
+                            config file.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">toml</span>
+                            </div>
+                            <pre><code># forge.toml
+[project]
+name = "my-project"
+version = "1.0.0"
+
+[build]
+target = "dist"
+minify = true
+
+[dev]
+port = 3000
+hot_reload = true</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEXUS -->
+            <div id="nexus" class="docs-block fade-up">
+                <div class="docs-block-header">
+                    <span class="docs-icon"
+                        ><svg
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                            ></path></svg
+                        ></span
+                    >
+                    <h2>Nexus</h2>
+                    <span class="dev-badge-inline">In Development</span>
+                </div>
+                <p class="docs-intro">
+                    Cloud infrastructure that just works. Nexus simplifies
+                    deployment, scaling, and management of applications across
+                    any cloud provider.
+                </p>
+                <div class="docs-cards-grid">
+                    <div class="docs-card">
+                        <h3>Deployment</h3>
+                        <p>Deploy applications with a single command.</p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># Initialize Nexus in your project
+nexus init
+
+# Deploy to production
+nexus deploy --env production
+
+# Deploy with preview URL
+nexus deploy --preview
+
+# View deployment status
+nexus status</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Infrastructure Config</h3>
+                        <p>
+                            Define your infrastructure as code with Nexus
+                            manifests.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">yaml</span>
+                            </div>
+                            <pre><code># nexus.yaml
+app:
+  name: my-app
+  runtime: node-20
+
+scaling:
+  min_instances: 1
+  max_instances: 10
+  cpu_threshold: 80
+
+networking:
+  domain: app.example.com
+  ssl: auto</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Monitoring</h3>
+                        <p>
+                            Built-in monitoring and logging for deployed
+                            applications.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># View live logs
+nexus logs --follow
+
+# Check resource usage
+nexus metrics
+
+# Set up alerts
+nexus alerts add \
+  --metric cpu \
+  --threshold 90 \
+  --notify email</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SENTINEL -->
+            <div id="sentinel" class="docs-block fade-up">
+                <div class="docs-block-header">
+                    <span class="docs-icon"
+                        ><svg
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                            ></path></svg
+                        ></span
+                    >
+                    <h2>Sentinel</h2>
+                </div>
+                <p class="docs-intro">
+                    Open source security for the modern web. Sentinel provides
+                    automated vulnerability scanning, dependency auditing, and
+                    security monitoring for your projects.
+                </p>
+                <div class="docs-cards-grid">
+                    <div class="docs-card">
+                        <h3>Vulnerability Scanning</h3>
+                        <p>
+                            Scan your codebase for known vulnerabilities and
+                            security issues.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># Run a full security scan
+sentinel scan
+
+# Scan specific directory
+sentinel scan --path ./src
+
+# Generate security report
+sentinel report --format html
+
+# CI/CD integration
+sentinel scan --ci --fail-on high</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Dependency Auditing</h3>
+                        <p>
+                            Audit your project dependencies for known
+                            vulnerabilities.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">bash</span>
+                            </div>
+                            <pre><code># Audit dependencies
+sentinel audit
+
+# Auto-fix vulnerabilities
+sentinel audit --fix
+
+# Check specific package
+sentinel audit --package lodash
+
+# Export audit report
+sentinel audit --export sbom.json</code></pre>
+                        </div>
+                    </div>
+                    <div class="docs-card">
+                        <h3>Configuration</h3>
+                        <p>
+                            Customize Sentinel's scanning rules and thresholds.
+                        </p>
+                        <div class="docs-code-block">
+                            <div class="docs-code-header">
+                                <span class="docs-code-lang">yaml</span>
+                            </div>
+                            <pre><code># .sentinel.yaml
+scan:
+  severity: medium
+  exclude:
+    - "test/**"
+    - "vendor/**"
+
+notifications:
+  slack: https://hooks.slack.com/...
+  email: security@example.com
+
+schedule:
+  cron: "0 6 * * 1"  # Weekly Monday</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMMUNITY -->
+            <div id="community" class="docs-block fade-up">
+                <div class="docs-block-header">
+                    <span class="docs-icon"
+                        ><svg
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><circle cx="12" cy="12" r="10"></circle><line
+                                x1="2"
+                                y1="12"
+                                x2="22"
+                                y2="12"></line><path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                            ></path></svg
+                        ></span
+                    >
+                    <h2>Community & Resources</h2>
+                </div>
+                <p class="docs-intro">
+                    Join the Criminas community. Contribute, ask questions, and
+                    help shape the future of open source.
+                </p>
+                <div class="docs-cards-grid">
+                    <div class="docs-card docs-resource-card">
+                        <div class="docs-resource-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                fill="currentColor"
+                                ><path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3>GitHub</h3>
+                        <p>
+                            Browse source code, file issues, and submit pull
+                            requests.
+                        </p>
+                        <a
+                            href="https://github.com/criminas"
+                            target="_blank"
+                            rel="noopener"
+                            class="docs-link">View on GitHub →</a
+                        >
+                    </div>
+                    <div class="docs-card docs-resource-card">
+                        <div class="docs-resource-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                fill="currentColor"
+                                ><path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3>Contact</h3>
+                        <p>
+                            Questions, feedback, or partnership inquiries —
+                            reach out anytime.
+                        </p>
+                        <a href="/contact" class="docs-link">Get in Touch →</a>
+                    </div>
+                    <div class="docs-card docs-resource-card">
+                        <div class="docs-resource-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                fill="currentColor"
+                                ><path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3>Contributing Guide</h3>
+                        <p>
+                            Learn how to contribute to Criminas projects and
+                            join the team.
+                        </p>
+                        <a
+                            href="https://github.com/criminas"
+                            target="_blank"
+                            rel="noopener"
+                            class="docs-link">Read the Guide →</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    /* Docs navigation bar */
+    .docs-nav-bar {
+        display: flex;
+        gap: 0.25rem;
+        padding: 0.35rem;
+        background: #fff;
+        border-radius: 10px;
+        margin-bottom: 3rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        overflow-x: auto;
+        position: sticky;
+        top: 60px;
+        z-index: 50;
+    }
+
+    .docs-nav-link {
+        padding: 0.6rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #4b5563;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    .docs-nav-link:hover {
+        background: rgba(124, 58, 237, 0.06);
+        color: #7c3aed;
+    }
+
+    .docs-nav-link.active {
+        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        color: #fff;
+    }
+
+    /* Docs blocks */
+    .docs-block {
+        margin-bottom: 4rem;
+        scroll-margin-top: 120px;
+    }
+
+    .docs-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .docs-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: linear-gradient(
+            135deg,
+            rgba(124, 58, 237, 0.12),
+            rgba(124, 58, 237, 0.04)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #7c3aed;
+        flex-shrink: 0;
+    }
+
+    .docs-block-header h2 {
+        font-size: 1.85rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: #0f0f23;
+    }
+
+    .dev-badge-inline {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.1);
+        border: 1px solid rgba(245, 158, 11, 0.25);
+        padding: 0.25rem 0.65rem;
+        border-radius: 100px;
+    }
+
+    .docs-intro {
+        font-size: 1.05rem;
+        color: #4b5563;
+        line-height: 1.75;
+        max-width: 700px;
+        margin-bottom: 2rem;
+    }
+
+    /* Docs card grid */
+    .docs-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .docs-card {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        padding: 1.75rem;
+        transition:
+            border-color 0.15s ease,
+            box-shadow 0.15s ease;
+    }
+
+    .docs-card:hover {
+        border-color: rgba(124, 58, 237, 0.2);
+        box-shadow: 0 4px 20px rgba(124, 58, 237, 0.06);
+    }
+
+    .docs-card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #0f0f23;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+    }
+
+    .docs-card > p {
+        font-size: 0.9rem;
+        color: #6b7280;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    /* Code blocks */
+    .docs-code-block {
+        background: #0f0f23;
+        border-radius: 10px;
+        overflow: hidden;
+        font-size: 0.82rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .docs-code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .docs-code-lang {
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .docs-copy-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 0.2rem 0.6rem;
+        border-radius: 5px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Inter", sans-serif;
+        transition: all 0.15s ease;
+    }
+
+    .docs-copy-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+    }
+
+    .docs-code-block pre {
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 0;
+    }
+
+    .docs-code-block code {
+        font-family: "Courier New", "SF Mono", "Fira Code", monospace;
+        color: #e2e8f0;
+        font-size: 0.82rem;
+        line-height: 1.7;
+        white-space: pre;
+    }
+
+    /* Resource cards */
+    .docs-resource-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .docs-resource-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: linear-gradient(
+            135deg,
+            rgba(124, 58, 237, 0.12),
+            rgba(124, 58, 237, 0.04)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        color: #7c3aed;
+    }
+
+    .docs-link {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #7c3aed;
+        margin-top: auto;
+        transition: color 0.15s ease;
+    }
+
+    .docs-link:hover {
+        color: #6d28d9;
+    }
+
+    .docs-section {
+        background: #f0f0f6;
+    }
+
+    @media (max-width: 768px) {
+        .docs-nav-bar {
+            gap: 0.15rem;
+        }
+
+        .docs-nav-link {
+            padding: 0.5rem 0.85rem;
+            font-size: 0.8rem;
+        }
+
+        .docs-cards-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .docs-block-header h2 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    // Highlight active nav link on scroll
+    document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll(".docs-block");
+        const navLinks = document.querySelectorAll(".docs-nav-link");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navLinks.forEach((link) => {
+                            link.classList.toggle(
+                                "active",
+                                link.getAttribute("href") === `#${id}`,
+                            );
+                        });
+                    }
+                });
+            },
+            { rootMargin: "-120px 0px -60% 0px" },
+        );
+
+        sections.forEach((section) => observer.observe(section));
+
+        // Copy button functionality
+        document.querySelectorAll(".docs-copy-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const code =
+                    btn.closest(".docs-code-block")?.querySelector("code")
+                        ?.textContent || "";
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = "Copied!";
+                    setTimeout(() => (btn.textContent = "Copy"), 2000);
+                });
+            });
+        });
+    });
+</script>

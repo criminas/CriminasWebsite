@@ -1,0 +1,248 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+    {
+        name: "CrimiRepo",
+        slug: "crimirepo",
+        tagline: "The community-driven package repository.",
+        description:
+            "CrimiRepo is a modern package repository designed to make software distribution simple. With community-maintained packages and automated build pipelines, everyone can contribute.",
+        tag: "Package Management",
+        tagColor: "#3b82f6",
+        tagBg: "rgba(59, 130, 246, 0.1)",
+        headerBg: "linear-gradient(135deg, #0f172a, #1e3a5f)",
+        inDev: true,
+        features: [
+            "Community-maintained packages",
+            "Automated build & testing pipelines",
+            "Easy contribution workflow",
+            "Version management & rollbacks",
+        ],
+    },
+    {
+        name: "Forge",
+        slug: "forge",
+        tagline: "Developer tools that accelerate your workflow.",
+        description:
+            "Forge is a suite of modern developer tools built to streamline your development process. From scaffolding to deployment, Forge handles the heavy lifting so you can focus on building.",
+        tag: "Developer Tools",
+        tagColor: "#1a1a2e",
+        tagBg: "rgba(26, 26, 46, 0.06)",
+        headerBg: "linear-gradient(135deg, #f0eef6, #e8e6f0)",
+        inDev: true,
+        features: [
+            "Project scaffolding & templates",
+            "Integrated build system",
+            "Hot module replacement",
+            "Plugin ecosystem",
+        ],
+    },
+    {
+        name: "Nexus",
+        slug: "nexus",
+        tagline: "Cloud infrastructure that just works.",
+        description:
+            "Deploy anything, anywhere with Nexus. Our open source cloud platform provides simple, powerful infrastructure that scales with your needs — from side projects to production workloads.",
+        tag: "Cloud Platform",
+        tagColor: "#7c3aed",
+        tagBg: "rgba(124, 58, 237, 0.1)",
+        headerBg: "linear-gradient(135deg, #312e81, #4c1d95)",
+        inDev: true,
+        features: [
+            "One-click deployments",
+            "Auto-scaling infrastructure",
+            "Built-in monitoring & logging",
+            "Edge network distribution",
+        ],
+    },
+    {
+        name: "Sentinel",
+        slug: "sentinel",
+        tagline: "Open source security for the modern web.",
+        description:
+            "Sentinel provides a comprehensive security toolkit for modern applications. From dependency scanning to runtime protection, keep your projects safe without the enterprise price tag.",
+        tag: "Security",
+        tagColor: "#ef4444",
+        tagBg: "rgba(239, 68, 68, 0.1)",
+        headerBg: "linear-gradient(135deg, #0a0a1a, #1a1a3e)",
+        inDev: false,
+        features: [
+            "Dependency vulnerability scanning",
+            "Runtime threat detection",
+            "Security audit reports",
+            "CI/CD integration",
+        ],
+    },
+];
+---
+
+<Layout
+    title="Projects — Open Source Software by Criminas"
+    description="Explore our open source projects: CrimiRepo package manager, Forge developer tools, Nexus cloud platform, and Sentinel security toolkit."
+    keywords="Criminas projects, CrimiRepo, Forge, Nexus, Sentinel, open source software, developer tools, cloud platform"
+    activePage="projects"
+    ogType="article"
+>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="hero-glow glow-1"></div>
+        <div class="hero-glow glow-2"></div>
+        <div class="page-hero-content fade-up">
+            <h1>Our <span class="highlight">Projects</span></h1>
+            <p>
+                We build products that innovate past the status quo. Everything
+                we build is open source and developed with the community.
+            </p>
+        </div>
+    </section>
+
+    <!-- PROJECTS LIST -->
+    <section class="content-block">
+        <div class="content-container">
+            {
+                projects.map((project, i) => (
+                    <div
+                        class={`content-grid ${i % 2 !== 0 ? "reverse" : ""}`}
+                        style={`margin-bottom: ${i < projects.length - 1 ? "5rem" : "0"};`}
+                    >
+                        <div class="fade-up">
+                            <div class="section-number">
+                                {String(i).padStart(2, "0")}
+                            </div>
+                            <h2 class="section-title">
+                                {project.name}
+                                {project.inDev && (
+                                    <span
+                                        class="dev-badge"
+                                        style="margin-left: 0.75rem; vertical-align: middle; font-size: 0.6rem;"
+                                    >
+                                        In Development
+                                    </span>
+                                )}
+                            </h2>
+                            <p
+                                class="section-desc"
+                                style="font-style: italic; color: #7c3aed; margin-bottom: 1rem;"
+                            >
+                                {project.tagline}
+                            </p>
+                            <p class="section-desc">{project.description}</p>
+                            <a
+                                href={`/projects/${project.slug}`}
+                                class="about-link"
+                                style="margin-top: 1.5rem; display: inline-flex;"
+                            >
+                                Learn more <span class="arrow">→</span>
+                            </a>
+                        </div>
+                        <div class="fade-up">
+                            <div class="project-detail-card">
+                                <div
+                                    class="project-detail-header"
+                                    style={`background: ${project.headerBg};`}
+                                >
+                                    <span
+                                        class="project-tag"
+                                        style={`color: ${project.tagColor}; background: ${project.tagBg};`}
+                                    >
+                                        {project.tag}
+                                    </span>
+                                    <h3
+                                        style={`color: ${project.headerBg.includes("#f0") ? "#1a1a2e" : "#fff"};`}
+                                    >
+                                        {project.name}
+                                    </h3>
+                                </div>
+                                <div class="project-detail-body">
+                                    <p style="margin-top: 1.5rem;">
+                                        {project.tagline}
+                                    </p>
+                                    <ul class="project-features">
+                                        {project.features.map((feature) => (
+                                            <li>{feature}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section
+        class="content-block alt"
+        style="text-align: center; padding-bottom: 6rem;"
+    >
+        <div class="content-container fade-up">
+            <h2 class="section-title">Want to contribute?</h2>
+            <p class="section-desc" style="margin: 0 auto 2rem;">
+                All of our projects are open source and welcome contributions.
+                Whether it's code, documentation, design, or testing — we'd love
+                your help.
+            </p>
+            <div
+                style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;"
+            >
+                <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-primary"
+                >
+                    View on GitHub
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        ><path d="M7 17l9.2-9.2M17 17V7.8H7.8"></path></svg
+                    >
+                </a>
+                <a
+                    href="/contact"
+                    class="btn-secondary"
+                    style="background: rgba(0,0,0,0.04); color: #1a1a2e; border-color: rgba(0,0,0,0.1);"
+                >
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structured Data for Projects -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Criminas Open Source Projects",
+            description:
+                "Explore our open source projects including CrimiRepo, Forge, Nexus, and Sentinel.",
+            mainEntity: {
+                "@type": "ItemList",
+                itemListElement: projects.map((p, i) => ({
+                    "@type": "ListItem",
+                    position: i + 1,
+                    item: {
+                        "@type": "SoftwareApplication",
+                        name: p.name,
+                        description: p.description,
+                        applicationCategory: p.tag,
+                        offers: {
+                            "@type": "Offer",
+                            price: "0",
+                            priceCurrency: "USD",
+                        },
+                        license: "https://opensource.org/licenses/MIT",
+                    },
+                })),
+            },
+        })}
+    />
+</Layout>
