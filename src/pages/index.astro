@@ -12,30 +12,33 @@ import Layout from "../layouts/Layout.astro";
 	<section class="hero">
 		<div class="hero-bg">
 			<canvas id="heroCanvas"></canvas>
-			<div class="hero-glow hero-glow-1"></div>
-			<div class="hero-glow hero-glow-2"></div>
-			<div class="hero-glow hero-glow-3"></div>
 		</div>
-		<div class="hero-content fade-up">
-			<h1>Welcome to <span class="highlight">Criminas</span></h1>
-			<p class="hero-subtitle">
-				Empowering everyone to change their world, by bringing open
-				source software to the masses.
-			</p>
-			<div class="hero-actions">
-				<a href="/projects" class="btn-primary">
-					Explore Projects
-					<svg
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2.5"
-						><path d="M5 12h14M12 5l7 7-7 7"></path></svg
-					>
-				</a>
-				<a href="/about" class="btn-secondary">Learn More</a>
+		<div class="section-container">
+			<div class="hero-content fade-up">
+				<div class="hero-badge">Open source collective</div>
+				<h1>
+					Build with <span class="highlight">clarity</span>, ship with
+					confidence.
+				</h1>
+				<p class="hero-subtitle">
+					Criminas designs open tools that feel intentional-combining
+					careful engineering with a sharp, modern experience for everyone.
+				</p>
+				<div class="hero-actions">
+					<a href="/projects" class="btn-primary">
+						Explore projects
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2.5"
+							><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+						>
+					</a>
+					<a href="/about" class="btn-secondary">See how we work</a>
+				</div>
 			</div>
 		</div>
 		<div class="hero-scroll-indicator">
@@ -175,6 +178,14 @@ import Layout from "../layouts/Layout.astro";
 						<p>Open source security tools for the modern web.</p>
 					</div>
 				</a>
+				<a href="/projects/app" class="project-card card-green fade-up">
+					<div class="project-card-bg"></div>
+					<span class="dev-badge">Android Only</span>
+					<div class="project-card-content">
+						<h3>Criminas Learning</h3>
+						<p>Master coding on the go. Exclusively for Android.</p>
+					</div>
+				</a>
 			</div>
 		</div>
 	</section>
@@ -192,15 +203,6 @@ import Layout from "../layouts/Layout.astro";
 						of these channels.
 					</p>
 					<div class="contact-channels">
-						<a href="#" class="contact-channel">
-							<div class="channel-icon">
-								<svg viewBox="0 0 24 24"
-									><path
-										d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"
-									></path></svg
-								>
-							</div>
-						</a>
 						<a
 							href="mailto:hello@criminas.org"
 							class="contact-channel"

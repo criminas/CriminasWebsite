@@ -13,7 +13,17 @@ Criminas is a collection of open-source projects focused on developer tools, clo
 
 ## Development
 
-This website is built with [Astro](https://astro.build/).
+This website is built with [Astro](https://astro.build/) and [Convex](https://convex.dev/) for authentication and data storage.
+
+### Authentication Setup
+
+This site includes user authentication with GitHub and Google OAuth. To set up authentication:
+
+1. Follow the [Convex Setup Guide](./CONVEX_SETUP.md) for detailed instructions
+2. Install dependencies: `npm install`
+3. Deploy Convex: `npx convex dev`
+4. Configure OAuth apps (see setup guide)
+5. Set environment variables in `.env.local`
 
 ### Commands
 
@@ -23,9 +33,18 @@ All commands are run from the root of the project:
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npx convex dev`          | Starts Convex development server                 |
 | `npm run build`           | Build the production site to `./dist/`           |
 | `npm run preview`         | Preview the build locally                        |
 | `npm run astro ...`       | Run Astro CLI commands                           |
+
+### Features
+
+- **User Authentication**: Sign in with GitHub or Google
+- **User Profiles**: Manage your account information
+- **Project Starring**: Star your favorite projects
+- **Dark Mode**: Professional dark theme with toggle
+- **Responsive Design**: Mobile-first design with modern aesthetics
 
 ## Contributing
 

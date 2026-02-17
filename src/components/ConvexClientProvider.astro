@@ -1,0 +1,27 @@
+---
+// ConvexClientProvider.astro
+---
+
+<div id="convex-provider">
+    <slot />
+</div>
+
+<script>
+    import { ConvexClient } from "convex/browser";
+    
+    const convexUrl = import.meta.env.PUBLIC_CONVEX_URL;
+    if (!convexUrl) {
+        console.error("Missing PUBLIC_CONVEX_URL environment variable");
+    }
+    
+    const convex = new ConvexClient(convexUrl || "");
+    
+    // Check for stored auth token and set it
+    const storedToken = localStorage.getItem('convex_auth_token');
+    if (storedToken) {
+        convex.setAuth(() => Promise.resolve(storedToken));
+    }
+    
+    // This makes Convex available globally for components
+    (window as any).__convex = convex;
+</script>

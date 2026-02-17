@@ -1,0 +1,192 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="Privacy Policy"
+    description="Criminas Privacy Policy - How we collect, use, and protect your data"
+    activePage="privacy"
+    noIndex={false}
+>
+    <section class="page-hero">
+        <div class="page-hero-content fade-up">
+            <h1>Privacy Policy</h1>
+            <p>Last updated: February 16, 2026</p>
+        </div>
+    </section>
+
+    <section class="section legal-section">
+        <div class="legal-container">
+            <div class="legal-content">
+                <h2>1. Introduction</h2>
+                <p>
+                    Criminas ("we," "us," "our," or "Company") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the "Site").
+                </p>
+
+                <h2>2. Information We Collect</h2>
+                <p>
+                    We may collect information about you in a variety of ways. The information we may collect on the Site includes:
+                </p>
+                <ul>
+                    <li><strong>Personal Data:</strong> Name, email address, and any other information you voluntarily provide through forms</li>
+                    <li><strong>Account Information:</strong> Username, password (encrypted), and profile information when you create an account</li>
+                    <li><strong>Usage Data:</strong> Browser type, IP address, access times, and pages viewed</li>
+                    <li><strong>Device Information:</strong> Device type, operating system, and unique device identifiers</li>
+                    <li><strong>Cookies and Tracking:</strong> We use cookies to enhance your experience</li>
+                </ul>
+
+                <h2>3. Use of Your Information</h2>
+                <p>
+                    Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:
+                </p>
+                <ul>
+                    <li>Create and manage your account</li>
+                    <li>Process transactions and send related information</li>
+                    <li>Email you regarding your account or subscription</li>
+                    <li>Fulfill and send out orders, returns, and refunds</li>
+                    <li>Generate a personal profile about you for internal purposes</li>
+                    <li>Improve the Site and your browsing experience</li>
+                    <li>Monitor and analyze Site usage</li>
+                    <li>Detect, prevent, and address technical issues and fraud</li>
+                </ul>
+
+                <h2>4. Disclosure of Your Information</h2>
+                <p>
+                    We may share your information in the following circumstances:
+                </p>
+                <ul>
+                    <li><strong>By Law or Protection of Rights:</strong> If required by law or in good faith, we may disclose your information when compelled by law</li>
+                    <li><strong>Third Party Service Providers:</strong> We may share data with vendors who assist us in operating our website</li>
+                    <li><strong>Business Transfers:</strong> We may transfer information if Criminas is acquired or merged</li>
+                    <li><strong>Consent:</strong> We may disclose information with your consent for specific purposes</li>
+                </ul>
+
+                <h2>5. Security of Your Information</h2>
+                <p>
+                    We use administrative, technical, and physical security measures to protect your personal information. However, perfect security cannot be guaranteed. Your information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights.
+                </p>
+
+                <h2>6. Cookies</h2>
+                <p>
+                    The Site may use cookies to enhance your experience. Most web browsers accept cookies by default, but you can usually modify your browser setting to decline cookies if you prefer. This may prevent you from taking full advantage of the Site's functionality.
+                </p>
+
+                <h2>7. Third-Party Websites</h2>
+                <p>
+                    The Site may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of these sites before providing your personal information.
+                </p>
+
+                <h2>8. Children's Privacy</h2>
+                <p>
+                    Criminas welcomes users of all ages, including children under 13. We are committed to complying with the Children's Online Privacy Protection Act (COPPA) and other applicable children's privacy laws. We collect only the minimum information necessary to provide our services safely. Parents or guardians can contact us at privacy@criminas.org to review, update, or delete their child's account information at any time.
+                </p>
+
+                <h2>9. Changes to This Privacy Policy</h2>
+                <p>
+                    We reserve the right to modify this Privacy Policy at any time. If we make material changes to how we use your personal information, we will notify you by updating the date of this policy and posting the updated policy on the Site.
+                </p>
+
+                <h2>10. Your Rights</h2>
+                <p>
+                    Depending on your location, you may have certain rights regarding your personal information, including:
+                </p>
+                <ul>
+                    <li>The right to access your personal information</li>
+                    <li>The right to request correction of inaccurate information</li>
+                    <li>The right to request deletion of your information</li>
+                    <li>The right to opt-out of marketing communications</li>
+                    <li>The right to data portability</li>
+                </ul>
+
+                <h2>11. Contact Us</h2>
+                <p>
+                    If you have questions about this Privacy Policy, your personal information, or our privacy practices, please contact us at:
+                    <br />
+                    <strong>Email:</strong> privacy@criminas.org
+                    <br />
+                    <strong>Address:</strong> Criminas, [Your Address]
+                </p>
+
+                <h2>12. California Privacy Rights</h2>
+                <p>
+                    If you are a California resident, you have specific rights under the California Consumer Privacy Act (CCPA). For more information about your California privacy rights, please contact us using the information provided above.
+                </p>
+
+                <h2>13. European Privacy Rights</h2>
+                <p>
+                    If you are located in the European Union, you have rights under the General Data Protection Regulation (GDPR). This includes the right to access, rectify, erase, restrict processing, data portability, and object to processing of your personal data.
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .legal-section {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .legal-container {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 48px;
+    }
+
+    .legal-content h2 {
+        font-size: 1.375rem;
+        font-weight: 600;
+        margin-top: 32px;
+        margin-bottom: 16px;
+        color: var(--text-primary);
+    }
+
+    .legal-content h2:first-child {
+        margin-top: 0;
+    }
+
+    .legal-content p {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 16px;
+    }
+
+    .legal-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0 24px 0;
+    }
+
+    .legal-content li {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 12px;
+        padding-left: 24px;
+        position: relative;
+    }
+
+    .legal-content li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: bold;
+    }
+
+    .page-hero-content p {
+        color: var(--text-tertiary);
+        font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+        .legal-container {
+            padding: 24px;
+        }
+
+        .legal-content h2 {
+            font-size: 1.125rem;
+            margin-top: 24px;
+        }
+    }
+</style>

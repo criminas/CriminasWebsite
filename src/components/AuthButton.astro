@@ -1,0 +1,103 @@
+---
+// AuthButton.astro - Authentication buttons for header
+---
+
+<auth-button id="auth-buttons">
+    <!-- Default: Show auth buttons immediately, JS will update if logged in -->
+    <div class="auth-button-group">
+        <a href="/login" class="btn-secondary">Sign In</a>
+        <a href="/register" class="btn-primary">Sign Up</a>
+    </div>
+</auth-button>
+
+<script>
+    import { api } from "../../convex/_generated/api";
+
+    class AuthButton extends HTMLElement {
+        constructor() {
+            super();
+        }
+
+        connectedCallback() {
+            this.checkAuth();
+        }
+
+        async checkAuth() {
+            try {
+                const convex = (window as any).__convex;
+                if (!convex) {
+                    // Retry after a short delay if Convex isn't ready yet
+                    setTimeout(() => this.checkAuth(), 100);
+                    return;
+                }
+
+                const user = await convex.query(api.users.current);
+                
+                if (user) {
+                    this.renderDashboard();
+                }
+                // If no user, keep the default auth buttons
+            } catch (error) {
+                console.error("Error checking auth:", error);
+                // Keep auth buttons on error
+            }
+        }
+
+        renderDashboard() {
+            this.innerHTML = `
+                <div class="auth-button-group">
+                    <a href="/dashboard" class="btn-primary dashboard-btn">Dashboard</a>
+                </div>
+            `;
+        }
+    }
+
+    customElements.define('auth-button', AuthButton);
+</script>
+
+<style>
+    #auth-buttons {
+        display: contents;
+    }
+
+    .auth-button-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .auth-button-group .btn-secondary,
+    .auth-button-group .btn-primary {
+        height: 40px;
+        padding: 0 18px;
+        font-size: 0.8125rem;
+        line-height: 1;
+        border-radius: var(--radius-md);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dashboard-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        height: 40px;
+        font-size: 0.8125rem;
+        line-height: 1;
+        border-radius: var(--radius-md);
+    }
+
+    @media (max-width: 768px) {
+        .auth-button-group {
+            gap: 8px;
+        }
+        
+        .auth-button-group .btn-secondary,
+        .auth-button-group .btn-primary {
+            font-size: 0.75rem;
+            padding: 3px 12px;
+        }
+    }
+</style>

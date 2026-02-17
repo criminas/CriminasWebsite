@@ -1,0 +1,157 @@
+---
+interface Props {
+    projectId: string;
+    projectName: string;
+}
+
+const { projectId, projectName } = Astro.props;
+---
+
+<star-button data-project-id={projectId} data-project-name={projectName}>
+    <button class="star-btn" aria-label="Star this project">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        <span class="star-text">Star</span>
+    </button>
+</star-button>
+
+<script>
+    import { api } from "../../convex/_generated/api";
+
+    class StarButton extends HTMLElement {
+        private projectId: string;
+        private projectName: string;
+        private button: HTMLButtonElement | null = null;
+        private svg: SVGElement | null = null;
+        private text: HTMLSpanElement | null = null;
+        private isStarred: boolean = false;
+
+        constructor() {
+            super();
+            this.projectId = this.dataset.projectId || '';
+            this.projectName = this.dataset.projectName || '';
+        }
+
+        connectedCallback() {
+            this.button = this.querySelector('.star-btn');
+            this.svg = this.querySelector('svg');
+            this.text = this.querySelector('.star-text');
+
+            if (this.button) {
+                this.button.addEventListener('click', this.handleClick.bind(this));
+            }
+
+            this.checkStarStatus();
+        }
+
+        async checkStarStatus() {
+            const convex = (window as any).__convex;
+            if (!convex) return;
+
+            try {
+                const user = await convex.query(api.users.current);
+                if (!user) {
+                    this.updateButton(false);
+                    return;
+                }
+
+                const starred = await convex.query(api.users.isProjectStarred, {
+                    projectId: this.projectId
+                });
+
+                this.isStarred = starred;
+                this.updateButton(starred);
+            } catch (error) {
+                console.error("Error checking star status:", error);
+            }
+        }
+
+        async handleClick(e: Event) {
+            e.preventDefault();
+            const convex = (window as any).__convex;
+            if (!convex) return;
+
+            try {
+                const user = await convex.query(api.users.current);
+                if (!user) {
+                    window.location.href = '/auth/signin';
+                    return;
+                }
+
+                await convex.mutation(api.users.starProject, {
+                    projectId: this.projectId,
+                    projectName: this.projectName
+                });
+
+                this.isStarred = !this.isStarred;
+                this.updateButton(this.isStarred);
+            } catch (error) {
+                console.error("Error toggling star:", error);
+            }
+        }
+
+        updateButton(starred: boolean) {
+            if (!this.button || !this.svg || !this.text) return;
+
+            if (starred) {
+                this.button.classList.add('starred');
+                this.svg.setAttribute('fill', 'currentColor');
+                this.text.textContent = 'Starred';
+            } else {
+                this.button.classList.remove('starred');
+                this.svg.setAttribute('fill', 'none');
+                this.text.textContent = 'Star';
+            }
+        }
+    }
+
+    customElements.define('star-button', StarButton);
+</script>
+
+<style>
+    star-button {
+        display: inline-block;
+    }
+
+    .star-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        color: var(--text-secondary);
+        font-size: 0.9375rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+    .star-btn:hover {
+        background: var(--bg-secondary);
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .star-btn.starred {
+        background: var(--accent-light);
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .star-btn svg {
+        transition: fill 0.15s ease;
+    }
+
+    .star-btn:hover svg {
+        stroke: var(--accent);
+    }
+
+    .star-btn.starred svg {
+        fill: var(--accent);
+        stroke: var(--accent);
+    }
+</style>

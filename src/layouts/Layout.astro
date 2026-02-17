@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import ConvexClientProvider from "../components/ConvexClientProvider.astro";
+import AuthButton from "../components/AuthButton.astro";
 
 export interface Props {
     title: string;
@@ -60,17 +62,19 @@ const siteUrl = "https://criminas.org";
         <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
 
         <!-- Additional SEO -->
-        <meta name="theme-color" content="#7c3aed" />
+        <meta name="theme-color" content="#ffffff" />
         <meta name="apple-mobile-web-app-title" content="Criminas" />
         <link rel="apple-touch-icon" href="/logo.png" />
+
+        <!-- Dark Mode Script (prevent flash) -->
+        <script is:inline>
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        </script>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-            rel="stylesheet"
-        />
 
         <!-- JSON-LD Structured Data -->
         <script
@@ -128,25 +132,50 @@ const siteUrl = "https://criminas.org";
                     <a
                         href="https://github.com/criminas"
                         target="_blank"
-                        rel="noopener"
-                        class="nav-cta">GitHub</a
+                        rel="noopener noreferrer"
+                        >GitHub</a
                     >
                 </li>
             </ul>
-            <button
-                class="mobile-toggle"
-                id="mobileToggle"
-                aria-label="Toggle Menu"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-controls">
+                <AuthButton />
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle Dark Mode"
+                >
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button
+                    class="mobile-toggle"
+                    id="mobileToggle"
+                    aria-label="Toggle Menu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
 
-        <main>
-            <slot />
-        </main>
+        <ConvexClientProvider>
+            <main>
+                <slot />
+            </main>
+        </ConvexClientProvider>
 
         <!-- FOOTER -->
         <footer class="footer">
@@ -227,11 +256,13 @@ const siteUrl = "https://criminas.org";
 
             mobileToggle?.addEventListener("click", () => {
                 navLinks?.classList.toggle("active");
+                mobileToggle?.classList.toggle("active");
             });
 
             navLinks?.querySelectorAll("a").forEach((link) => {
                 link.addEventListener("click", () => {
                     navLinks?.classList.remove("active");
+                    mobileToggle?.classList.remove("active");
                 });
             });
 
@@ -259,6 +290,20 @@ const siteUrl = "https://criminas.org";
                     .querySelector(".page-hero .fade-up")
                     ?.classList.add("visible");
             }, 300);
+
+            // ===== DARK MODE TOGGLE =====
+            const themeToggle = document.getElementById("themeToggle");
+            const html = document.documentElement;
+            
+            // Check for saved theme preference or default to light mode
+            const currentTheme = localStorage.getItem("theme") || "light";
+            html.setAttribute("data-theme", currentTheme);
+            
+            themeToggle?.addEventListener("click", () => {
+                const theme = html.getAttribute("data-theme") === "light" ? "dark" : "light";
+                html.setAttribute("data-theme", theme);
+                localStorage.setItem("theme", theme);
+            });
         </script>
     </body>
 </html>
