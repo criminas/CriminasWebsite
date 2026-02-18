@@ -9,10 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/sitemap": "^3.7.0",
     "@auth/core": "^0.37.4",
     "@convex-dev/auth": "^0.0.90",
     "astro": "^5.17.1",
-    "convex": "^1.31.7"
+    "convex": "^1.31.7",
+    "typescript": "^5.9.3"
   }
 }
