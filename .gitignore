@@ -19,7 +19,6 @@ pnpm-debug.log*
 .env.local
 
 # Convex generated files
-convex/_generated/
 .convex/
 
 # macOS-specific files
