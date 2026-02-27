@@ -13,9 +13,16 @@ import Layout from "../../layouts/Layout.astro";
     <section class="page-hero">
         <div class="hero-glow glow-1"></div>
         <div class="hero-glow glow-2"></div>
-        <div class="page-hero-content fade-up">
-            <h1><span class="highlight">ArcOS</span></h1>
-            <p>Optimized Windows. Designed for enthusiasts.</p>
+        <div class="page-hero-content fade-up" style="display: flex; align-items: center; gap: 3rem; text-align: left; max-width: 1100px; width: 100%;">
+            <!-- Left: logo + tagline -->
+            <div style="flex: 0 0 auto;">
+                <img src="/arctext.png" alt="ArcOS" style="width: 200px; height: auto; display: block; margin-bottom: 1rem;"/>
+                <p style="margin: 0; font-size: 1.1rem; opacity: 0.7;">Optimized Windows. Designed for enthusiasts.</p>
+            </div>
+            <!-- Right: preview -->
+            <div class="arc-preview" style="flex: 1 1 0; min-width: 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 24px 60px rgba(0,0,0,0.5);">
+                <img src="/wallpaper.png" alt="ArcOS Preview" style="width: 100%; height: auto; display: block;"/>
+            </div>
         </div>
     </section>
 
