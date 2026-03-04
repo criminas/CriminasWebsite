@@ -1,0 +1,190 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+    title="OpenShelf — Free & Open Source Online Library"
+    description="OpenShelf is a free and open source online library providing universal access to knowledge. Browse, read, and share books without barriers."
+    keywords="OpenShelf, online library, free books, open source library, digital library, free reading"
+    activePage="projects"
+    ogType="article"
+>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="hero-glow glow-1"></div>
+        <div class="hero-glow glow-2"></div>
+
+        <div class="page-hero-content fade-up" style="display: flex; align-items: center; gap: 3rem; text-align: left; max-width: 1100px; width: 100%;">
+            
+            <!-- Left -->
+            <div style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 1.25rem;">
+                <h1 style="font-size: 3.5rem; margin: 0; font-weight: 700; background: lightgrey; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">OpenShelf</h1>
+                <p style="margin: 0; font-size: 1.1rem; opacity: 0.7;">
+                    Free and open source library for everyone.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="content-block">
+        <div class="content-container">
+            <div class="content-grid">
+                <div class="fade-up">
+                    <div class="section-number">00</div>
+                    <h2 class="section-title">About OpenShelf</h2>
+
+                    <p class="section-desc">
+                        OpenShelf is a free and open source online library dedicated to making
+                        knowledge accessible to everyone. We believe that access to books and
+                        information should be a universal right, not a privilege.
+                    </p>
+
+                    <p class="section-desc" style="margin-top: 1rem;">
+                        Our platform provides a modern, user-friendly interface for browsing,
+                        reading, and sharing public domain and openly licensed works. No paywalls,
+                        no registration barriers, no tracking.
+                    </p>
+
+                    <p class="section-desc" style="margin-top: 1rem;">
+                        OpenShelf respects reader privacy, supports multiple formats, and
+                        works seamlessly across devices. Every book, every person, everywhere.
+                    </p>
+                </div>
+
+                <div class="fade-up">
+                    <div class="project-detail-card">
+                        <div
+                            class="project-detail-header"
+                            style="background: linear-gradient(135deg, #312e81, #6366f1);"
+                        >
+                            <span
+                                class="project-tag"
+                                style="color: #8b5cf6; background: rgba(139, 92, 246, 0.1);"
+                            >Digital Library</span>
+                            <h3 style="color: #fff;">OpenShelf</h3>
+                        </div>
+
+                        <div class="project-detail-body">
+                            <p style="margin-top: 1.5rem;">
+                                Accessible, private, and community-driven.
+                            </p>
+
+                            <ul class="project-features">
+                                <li>Thousands of public domain books</li>
+                                <li>Multiple format support (EPUB, PDF, TXT)</li>
+                                <li>No registration required</li>
+                                <li>Privacy-first design</li>
+                                <li>Mobile and desktop optimized</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="content-block alt">
+        <div class="content-container">
+            <div class="section-number fade-up">01</div>
+            <h2 class="section-title fade-up">Core Features</h2>
+
+            <p class="section-desc fade-up" style="margin-bottom: 3rem;">
+                OpenShelf is designed with readers and communities in mind.
+            </p>
+
+            <div class="values-grid">
+
+                <div class="value-card fade-up">
+                    <h3>Universal Access</h3>
+                    <p>
+                        No accounts, no barriers. Start reading immediately
+                        with just a click. Works on any device with a browser.
+                    </p>
+                </div>
+
+                <div class="value-card fade-up">
+                    <h3>Privacy Focused</h3>
+                    <p>
+                        We don't track your reading habits, sell your data,
+                        or require personal information. Your reading is yours alone.
+                    </p>
+                </div>
+
+                <div class="value-card fade-up">
+                    <h3>Rich Collection</h3>
+                    <p>
+                        Browse thousands of classic literature, historical texts,
+                        academic papers, and openly licensed contemporary works.
+                    </p>
+                </div>
+
+                <div class="value-card fade-up">
+                    <h3>Community Powered</h3>
+                    <p>
+                        Open source means anyone can contribute. Help us expand
+                        the collection, improve features, or translate the platform.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="content-block" style="text-align: center; padding-bottom: 6rem;">
+        <div class="content-container fade-up">
+            <h2 class="section-title">Open Source & Free Forever</h2>
+            <p class="section-desc" style="margin: 0 auto 2rem;">
+                OpenShelf is open source and available under the MIT license.
+                Explore the code, contribute improvements, or deploy your own instance.
+            </p>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a
+                    href="https://books.arcbase.one"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-primary">Start Reading</a>
+                <a
+                    href="https://github.com/arcbasehq/openshelf"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-primary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structured Data -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            name: "OpenShelf",
+            applicationCategory: "EducationalApplication",
+            offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD"
+            },
+            description:
+                "OpenShelf is a free and open source online library providing universal access to knowledge. Browse, read, and share books without barriers.",
+            featureList: [
+                "Public domain books",
+                "Multiple format support",
+                "No registration required",
+                "Privacy-first design",
+                "Mobile optimized"
+            ],
+            author: {
+                "@type": "Organization",
+                name: "Criminas"
+            }
+        })}
+    />
+</Layout>

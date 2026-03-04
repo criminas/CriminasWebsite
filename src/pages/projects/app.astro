@@ -27,7 +27,7 @@ import Layout from "../../layouts/Layout.astro";
                     Get on Play Store
                 </a>
                 <a
-                    href="https://github.com/criminas/criminasapp" target="_blank"
+                    href="https://github.com/Arcbasehq/criminasapp" target="_blank"
                     class="btn-secondary"
                 >
                     Source Code
@@ -421,7 +421,7 @@ import Layout from "../../layouts/Layout.astro";
             position: relative;
             overflow: hidden;
             text-align: center;
-            border-bottom: 2px solid #222222;
+            border-bottom: 2px solid var(--border-strong);
         }
 
         .project-hero-content {
@@ -454,14 +454,14 @@ import Layout from "../../layouts/Layout.astro";
         .project-hero h1 {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
-            color: #fff;
+            color: var(--text-primary);
             line-height: 1.1;
             margin: 0;
         }
 
         .project-subtitle {
             font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 2.5rem;
         }
@@ -480,31 +480,34 @@ import Layout from "../../layouts/Layout.astro";
         }
 
         .feature-card {
-            background: #333333;
+            background: var(--surface);
+            border: 1px solid var(--border);
             padding: 2.5rem;
             border-radius: 16px;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
-            background: #f0fdf4;
+            background: var(--accent-light);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #10b981;
+            color: var(--accent);
             margin-bottom: 1.5rem;
         }
 
         .feature-icon.green {
-            background: #ecfdf5;
-            color: #059669;
+            background: var(--accent-light);
+            color: var(--accent);
         }
 
         .feature-icon svg {
@@ -516,16 +519,16 @@ import Layout from "../../layouts/Layout.astro";
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.75rem;
-            color: lightgrey;
+            color: var(--text-primary);
         }
 
         .feature-card p {
-            color: lightgrey;
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
         .alt-bg {
-            background: #f9fafb;
+            background: var(--bg-secondary);
         }
 
         .preview-layout {
@@ -547,7 +550,7 @@ import Layout from "../../layouts/Layout.astro";
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 1rem;
-            color: white;
+            color: var(--text-secondary);
         }
 
         .preview-list li::before {

@@ -1,9 +1,9 @@
 /* ===== ROOT & RESET ===== */
 :root {
-  --bg-primary: #b1b1b1;
-  --bg-secondary: #b1b1b1;
+  --bg-primary: #f8f8f8;
+  --bg-secondary: #f0f0f0;
   --bg-tertiary: #e8e8e8;
-  --surface: #b1b1b1;
+  --surface: #ffffff;
   --text-primary: #242424;
   --text-secondary: #424242;
   --text-tertiary: #707070;
@@ -77,11 +77,9 @@ body {
 }
 
 [data-theme="dark"] body {
-  background-image: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.05) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px);
 }
 
 main {
@@ -128,7 +126,7 @@ img {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-.section > * {
+.section>* {
   position: relative;
   z-index: 1;
 }
@@ -426,7 +424,7 @@ img {
   position: relative;
   overflow: hidden;
   padding: 120px 24px 80px;
-  background: #b1b1b1;
+  background: var(--bg-primary);
 }
 
 .hero::before {
@@ -434,11 +432,9 @@ img {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(
-      circle at 20% 50%,
+    radial-gradient(circle at 20% 50%,
       rgba(0, 103, 192, 0.03) 0%,
-      transparent 50%
-    ),
+      transparent 50%),
     linear-gradient(to right, rgba(0, 103, 192, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 103, 192, 0.08) 1px, transparent 1px);
   background-size:
@@ -456,11 +452,9 @@ img {
 
 [data-theme="dark"] .hero::before {
   background-image:
-    radial-gradient(
-      circle at 20% 50%,
+    radial-gradient(circle at 20% 50%,
       rgba(59, 157, 255, 0.08) 0%,
-      transparent 50%
-    ),
+      transparent 50%),
     linear-gradient(to right, rgba(59, 157, 255, 0.06) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(59, 157, 255, 0.06) 1px, transparent 1px);
   background-size:
@@ -787,11 +781,9 @@ img {
 }
 
 [data-theme="dark"] .project-card.featured {
-  background: linear-gradient(
-    135deg,
-    rgba(59, 157, 255, 0.1) 0%,
-    rgba(59, 157, 255, 0.05) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(59, 157, 255, 0.1) 0%,
+      rgba(59, 157, 255, 0.05) 100%);
 }
 
 .project-card-bg {
@@ -1080,7 +1072,7 @@ img {
   direction: rtl;
 }
 
-.content-grid.reverse > * {
+.content-grid.reverse>* {
   direction: ltr;
 }
 
@@ -1270,11 +1262,9 @@ img {
   padding: 36px 28px 28px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    var(--bg-secondary) 0%,
-    var(--bg-tertiary) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--bg-secondary) 0%,
+      var(--bg-tertiary) 100%);
 }
 
 .project-detail-header::before {
@@ -1422,20 +1412,24 @@ img {
 
 /* ===== ANIMATIONS ===== */
 @keyframes float {
+
   0%,
   100% {
     transform: translateX(-50%) translateY(0);
   }
+
   50% {
     transform: translateX(-50%) translateY(-6px);
   }
 }
 
 @keyframes scrollPulse {
+
   0%,
   100% {
     opacity: 0.4;
   }
+
   50% {
     opacity: 1;
   }
@@ -1456,6 +1450,7 @@ img {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1100px) {
+
   .about-grid,
   .content-grid {
     grid-template-columns: 1fr;
@@ -1547,6 +1542,7 @@ img {
 }
 
 @media (max-width: 700px) {
+
   .section,
   .content-block {
     padding: 72px 20px;

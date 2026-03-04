@@ -74,12 +74,12 @@ import Layout from "../layouts/Layout.astro";
                                 <span class="docs-code-lang">bash</span>
                                 <button
                                     class="docs-copy-btn"
-                                    data-code="git clone https://github.com/criminas/{project}.git"
+                                    data-code="git clone https://github.com/Arcbasehq/{project}.git"
                                     >Copy</button
                                 >
                             </div>
                             <pre><code># Clone any arcbase project
-git clone https://github.com/criminas/&#123;project&#125;.git
+git clone https://github.com/Arcbasehq/&#123;project&#125;.git
 cd &#123;project&#125;
 
 # Follow project-specific setup
@@ -545,7 +545,7 @@ schedule:
                             requests.
                         </p>
                         <a
-                            href="https://github.com/criminas"
+                            href="https://github.com/Arcbasehq"
                             target="_blank"
                             rel="noopener"
                             class="docs-link">View on GitHub →</a
@@ -588,7 +588,7 @@ schedule:
                             join the team.
                         </p>
                         <a
-                            href="https://github.com/criminas"
+                            href="https://github.com/Arcbasehq"
                             target="_blank"
                             rel="noopener"
                             class="docs-link">Read the Guide →</a
@@ -606,11 +606,11 @@ schedule:
         display: flex;
         gap: 0.25rem;
         padding: 0.35rem;
-        background: #fff;
+        background: var(--surface);
         border-radius: 10px;
         margin-bottom: 3rem;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
         overflow-x: auto;
         position: sticky;
         top: 60px;
@@ -622,19 +622,19 @@ schedule:
         border-radius: 8px;
         font-size: 0.85rem;
         font-weight: 600;
-        color: #4b5563;
+        color: var(--text-secondary);
         transition: all 0.15s ease;
         white-space: nowrap;
         text-align: center;
     }
 
     .docs-nav-link:hover {
-        background: rgba(124, 58, 237, 0.06);
-        color: #7c3aed;
+        background: var(--accent-light);
+        color: var(--accent);
     }
 
     .docs-nav-link.active {
-        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        background: var(--accent);
         color: #fff;
     }
 
@@ -656,15 +656,11 @@ schedule:
         width: 36px;
         height: 36px;
         border-radius: 8px;
-        background: linear-gradient(
-            135deg,
-            rgba(124, 58, 237, 0.12),
-            rgba(124, 58, 237, 0.04)
-        );
+        background: var(--accent-light);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #7c3aed;
+        color: var(--accent);
         flex-shrink: 0;
     }
 
@@ -672,7 +668,7 @@ schedule:
         font-size: 1.85rem;
         font-weight: 800;
         letter-spacing: -0.03em;
-        color: #0f0f23;
+        color: var(--text-primary);
     }
 
     .dev-badge-inline {
@@ -689,7 +685,7 @@ schedule:
 
     .docs-intro {
         font-size: 1.05rem;
-        color: #4b5563;
+        color: var(--text-secondary);
         line-height: 1.75;
         max-width: 700px;
         margin-bottom: 2rem;
@@ -703,8 +699,8 @@ schedule:
     }
 
     .docs-card {
-        background: #fff;
-        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 12px;
         padding: 1.75rem;
         transition:
@@ -713,21 +709,21 @@ schedule:
     }
 
     .docs-card:hover {
-        border-color: rgba(124, 58, 237, 0.2);
-        box-shadow: 0 4px 20px rgba(124, 58, 237, 0.06);
+        border-color: var(--accent);
+        box-shadow: var(--shadow-md);
     }
 
     .docs-card h3 {
         font-size: 1.1rem;
         font-weight: 700;
-        color: #0f0f23;
+        color: var(--text-primary);
         margin-bottom: 0.5rem;
         letter-spacing: -0.02em;
     }
 
     .docs-card > p {
         font-size: 0.9rem;
-        color: #6b7280;
+        color: var(--text-secondary);
         line-height: 1.6;
         margin-bottom: 1rem;
     }
@@ -800,32 +796,28 @@ schedule:
         width: 44px;
         height: 44px;
         border-radius: 10px;
-        background: linear-gradient(
-            135deg,
-            rgba(124, 58, 237, 0.12),
-            rgba(124, 58, 237, 0.04)
-        );
+        background: var(--accent-light);
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 1rem;
-        color: #7c3aed;
+        color: var(--accent);
     }
 
     .docs-link {
         font-size: 0.9rem;
         font-weight: 600;
-        color: #7c3aed;
+        color: var(--accent);
         margin-top: auto;
         transition: color 0.15s ease;
     }
 
     .docs-link:hover {
-        color: #6d28d9;
+        color: var(--accent-hover);
     }
 
     .docs-section {
-        background: #f0f0f6;
+        background: var(--bg-secondary);
     }
 
     @media (max-width: 768px) {

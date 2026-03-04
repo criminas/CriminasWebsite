@@ -107,18 +107,18 @@ import Layout from "../layouts/Layout.astro";
                     </p>
                     <div
                         class="contact-card"
-                        style="margin-top: 2rem; background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);"
+                        style="margin-top: 2rem; background: var(--surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border);"
                     >
-                        <h4 style="margin-bottom: 0.5rem; color: #0f0f23;">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--text-primary);">
                             Press Email
                         </h4>
                         <a
                             href="mailto:press@arcbase.one"
-                            style="color: #7c3aed; font-weight: 600; text-decoration: none; font-size: 1.1rem;"
+                            style="color: var(--accent); font-weight: 600; text-decoration: none; font-size: 1.1rem;"
                             >press@arcbase.one</a
                         >
                         <p
-                            style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;"
+                            style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-tertiary);"
                         >
                             Average response time: 24-48 hours.
                         </p>
@@ -134,7 +134,7 @@ import Layout from "../layouts/Layout.astro";
                             width="80"
                             height="80"
                             fill="none"
-                            stroke="#7c3aed"
+                            stroke="var(--accent)"
                             stroke-width="1.5"
                             stroke-linecap="round"
                             stroke-linejoin="round"
@@ -196,26 +196,26 @@ import Layout from "../layouts/Layout.astro";
         }
 
         .asset-card {
-            background: #fff;
+            background: var(--surface);
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
             transition: all 0.3s ease;
         }
 
         .asset-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.08);
-            border-color: rgba(124, 58, 237, 0.2);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
         }
 
         .asset-preview {
             height: 180px;
-            background: #f8f9fa;
+            background: var(--bg-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            border-bottom: 1px solid var(--border);
         }
 
         .press-logo-img {
@@ -241,7 +241,7 @@ import Layout from "../layouts/Layout.astro";
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: 2px solid #fff;
+            border: 2px solid var(--surface);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
@@ -254,7 +254,7 @@ import Layout from "../layouts/Layout.astro";
             font-family: "JetBrains Mono", monospace, "Courier New", Courier;
             font-size: 0.75rem;
             font-weight: 600;
-            color: #6b7280;
+            color: var(--text-tertiary);
             opacity: 0;
             transform: translateY(5px);
             transition: all 0.3s ease;
@@ -272,11 +272,12 @@ import Layout from "../layouts/Layout.astro";
         .asset-info h3 {
             margin-bottom: 0.5rem;
             font-size: 1.25rem;
+            color: var(--text-primary);
         }
 
         .asset-info p {
             font-size: 0.9rem;
-            color: #6b7280;
+            color: var(--text-tertiary);
             margin-bottom: 1.25rem;
         }
 
@@ -289,13 +290,13 @@ import Layout from "../layouts/Layout.astro";
 
         .release-item {
             padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid var(--border);
         }
 
         .release-date {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #7c3aed;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             display: block;
@@ -305,12 +306,12 @@ import Layout from "../layouts/Layout.astro";
         .release-item h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #0f0f23;
+            color: var(--text-primary);
             max-width: 800px;
         }
 
         .release-item p {
-            color: #4b5563;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             max-width: 700px;
         }
@@ -319,7 +320,7 @@ import Layout from "../layouts/Layout.astro";
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            background: rgba(124, 58, 237, 0.05);
+            background: var(--accent-light);
             display: flex;
             align-items: center;
             justify-content: center;
