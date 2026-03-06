@@ -18,10 +18,12 @@ export const { auth, signIn, signOut, store } = convexAuth({
       }
 
       const baseUrl = process.env.SITE_URL!.replace(/\/$/, "");
+      const wwwBaseUrl = baseUrl.replace("https://", "https://www.");
+
       if (redirectTo.startsWith("?") || redirectTo.startsWith("/")) {
         return `${baseUrl}${redirectTo}`;
       }
-      if (redirectTo.startsWith(baseUrl)) {
+      if (redirectTo.startsWith(baseUrl) || redirectTo.startsWith(wwwBaseUrl)) {
         return redirectTo;
       }
       throw new Error(`Invalid redirect: ${redirectTo}`);
