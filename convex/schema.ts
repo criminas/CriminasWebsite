@@ -4,7 +4,7 @@ import { v } from "convex/values";
 
 const schema = defineSchema({
   ...authTables,
-  
+
   // Override users table to include existing app fields
   users: defineTable({
     // Auth fields from authTables
@@ -15,7 +15,7 @@ const schema = defineSchema({
     name: v.optional(v.string()),
     phone: v.optional(v.string()),
     phoneVerificationTime: v.optional(v.number()),
-    
+
     // Existing app fields (for backward compatibility with your data)
     username: v.optional(v.string()),
     passwordHash: v.optional(v.string()),
@@ -25,6 +25,13 @@ const schema = defineSchema({
     learningGoal: v.optional(v.string()),
     skillLevel: v.optional(v.string()),
     xp: v.optional(v.number()),
+
+    // Newsletter
+    newsletterSubscribed: v.optional(v.boolean()),
+    newsletterSubscribedAt: v.optional(v.number()),
+
+    // User Roles (e.g., admin, mod, manager)
+    role: v.optional(v.string()),
   }).index("email", ["email"]),
 
   starredProjects: defineTable({
@@ -46,6 +53,11 @@ const schema = defineSchema({
   })
     .index("by_email", ["email"])
     .index("by_status", ["status"]),
+
+  newsletterSubscriptions: defineTable({
+    email: v.string(),
+    subscribedAt: v.number(),
+  }).index("by_email", ["email"]),
 });
 
 export default schema;

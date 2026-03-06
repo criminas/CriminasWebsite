@@ -577,6 +577,119 @@ img {
   line-height: 1.4;
 }
 
+/* ===== SPONSOR AD ===== */
+.sponsor-section {
+  padding: 32px 0 16px;
+  background: transparent;
+}
+
+.sponsor-ad-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.sponsor-ad-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.ad-badge {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.ad-content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sponsor-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.ad-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ad-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.sponsor-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.ad-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.sponsor-ad-card:hover .ad-cta {
+  background: var(--accent);
+  color: white;
+}
+
+.sponsor-ad-card:hover .ad-cta svg {
+  transform: translateX(2px);
+}
+
+.ad-cta svg {
+  transition: transform 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .sponsor-ad-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .ad-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .hero-scroll-indicator {
   position: absolute;
   bottom: 32px;

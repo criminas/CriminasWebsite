@@ -1,0 +1,255 @@
+---
+// Newsletter Signup Component
+// Reusable component for capturing email signups
+---
+
+<section class="newsletter-section">
+    <div class="newsletter-container">
+        <div class="newsletter-content fade-up">
+            <div class="newsletter-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </div>
+            <h2>Stay in the loop</h2>
+            <p>
+                Get project updates, community highlights, and open source
+                news delivered to your inbox. No spam — just the good stuff.
+            </p>
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="newsletter-input-group">
+                    <input
+                        type="email"
+                        id="newsletterEmail"
+                        placeholder="you@example.com"
+                        required
+                        aria-label="Email address"
+                    />
+                    <button type="submit" class="newsletter-btn" id="newsletterBtn">
+                        Subscribe
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                <p class="newsletter-hint">
+                    Join 1000+ developers and enthusiasts. Unsubscribe anytime.
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { api } from "../../convex/_generated/api";
+
+    const form = document.getElementById("newsletterForm") as HTMLFormElement;
+    const btn = document.getElementById("newsletterBtn") as HTMLButtonElement;
+    const emailInput = document.getElementById("newsletterEmail") as HTMLInputElement;
+
+    function waitForConvex(timeout = 3000): Promise<any | null> {
+        return new Promise((resolve) => {
+            const start = Date.now();
+            const check = () => {
+                const convex = (window as any).__convex;
+                if (convex) {
+                    resolve(convex);
+                } else if (Date.now() - start > timeout) {
+                    resolve(null);
+                } else {
+                    setTimeout(check, 50);
+                }
+            };
+            check();
+        });
+    }
+
+    form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = emailInput?.value;
+
+        if (!email) return;
+
+        btn.disabled = true;
+        btn.innerHTML = `Subscribing...`;
+
+        try {
+            const convex = await waitForConvex();
+            if (convex) {
+                await convex.mutation(api.newsletter.subscribe, { email });
+            }
+
+            btn.innerHTML = `Subscribed! ✓`;
+            btn.style.background = "linear-gradient(135deg, #059669, #047857)";
+            btn.style.borderColor = "#059669";
+            emailInput.value = "";
+
+            setTimeout(() => {
+                btn.innerHTML = `
+                    Subscribe
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                `;
+                btn.style.background = "";
+                btn.style.borderColor = "";
+                btn.disabled = false;
+            }, 3000);
+        } catch (error: any) {
+            console.error("Newsletter subscribe error:", error);
+            btn.innerHTML = `Try again`;
+            btn.disabled = false;
+            setTimeout(() => {
+                btn.innerHTML = `
+                    Subscribe
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                `;
+            }, 2000);
+        }
+    });
+</script>
+
+<style>
+    .newsletter-section {
+        padding: 80px 24px;
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .newsletter-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+            radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 6%, transparent) 0%, transparent 60%);
+        pointer-events: none;
+    }
+
+    .newsletter-container {
+        max-width: 640px;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .newsletter-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        background: var(--accent-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        color: var(--accent);
+    }
+
+    .newsletter-content h2 {
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .newsletter-content > p {
+        font-size: 1.0625rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .newsletter-form {
+        width: 100%;
+    }
+
+    .newsletter-input-group {
+        display: flex;
+        gap: 0.75rem;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .newsletter-input-group input {
+        flex: 1;
+        padding: 14px 18px;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-md);
+        font-size: 0.9375rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--surface);
+        color: var(--text-primary);
+        outline: none;
+        transition: all 0.15s ease;
+    }
+
+    .newsletter-input-group input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+    }
+
+    .newsletter-input-group input::placeholder {
+        color: var(--text-tertiary);
+    }
+
+    .newsletter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 24px;
+        background: var(--accent);
+        color: #fff;
+        border: 1px solid var(--accent);
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        font-size: 0.9375rem;
+        cursor: pointer;
+        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        white-space: nowrap;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .newsletter-btn:hover {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+        box-shadow: 0 2px 8px rgba(0, 103, 192, 0.25);
+        transform: translateY(-1px);
+    }
+
+    .newsletter-btn:active {
+        transform: translateY(0);
+    }
+
+    .newsletter-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .newsletter-hint {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+        margin-top: 1rem;
+    }
+
+    @media (max-width: 520px) {
+        .newsletter-input-group {
+            flex-direction: column;
+        }
+
+        .newsletter-btn {
+            justify-content: center;
+        }
+    }
+</style>

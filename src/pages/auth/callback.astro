@@ -1,0 +1,130 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+    title="Signing In..."
+    description="Completing your sign-in"
+    activePage=""
+>
+    <section class="callback-page">
+        <div class="callback-card">
+            <div class="spinner"></div>
+            <h2>Signing you in...</h2>
+            <p>Please wait while we complete your authentication.</p>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    import { api } from "../../../convex/_generated/api";
+
+    async function handleCallback() {
+        const url = new URL(window.location.href);
+        const code = url.searchParams.get("code");
+        const verifier = localStorage.getItem("convex_auth_verifier");
+
+        if (!code) {
+            // No code — just redirect to login
+            window.location.href = "/login";
+            return;
+        }
+
+        // Wait for Convex
+        const convex = await new Promise<any>((resolve) => {
+            const check = () => {
+                const c = (window as any).__convex;
+                if (c) resolve(c);
+                else setTimeout(check, 50);
+            };
+            check();
+        });
+
+        try {
+            // Exchange the OAuth code + verifier for auth tokens
+            const args: any = {
+                provider: "google",
+                params: { code },
+            };
+            if (verifier) {
+                args.verifier = verifier;
+            }
+
+            const result = await convex.action(api.auth.signIn as any, args);
+
+            // Clean up verifier
+            localStorage.removeItem("convex_auth_verifier");
+
+            // Store the tokens
+            const token = result?.tokens?.token;
+            const refreshToken = result?.tokens?.refreshToken;
+
+            if (token) {
+                localStorage.setItem("convex_auth_token", token);
+                if (refreshToken) {
+                    localStorage.setItem("convex_auth_refresh_token", refreshToken);
+                }
+                // Redirect to dashboard with auth
+                window.location.href = "/dashboard";
+                return;
+            }
+
+            // No tokens returned — something went wrong
+            console.error("No tokens returned from code exchange");
+            window.location.href = "/login";
+        } catch (error) {
+            console.error("OAuth callback error:", error);
+            localStorage.removeItem("convex_auth_verifier");
+            window.location.href = "/login";
+        }
+    }
+
+    handleCallback();
+</script>
+
+<style>
+    .callback-page {
+        min-height: calc(100vh - 56px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 24px 48px;
+        background: var(--bg-primary);
+    }
+
+    .callback-card {
+        text-align: center;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 64px 48px;
+        max-width: 420px;
+        width: 100%;
+    }
+
+    .callback-card h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+    }
+
+    .callback-card p {
+        color: var(--text-secondary);
+        font-size: 0.9375rem;
+    }
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        margin: 0 auto 24px;
+        animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+</style>

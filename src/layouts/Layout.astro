@@ -87,7 +87,7 @@ const siteUrl = "https://arcbase.one";
                 logo: `${siteUrl}/logo.png`,
                 description:
                     "Empowering everyone to change their world, by bringing open source software to the masses.",
-                sameAs: ["https://github.com/Arcbasehq"],
+                sameAs: ["https://github.com/arcbasehq"],
                 contactPoint: {
                     "@type": "ContactPoint",
                     email: "hello@arcbase.one",
@@ -131,7 +131,14 @@ const siteUrl = "https://arcbase.one";
                 </li>
                 <li>
                     <a
-                        href="https://github.com/Arcbasehq"
+                        href="/blog"
+                        class={activePage === "blog" ? "active" : ""}
+                        >Blog</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="https://github.com/arcbasehq"
                         target="_blank"
                         rel="noopener noreferrer"
                         >GitHub</a
@@ -190,7 +197,7 @@ const siteUrl = "https://arcbase.one";
                         />
                         <span
                             style="color: var(--text-primary); font-weight: 700; font-size: 1.15rem;"
-                            >arcbase</span
+                            >Arcbase</span
                         >
                     </a>
                     <p>
@@ -209,11 +216,12 @@ const siteUrl = "https://arcbase.one";
                 <div class="footer-col">
                     <h4>Community</h4>
                     <a
-                        href="https://github.com/Arcbasehq"
+                        href="https://github.com/arcbasehq/"
                         target="_blank"
                         rel="noopener">GitHub</a
                     >
                     <a href="/docs">Docs</a>
+                    <a href="/blog">Blog</a>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
@@ -223,10 +231,10 @@ const siteUrl = "https://arcbase.one";
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 arcbase. All rights reserved.</p>
+                <p>&copy; 2026 Arcbase. All rights reserved.</p>
                 <div class="footer-socials">
                     <a
-                        href="https://github.com/Arcbasehq"
+                        href="https://github.com/arcbasehq"
                         target="_blank"
                         rel="noopener"
                         aria-label="GitHub"

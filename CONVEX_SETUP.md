@@ -32,7 +32,7 @@ This guide will walk you through setting up authentication for the arcbase websi
 
 ## Step 2: Set Up GitHub OAuth
 
-1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
+1. Go to [GitHub Developer Settings](https://https://github.com/arcbasehq/settings/developers)
 
 2. Click "New OAuth App"
 
@@ -173,5 +173,5 @@ When deploying to production:
 
 - [Convex Documentation](https://docs.convex.dev/)
 - [Convex Auth Documentation](https://labs.convex.dev/auth)
-- [GitHub OAuth Documentation](https://docs.github.com/en/developers/apps/building-oauth-apps)
+- [GitHub OAuth Documentation](https://docs.https://github.com/arcbasehq/en/developers/apps/building-oauth-apps)
 - [Google OAuth Documentation](https://developers.google.com/identity/protocols/oauth2)

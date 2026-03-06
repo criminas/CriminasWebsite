@@ -12,8 +12,11 @@
     "@astrojs/check": "^0.9.6",
     "@auth/core": "^0.37.4",
     "@convex-dev/auth": "^0.0.90",
+    "@convex-dev/rate-limiter": "^0.3.2",
+    "@oslojs/crypto": "^1.0.1",
     "astro": "^5.17.1",
     "convex": "^1.31.7",
+    "resend": "^6.9.3",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

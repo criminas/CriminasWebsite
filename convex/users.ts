@@ -1,13 +1,15 @@
-import { v, Id } from "convex/values";
+import { v, ConvexError } from "convex/values";
+import type { Id } from "./_generated/dataModel";
 import { query, mutation, internalMutation } from "./_generated/server";
 import { auth } from "./auth";
+import { rateLimits } from "./rateLimit";
 
 export const current = query({
   args: {},
   handler: async (ctx) => {
     const userId = await auth.getUserId(ctx);
     if (!userId) return null;
-    
+
     return await ctx.db.get(userId);
   },
 });
@@ -15,14 +17,48 @@ export const current = query({
 export const updateProfile = mutation({
   args: {
     name: v.optional(v.string()),
+    image: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const userId = await auth.getUserId(ctx);
-    if (!userId) throw new Error("Not authenticated");
-    
-    await ctx.db.patch(userId, {
-      name: args.name,
-    });
+    if (!userId) throw new ConvexError("Not authenticated");
+
+    await rateLimits.limit(ctx, "updateProfile", { key: userId });
+
+    const updates: Record<string, string | undefined> = {};
+    if (args.name !== undefined) {
+      if (args.name.length > 50) throw new ConvexError("Name is too long");
+      updates.name = args.name.trim();
+    }
+    if (args.image !== undefined) {
+      if (args.image.length > 1000) throw new ConvexError("Image URL is too long");
+      updates.image = args.image;
+    }
+
+    await ctx.db.patch(userId, updates);
+  },
+});
+
+export const generateUploadUrl = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) throw new ConvexError("Not authenticated");
+    return await ctx.storage.generateUploadUrl();
+  },
+});
+
+export const updateProfileImage = mutation({
+  args: { storageId: v.id("_storage") },
+  handler: async (ctx, args) => {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) throw new ConvexError("Not authenticated");
+
+    const url = await ctx.storage.getUrl(args.storageId);
+    if (!url) throw new ConvexError("File not found");
+
+    await ctx.db.patch(userId, { image: url });
+    return { url };
   },
 });
 
@@ -33,15 +69,20 @@ export const starProject = mutation({
   },
   handler: async (ctx, args) => {
     const userId = await auth.getUserId(ctx);
-    if (!userId) throw new Error("Not authenticated");
-    
+    if (!userId) throw new ConvexError("Not authenticated");
+
+    if (args.projectId.length > 200) throw new ConvexError("Project ID too long");
+    if (args.projectName.length > 200) throw new ConvexError("Project Name too long");
+
+    await rateLimits.limit(ctx, "starProject", { key: userId });
+
     // Check if already starred
     const existing = await ctx.db
       .query("starredProjects")
       .withIndex("by_user", (q) => q.eq("userId", userId))
       .filter((q) => q.eq(q.field("projectId"), args.projectId))
       .first();
-    
+
     if (existing) {
       // Unstar
       await ctx.db.delete(existing._id);
@@ -64,7 +105,7 @@ export const getStarredProjects = query({
   handler: async (ctx) => {
     const userId = await auth.getUserId(ctx);
     if (!userId) return [];
-    
+
     return await ctx.db
       .query("starredProjects")
       .withIndex("by_user", (q) => q.eq("userId", userId))
@@ -77,13 +118,13 @@ export const isProjectStarred = query({
   handler: async (ctx, args) => {
     const userId = await auth.getUserId(ctx);
     if (!userId) return false;
-    
+
     const starred = await ctx.db
       .query("starredProjects")
       .withIndex("by_user", (q) => q.eq("userId", userId))
       .filter((q) => q.eq(q.field("projectId"), args.projectId))
       .first();
-    
+
     return !!starred;
   },
 });
@@ -92,8 +133,8 @@ export const deleteAccount = mutation({
   args: {},
   handler: async (ctx) => {
     const userId = await auth.getUserId(ctx);
-    if (!userId) throw new Error("Not authenticated");
-    
+    if (!userId) throw new ConvexError("Not authenticated");
+
     await deleteStarredProjects(ctx, userId);
     await deleteAuthStateForUser(ctx, userId);
     await ctx.db.delete(userId);
@@ -133,7 +174,7 @@ export const cleanupOrphanedAuthRecords = internalMutation({
 async function deleteStarredProjects(ctx: any, userId: Id<"users">) {
   const starredProjects = await ctx.db
     .query("starredProjects")
-    .withIndex("by_user", (q) => q.eq("userId", userId))
+    .withIndex("by_user", (q: any) => q.eq("userId", userId))
     .collect();
 
   for (const project of starredProjects) {
@@ -144,7 +185,7 @@ async function deleteStarredProjects(ctx: any, userId: Id<"users">) {
 async function deleteAuthStateForUser(ctx: any, userId: Id<"users">) {
   const sessions = await ctx.db
     .query("authSessions")
-    .withIndex("userId", (q) => q.eq("userId", userId))
+    .withIndex("userId", (q: any) => q.eq("userId", userId))
     .collect();
 
   for (const session of sessions) {
@@ -153,7 +194,7 @@ async function deleteAuthStateForUser(ctx: any, userId: Id<"users">) {
 
   const accounts = await ctx.db
     .query("authAccounts")
-    .withIndex("userIdAndProvider", (q) => q.eq("userId", userId))
+    .withIndex("userIdAndProvider", (q: any) => q.eq("userId", userId))
     .collect();
 
   for (const account of accounts) {
@@ -164,7 +205,7 @@ async function deleteAuthStateForUser(ctx: any, userId: Id<"users">) {
 async function deleteSessionArtifacts(ctx: any, sessionId: Id<"authSessions">) {
   const refreshTokens = await ctx.db
     .query("authRefreshTokens")
-    .withIndex("sessionId", (q) => q.eq("sessionId", sessionId))
+    .withIndex("sessionId", (q: any) => q.eq("sessionId", sessionId))
     .collect();
 
   for (const token of refreshTokens) {
@@ -173,7 +214,7 @@ async function deleteSessionArtifacts(ctx: any, sessionId: Id<"authSessions">) {
 
   const verifiers = await ctx.db
     .query("authVerifiers")
-    .filter((q) => q.eq(q.field("sessionId"), sessionId))
+    .filter((q: any) => q.eq(q.field("sessionId"), sessionId))
     .collect();
 
   for (const verifier of verifiers) {
@@ -186,7 +227,7 @@ async function deleteSessionArtifacts(ctx: any, sessionId: Id<"authSessions">) {
 async function deleteAccountArtifacts(ctx: any, accountId: Id<"authAccounts">) {
   const verificationCodes = await ctx.db
     .query("authVerificationCodes")
-    .withIndex("accountId", (q) => q.eq("accountId", accountId))
+    .withIndex("accountId", (q: any) => q.eq("accountId", accountId))
     .collect();
 
   for (const code of verificationCodes) {
@@ -195,7 +236,7 @@ async function deleteAccountArtifacts(ctx: any, accountId: Id<"authAccounts">) {
 
   const rateLimit = await ctx.db
     .query("authRateLimits")
-    .withIndex("identifier", (q) => q.eq("identifier", accountId as unknown as string))
+    .withIndex("identifier", (q: any) => q.eq("identifier", accountId as unknown as string))
     .unique();
 
   if (rateLimit) {

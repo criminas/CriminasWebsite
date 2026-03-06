@@ -1,0 +1,429 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="Verify Your Email"
+    description="Verify your email address to complete registration"
+    activePage="verify-email"
+>
+    <section class="auth-page">
+        <div class="verify-container">
+            <div class="verify-card">
+                <div class="verify-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="M22 4L12 13L2 4"></path>
+                    </svg>
+                </div>
+
+                <div class="verify-header">
+                    <h1>Check your email</h1>
+                    <p id="verifyDescription">We sent a verification code to your email address. Enter it below to verify your account.</p>
+                </div>
+
+                <div class="email-display" id="emailDisplay" style="display: none;">
+                    <span id="emailText"></span>
+                </div>
+
+                <form class="verify-form" id="verifyForm">
+                    <div class="code-inputs" id="codeInputs">
+                        <input type="text" maxlength="1" class="code-digit" data-index="0" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code" />
+                        <input type="text" maxlength="1" class="code-digit" data-index="1" inputmode="numeric" pattern="[0-9]" />
+                        <input type="text" maxlength="1" class="code-digit" data-index="2" inputmode="numeric" pattern="[0-9]" />
+                        <input type="text" maxlength="1" class="code-digit" data-index="3" inputmode="numeric" pattern="[0-9]" />
+                        <input type="text" maxlength="1" class="code-digit" data-index="4" inputmode="numeric" pattern="[0-9]" />
+                        <input type="text" maxlength="1" class="code-digit" data-index="5" inputmode="numeric" pattern="[0-9]" />
+                    </div>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                    <div id="successMessage" class="success-message" style="display: none;"></div>
+
+                    <button type="submit" class="btn-primary btn-block" id="verifyBtn" disabled>
+                        Verify Email
+                    </button>
+                </form>
+
+                <div class="resend-section">
+                    <p>Didn't receive the code?</p>
+                    <button class="resend-btn" id="resendBtn">Resend Code</button>
+                    <span id="resendTimer" class="resend-timer" style="display: none;"></span>
+                </div>
+
+                <div class="verify-footer">
+                    <a href="/login">Back to Sign In</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    import { api } from "../../convex/_generated/api";
+
+    const codeInputs = document.querySelectorAll<HTMLInputElement>('.code-digit');
+    const verifyBtn = document.getElementById('verifyBtn') as HTMLButtonElement;
+    const verifyForm = document.getElementById('verifyForm') as HTMLFormElement;
+    const errorMessage = document.getElementById('errorMessage') as HTMLDivElement;
+    const successMessage = document.getElementById('successMessage') as HTMLDivElement;
+    const resendBtn = document.getElementById('resendBtn') as HTMLButtonElement;
+    const resendTimer = document.getElementById('resendTimer') as HTMLSpanElement;
+    const emailDisplay = document.getElementById('emailDisplay') as HTMLDivElement;
+    const emailText = document.getElementById('emailText') as HTMLSpanElement;
+
+    // Get email from URL params
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email');
+    if (email) {
+        emailDisplay.style.display = 'flex';
+        emailText.textContent = email;
+    }
+
+    function waitForConvex(): Promise<any> {
+        return new Promise((resolve) => {
+            const check = () => {
+                const convex = (window as any).__convex;
+                if (convex) {
+                    resolve(convex);
+                } else {
+                    setTimeout(check, 50);
+                }
+            };
+            check();
+        });
+    }
+
+    // Auto-focus first input
+    codeInputs[0]?.focus();
+
+    // Handle code input behavior
+    codeInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            const target = e.target as HTMLInputElement;
+            const value = target.value.replace(/[^0-9]/g, '');
+            target.value = value;
+
+            if (value && index < codeInputs.length - 1) {
+                codeInputs[index + 1].focus();
+            }
+
+            checkCodeComplete();
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !input.value && index > 0) {
+                codeInputs[index - 1].focus();
+            }
+        });
+
+        input.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const pasted = e.clipboardData?.getData('text').replace(/[^0-9]/g, '') || '';
+            const digits = pasted.split('').slice(0, 6);
+            digits.forEach((digit, i) => {
+                if (codeInputs[i]) {
+                    codeInputs[i].value = digit;
+                }
+            });
+            if (digits.length > 0) {
+                const focusIndex = Math.min(digits.length, codeInputs.length - 1);
+                codeInputs[focusIndex].focus();
+            }
+            checkCodeComplete();
+        });
+    });
+
+    function getCode(): string {
+        return Array.from(codeInputs).map(i => i.value).join('');
+    }
+
+    function checkCodeComplete() {
+        const code = getCode();
+        verifyBtn.disabled = code.length !== 6;
+    }
+
+    // Submit verification
+    verifyForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const code = getCode();
+        if (code.length !== 6) return;
+
+        errorMessage.style.display = 'none';
+        verifyBtn.disabled = true;
+        verifyBtn.textContent = 'Verifying...';
+
+        try {
+            const convex = await waitForConvex();
+
+            // Use Convex Auth's email verification
+            const result = await convex.action(api.auth.signIn, {
+                provider: 'password',
+                params: { email, code, flow: 'email-verification' }
+            });
+
+            successMessage.textContent = 'Email verified successfully! Redirecting...';
+            successMessage.style.display = 'block';
+
+            // Store token if returned
+            const token = result?.token || result?.tokens?.token;
+            if (token) {
+                localStorage.setItem('convex_auth_token', token);
+                convex.setAuth(() => Promise.resolve(token));
+            }
+
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 1500);
+        } catch (error: any) {
+            console.error('Verification error:', error);
+            errorMessage.textContent = error.message || 'Invalid verification code. Please try again.';
+            errorMessage.style.display = 'block';
+            verifyBtn.disabled = false;
+            verifyBtn.textContent = 'Verify Email';
+
+            // Clear inputs
+            codeInputs.forEach(i => i.value = '');
+            codeInputs[0]?.focus();
+        }
+    });
+
+    // Resend code with cooldown
+    let cooldown = 0;
+    let cooldownInterval: ReturnType<typeof setInterval>;
+
+    resendBtn?.addEventListener('click', async () => {
+        if (cooldown > 0) return;
+
+        resendBtn.disabled = true;
+        resendBtn.textContent = 'Sending...';
+
+        try {
+            const convex = await waitForConvex();
+            await convex.action(api.auth.signIn, {
+                provider: 'password',
+                params: { email, flow: 'email-verification' }
+            });
+
+            // Start cooldown
+            cooldown = 60;
+            resendBtn.style.display = 'none';
+            resendTimer.style.display = 'inline';
+            resendTimer.textContent = `Resend in ${cooldown}s`;
+
+            cooldownInterval = setInterval(() => {
+                cooldown--;
+                resendTimer.textContent = `Resend in ${cooldown}s`;
+                if (cooldown <= 0) {
+                    clearInterval(cooldownInterval);
+                    resendBtn.style.display = 'inline';
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = 'Resend Code';
+                    resendTimer.style.display = 'none';
+                }
+            }, 1000);
+        } catch (error: any) {
+            console.error('Resend error:', error);
+            errorMessage.textContent = 'Failed to resend code. Please try again.';
+            errorMessage.style.display = 'block';
+            resendBtn.disabled = false;
+            resendBtn.textContent = 'Resend Code';
+        }
+    });
+</script>
+
+<style>
+    .auth-page {
+        min-height: calc(100vh - 56px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 24px 48px;
+        background: var(--bg-primary);
+    }
+
+    .verify-container {
+        max-width: 480px;
+        width: 100%;
+    }
+
+    .verify-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 48px;
+        text-align: center;
+    }
+
+    .verify-icon {
+        margin-bottom: 24px;
+        color: var(--accent);
+    }
+
+    .verify-icon svg {
+        display: inline-block;
+    }
+
+    .verify-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--text-primary);
+    }
+
+    .verify-header p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
+
+    .email-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        margin-bottom: 32px;
+    }
+
+    .email-display span {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.9375rem;
+    }
+
+    .code-inputs {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 24px;
+    }
+
+    .code-digit {
+        width: 48px;
+        height: 56px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        background: var(--bg-primary);
+        border: 2px solid var(--border);
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        transition: all 0.15s ease;
+        outline: none;
+    }
+
+    .code-digit:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    .code-digit:not(:placeholder-shown) {
+        border-color: var(--accent);
+    }
+
+    .error-message {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #ef4444;
+        padding: 12px 16px;
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        margin-bottom: 16px;
+    }
+
+    .success-message {
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #22c55e;
+        padding: 12px 16px;
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        margin-bottom: 16px;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .resend-section {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+    }
+
+    .resend-section p {
+        color: var(--text-tertiary);
+        font-size: 0.875rem;
+        margin-bottom: 8px;
+    }
+
+    .resend-btn {
+        background: none;
+        border: none;
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: var(--radius-sm);
+        transition: all 0.15s ease;
+    }
+
+    .resend-btn:hover {
+        background: rgba(99, 102, 241, 0.1);
+    }
+
+    .resend-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .resend-timer {
+        color: var(--text-tertiary);
+        font-size: 0.875rem;
+    }
+
+    .verify-footer {
+        margin-top: 24px;
+    }
+
+    .verify-footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.15s ease;
+    }
+
+    .verify-footer a:hover {
+        color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+        .auth-page {
+            padding: 80px 16px 32px;
+        }
+
+        .verify-card {
+            padding: 32px 24px;
+        }
+
+        .code-digit {
+            width: 40px;
+            height: 48px;
+            font-size: 1.25rem;
+        }
+
+        .code-inputs {
+            gap: 6px;
+        }
+    }
+</style>
