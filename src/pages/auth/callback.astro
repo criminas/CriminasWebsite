@@ -50,7 +50,19 @@ import Layout from "../../layouts/Layout.astro";
                 args.verifier = verifier;
             }
 
-            const result = await convex.action(api.auth.signIn as any, args);
+            let result;
+            try {
+                result = await convex.action(api.auth.signIn as any, args);
+            } catch (err: any) {
+                if (err.message && err.message.includes("Connection lost")) {
+                    console.warn("Connection lost during code exchange, retrying...");
+                    // Wait for the websocket to finish reconnecting
+                    await new Promise(r => setTimeout(r, 1500));
+                    result = await convex.action(api.auth.signIn as any, args);
+                } else {
+                    throw err;
+                }
+            }
 
             // Clean up verifier
             localStorage.removeItem("convex_auth_verifier");
