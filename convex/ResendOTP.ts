@@ -2,9 +2,15 @@ import Resend from "@auth/core/providers/resend";
 import { Resend as ResendAPI } from "resend";
 import { type RandomReader, generateRandomString } from "@oslojs/crypto/random";
 
+const resendApiKey = process.env.AUTH_RESEND_KEY ?? process.env.RESEND_API_KEY;
+
+if (!resendApiKey) {
+  throw new Error("Missing AUTH_RESEND_KEY (Resend API key). Set it in Convex env.");
+}
+
 export const ResendOTP = Resend({
-    id: "resend-otp",
-    apiKey: process.env.AUTH_RESEND_KEY,
+  id: "resend-otp",
+  apiKey: resendApiKey,
 
     async generateVerificationToken() {
         const random: RandomReader = {
@@ -16,7 +22,11 @@ export const ResendOTP = Resend({
     },
 
     async sendVerificationRequest({ identifier: email, provider, token }) {
-        const resend = new ResendAPI(provider.apiKey);
+      const apiKey = provider.apiKey ?? resendApiKey;
+      if (!apiKey) {
+        throw new Error("Missing AUTH_RESEND_KEY (Resend API key). Set it in Convex env.");
+      }
+      const resend = new ResendAPI(apiKey);
         const { error } = await resend.emails.send({
             from: "Arcbase <noreply@arcbase.one>",
             to: [email],

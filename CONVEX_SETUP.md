@@ -80,7 +80,18 @@ This guide will walk you through setting up authentication for the arcbase websi
    AUTH_GOOGLE_SECRET=your_google_client_secret
    ```
 
-## Step 4: Generate Auth Secret
+## Step 4: Set Up Resend (Email Verification)
+
+1. Create a Resend account: https://resend.com
+
+2. Create an API key in the Resend dashboard
+
+3. Add it to `.env.local`:
+   ```
+   AUTH_RESEND_KEY=re_123
+   ```
+
+## Step 5: Generate Auth Secret
 
 Generate a secure random string for session encryption:
 
@@ -93,7 +104,7 @@ Add it to `.env.local`:
 AUTH_SECRET=your_generated_secret
 ```
 
-## Step 5: Deploy Environment Variables to Convex
+## Step 6: Deploy Environment Variables to Convex
 
 Push your environment variables to Convex:
 
@@ -102,10 +113,11 @@ npx convex env set AUTH_GITHUB_ID "your_github_client_id"
 npx convex env set AUTH_GITHUB_SECRET "your_github_client_secret"
 npx convex env set AUTH_GOOGLE_ID "your_google_client_id"
 npx convex env set AUTH_GOOGLE_SECRET "your_google_client_secret"
+npx convex env set AUTH_RESEND_KEY "re_123"
 npx convex env set AUTH_SECRET "your_generated_secret"
 ```
 
-## Step 6: Start Development Server
+## Step 7: Start Development Server
 
 1. Make sure Convex is running:
    ```bash
