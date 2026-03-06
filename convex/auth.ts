@@ -11,4 +11,20 @@ export const { auth, signIn, signOut, store } = convexAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
     }),
   ],
+  callbacks: {
+    async redirect({ redirectTo }) {
+      if (redirectTo.includes(".vercel.app/")) {
+        return redirectTo;
+      }
+
+      const baseUrl = process.env.SITE_URL!.replace(/\/$/, "");
+      if (redirectTo.startsWith("?") || redirectTo.startsWith("/")) {
+        return `${baseUrl}${redirectTo}`;
+      }
+      if (redirectTo.startsWith(baseUrl)) {
+        return redirectTo;
+      }
+      throw new Error(`Invalid redirect: ${redirectTo}`);
+    }
+  }
 });
