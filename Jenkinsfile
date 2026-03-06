@@ -7,13 +7,6 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
-    environment {
-        NODE_ENV = 'production'
-        // Set these as Jenkins credentials/environment variables:
-        // CONVEX_DEPLOYMENT
-        // CONVEX_DEPLOYMENT_KEY
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -25,10 +18,10 @@ pipeline {
             steps {
                 script {
                     echo 'Installing root project dependencies...'
-                    sh 'npm ci'
+                    sh 'npm ci --include=dev'
                     
                     echo 'Installing os.arcbase.one dependencies...'
-                    sh 'cd os.arcbase.one && npm ci && cd ..'
+                    sh 'cd os.arcbase.one && npm ci --include=dev && cd ..'
                 }
             }
         }
