@@ -50,9 +50,16 @@ const schema = defineSchema({
     message: v.string(),
     submittedAt: v.number(),
     status: v.optional(v.string()), // "new", "read", "responded"
-  })
-    .index("by_email", ["email"])
-    .index("by_status", ["status"]),
+  }),
+
+  // Service status table for status page
+  serviceStatuses: defineTable({
+    name: v.string(), // e.g., 'Website', 'API', 'Database'
+    description: v.optional(v.string()),
+    status: v.string(), // e.g., 'operational', 'degraded', 'down'
+    lastChecked: v.number(), // timestamp
+    details: v.optional(v.string()),
+  }).index("by_status", ["status"]),
 
   newsletterSubscriptions: defineTable({
     email: v.string(),
