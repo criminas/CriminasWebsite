@@ -55,21 +55,48 @@ try {
         }
 
         const baseUrl = siteEnv.replace(/\/$/, "");
-        let wwwBaseUrl = baseUrl;
-        const m = baseUrl.match(/^(https?:\/\/)(?:www\.)?([^/]+)(?:\/.*)?$/i);
-        if (m) {
-          wwwBaseUrl = `${m[1]}www.${m[2]}`;
+
+        // Build a set of allowed origins based on the configured SITE_URL.
+        // Accept both the `www` and non-`www` variants so users who visit
+        // either https://arcbase.one or https://www.arcbase.one will be
+        // accepted when SITE_URL is set to one of them.
+        const allowedOrigins = new Set<string>();
+        try {
+          const parsedBase = new URL(baseUrl);
+          const hostNoWww = parsedBase.hostname.replace(/^www\./i, "");
+          // base origin as configured
+          allowedOrigins.add(parsedBase.origin);
+          // non-www
+          allowedOrigins.add(`${parsedBase.protocol}//${hostNoWww}`);
+          // www
+          allowedOrigins.add(`${parsedBase.protocol}//www.${hostNoWww}`);
+        } catch (e) {
+          // If URL parsing fails, fall back to simple string checks
+          allowedOrigins.add(baseUrl);
         }
 
-        if (redirectTo.startsWith("?") || redirectTo.startsWith("/")) {
+        if (
+          typeof redirectTo === "string" &&
+          (redirectTo.startsWith("?") || redirectTo.startsWith("/"))
+        ) {
           return `${baseUrl}${redirectTo}`;
         }
+
         if (
-          redirectTo.startsWith(baseUrl) ||
-          redirectTo.startsWith(wwwBaseUrl)
+          typeof redirectTo === "string" &&
+          (redirectTo.startsWith("http://") ||
+            redirectTo.startsWith("https://"))
         ) {
-          return redirectTo;
+          try {
+            const parsed = new URL(redirectTo);
+            if (allowedOrigins.has(parsed.origin)) {
+              return redirectTo;
+            }
+          } catch (e) {
+            // fall through to error below
+          }
         }
+
         throw new Error(`Invalid redirect: ${redirectTo}`);
       },
     },
@@ -77,7 +104,13 @@ try {
 } catch (e) {
   console.error("convexAuth initialization failed:", e);
   _authInit = {
-    auth: undefined,
+    // Provide a safe no-op `auth` with `addHttpRoutes` so imports that
+    // call `auth.addHttpRoutes(...)` (e.g. convex/http.ts) don't throw.
+    auth: {
+      addHttpRoutes: (_router: any) => {
+        console.warn("auth.addHttpRoutes noop: auth not initialized");
+      },
+    },
     signIn: async () => {
       throw new Error("Auth not initialized");
     },
