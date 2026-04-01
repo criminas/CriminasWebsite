@@ -13,30 +13,28 @@ arcbase is a collection of open-source projects focused on developer tools, clou
 
 ## Development
 
-This website is built with [Astro](https://astro.build/) and [Convex](https://convex.dev/) for authentication and data storage.
+This website is built with [Astro](https://astro.build/) and [Supabase](https://supabase.com/) for authentication and data storage.
 
 ### Authentication Setup
 
 This site includes user authentication with GitHub and Google OAuth. To set up authentication:
 
-1. Follow the [Convex Setup Guide](./CONVEX_SETUP.md) for detailed instructions
+1. Follow the [Supabase Setup Guide](./SUPABASE_SETUP.md) for detailed instructions
 2. Install dependencies: `npm install`
-3. Deploy Convex: `npx convex dev`
-4. Configure OAuth apps (see setup guide)
-5. Set environment variables in `.env.local`
+3. Configure OAuth apps (see setup guide)
+4. Set environment variables in `.env.local`
 
 ### Commands
 
 All commands are run from the root of the project:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npx convex dev`          | Starts Convex development server                 |
-| `npm run build`           | Build the production site to `./dist/`           |
-| `npm run preview`         | Preview the build locally                        |
-| `npm run astro ...`       | Run Astro CLI commands                           |
+| Command             | Action                                      |
+| :------------------ | :------------------------------------------ |
+| `npm install`       | Installs dependencies                       |
+| `npm run dev`       | Starts local dev server at `localhost:4321` |
+| `npm run build`     | Build the production site to `./dist/`      |
+| `npm run preview`   | Preview the build locally                   |
+| `npm run astro ...` | Run Astro CLI commands                      |
 
 ### Features
 

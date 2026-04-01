@@ -42,28 +42,11 @@
 </section>
 
 <script>
-    import { api } from "../../convex/_generated/api";
+    import { supabase } from "../lib/supabase";
 
     const form = document.getElementById("newsletterForm") as HTMLFormElement;
     const btn = document.getElementById("newsletterBtn") as HTMLButtonElement;
     const emailInput = document.getElementById("newsletterEmail") as HTMLInputElement;
-
-    function waitForConvex(timeout = 3000): Promise<any | null> {
-        return new Promise((resolve) => {
-            const start = Date.now();
-            const check = () => {
-                const convex = (window as any).__convex;
-                if (convex) {
-                    resolve(convex);
-                } else if (Date.now() - start > timeout) {
-                    resolve(null);
-                } else {
-                    setTimeout(check, 50);
-                }
-            };
-            check();
-        });
-    }
 
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -75,9 +58,10 @@
         btn.innerHTML = `Subscribing...`;
 
         try {
-            const convex = await waitForConvex();
-            if (convex) {
-                await convex.mutation(api.newsletter.subscribe, { email });
+            const { error } = await supabase.from('newsletter_subscriptions').insert({ email });
+            // Ignore unique constraint errors silently in UI but log them
+            if (error && error.code !== '23505') { 
+                throw error;
             }
 
             btn.innerHTML = `Subscribed! ✓`;

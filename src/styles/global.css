@@ -305,8 +305,8 @@ select:focus-visible {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 0 24px;
-  height: 56px;
+  min-height: 56px;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -339,8 +339,7 @@ select:focus-visible {
 }
 
 .nav-brand img {
-  height: 24px;
-  width: auto;
+  max-height: 100%;
 }
 
 .nav-brand span {

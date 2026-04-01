@@ -59,7 +59,7 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { api } from "../../convex/_generated/api";
+    import { supabase } from "../lib/supabase";
 
     const codeInputs = document.querySelectorAll<HTMLInputElement>('.code-digit');
     const verifyBtn = document.getElementById('verifyBtn') as HTMLButtonElement;
@@ -77,20 +77,6 @@ import Layout from "../layouts/Layout.astro";
     if (email) {
         emailDisplay.style.display = 'flex';
         emailText.textContent = email;
-    }
-
-    function waitForConvex(): Promise<any> {
-        return new Promise((resolve) => {
-            const check = () => {
-                const convex = (window as any).__convex;
-                if (convex) {
-                    resolve(convex);
-                } else {
-                    setTimeout(check, 50);
-                }
-            };
-            check();
-        });
     }
 
     // Auto-focus first input
@@ -153,23 +139,18 @@ import Layout from "../layouts/Layout.astro";
         verifyBtn.textContent = 'Verifying...';
 
         try {
-            const convex = await waitForConvex();
+            if (!email) throw new Error("Email address is missing.");
 
-            // Use Convex Auth's email verification
-            const result = await convex.action(api.auth.signIn, {
-                provider: 'password',
-                params: { email, code, flow: 'email-verification' }
+            const { error } = await supabase.auth.verifyOtp({
+                email,
+                token: code,
+                type: 'signup'
             });
+
+            if (error) throw error;
 
             successMessage.textContent = 'Email verified successfully! Redirecting...';
             successMessage.style.display = 'block';
-
-            // Store token if returned
-            const token = result?.token || result?.tokens?.token;
-            if (token) {
-                localStorage.setItem('convex_auth_token', token);
-                convex.setAuth(() => Promise.resolve(token));
-            }
 
             setTimeout(() => {
                 window.location.href = '/dashboard';
@@ -198,11 +179,14 @@ import Layout from "../layouts/Layout.astro";
         resendBtn.textContent = 'Sending...';
 
         try {
-            const convex = await waitForConvex();
-            await convex.action(api.auth.signIn, {
-                provider: 'password',
-                params: { email, flow: 'email-verification' }
+            if (!email) throw new Error("Email address is missing.");
+
+            const { error } = await supabase.auth.resend({
+                type: 'signup',
+                email
             });
+
+            if (error) throw error;
 
             // Start cooldown
             cooldown = 60;
@@ -223,7 +207,7 @@ import Layout from "../layouts/Layout.astro";
             }, 1000);
         } catch (error: any) {
             console.error('Resend error:', error);
-            errorMessage.textContent = 'Failed to resend code. Please try again.';
+            errorMessage.textContent = error.message || 'Failed to resend code. Please try again.';
             errorMessage.style.display = 'block';
             resendBtn.disabled = false;
             resendBtn.textContent = 'Resend Code';

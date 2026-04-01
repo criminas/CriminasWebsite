@@ -17,9 +17,6 @@ pnpm-debug.log*
 .env.production
 .env.local
 
-# Convex generated files
-.convex/
-
 # macOS-specific files
 .DS_Store
 
@@ -31,4 +28,4 @@ ai.arcbase.org/
 analysis.astro/
 os.arcbase.one/
 
-CONVEX_SETUP.md
+SUPABASE_SETUP.md

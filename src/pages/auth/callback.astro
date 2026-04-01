@@ -17,109 +17,37 @@ import Layout from "../../layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { api } from "../../../convex/_generated/api";
+    import { supabase } from "../../lib/supabase";
 
     async function handleCallback() {
-        const url = new URL(window.location.href);
-        const code = url.searchParams.get("code");
-        const hasCode = !!code;
-        const verifier = localStorage.getItem("convex_auth_verifier");
-        console.debug('OAuth callback: started', { hasCode, hasVerifier: !!verifier });
-
-        if (!code) {
-            // No code — just redirect to login
-            window.location.href = "/login";
-            return;
-        }
-
-        // Wait for Convex
-        const convex = await new Promise<any>((resolve) => {
-            const check = () => {
-                const c = (window as any).__convex;
-                if (c) resolve(c);
-                else setTimeout(check, 50);
-            };
-            check();
-        });
-
+        // Supabase client automatically processes the access_token from the URL hash
+        // We just need to wait a moment to make sure the session is established.
+        
         try {
-            // Exchange the OAuth code + verifier for auth tokens
-            const args: any = {
-                provider: "google",
-                params: { code },
-            };
-            if (verifier) {
-                args.verifier = verifier;
-            }
-
-            let result;
-            try {
-                result = await convex.action(api.auth.signIn as any, args);
-            } catch (err: any) {
-                if (err.message && err.message.includes("Connection lost")) {
-                    console.warn("Connection lost during code exchange, retrying...");
-                    // Wait for the websocket to finish reconnecting
-                    await new Promise(r => setTimeout(r, 1500));
-                    try {
-                        result = await convex.action(api.auth.signIn as any, args);
-                    } catch (err2) {
-                        console.error('OAuth callback: retry failed', err2);
-                        throw err2;
-                    }
-                } else {
-                    throw err;
-                }
-            }
-
-            console.debug('OAuth callback: exchange result keys=', result ? Object.keys(result) : null);
-
-            // Clean up verifier
-            localStorage.removeItem("convex_auth_verifier");
-
-            // Store the tokens (support both top-level `token` and nested `tokens.token`)
-            const token = result?.token || result?.tokens?.token;
-            const refreshToken = result?.refreshToken || result?.tokens?.refreshToken;
-
-            console.debug('OAuth callback: tokens present=', { hasToken: !!token, hasRefresh: !!refreshToken });
-
-            if (token) {
-                try {
-                    localStorage.setItem("convex_auth_token", token);
-                    if (refreshToken) {
-                        localStorage.setItem("convex_auth_refresh_token", refreshToken);
-                    }
-                    console.debug('OAuth callback: wrote tokens to localStorage, verify=', !!localStorage.getItem('convex_auth_token'));
-                } catch (e) {
-                    console.warn('OAuth callback: could not write tokens to localStorage', e);
-                }
-
-                // Ensure the Convex client picks up the token immediately
-                try {
-                    await convex.setAuth(() => Promise.resolve(token));
-                    console.debug('OAuth callback: convex.setAuth applied');
-                    if (typeof convex.connectionState === 'function') {
-                        try {
-                            console.debug('OAuth callback: convex.connectionState', convex.connectionState());
-                        } catch (e) {
-                            // ignore
-                        }
-                    }
-                } catch (e) {
-                    console.warn('OAuth callback: convex.setAuth failed', e);
-                }
-
-                // Redirect to dashboard with auth
-                console.debug('OAuth callback: redirecting to /dashboard');
+            const { data, error } = await supabase.auth.getSession();
+            
+            // if we have a session, redirect to the dashboard
+            if (data.session) {
                 window.location.href = "/dashboard";
                 return;
             }
 
-            // No tokens returned — something went wrong
-            console.error("No tokens returned from code exchange");
+            // On some OAuth setups like Google, Supabase might need to fetch the user 
+            // after processing the URL. Let's wait up to 2 seconds polling for the user.
+            for (let i = 0; i < 20; i++) {
+                const { data: userResp } = await supabase.auth.getUser();
+                if (userResp.user) {
+                    window.location.href = "/dashboard";
+                    return;
+                }
+                await new Promise(r => setTimeout(r, 100)); // wait 100ms
+            }
+
+            // If we still don't have a user, Auth failed or invalid token.
+            console.error("No valid session found during OAuth callback.");
             window.location.href = "/login";
         } catch (error) {
             console.error("OAuth callback error:", error);
-            localStorage.removeItem("convex_auth_verifier");
             window.location.href = "/login";
         }
     }

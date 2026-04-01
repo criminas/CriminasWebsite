@@ -96,48 +96,25 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { api } from "../../convex/_generated/api";
+    import { supabase } from "../lib/supabase";
 
     const form = document.getElementById('registerForm') as HTMLFormElement;
     const errorMessage = document.getElementById('errorMessage') as HTMLDivElement;
     const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
     const googleBtn = document.getElementById('googleSignUp') as HTMLButtonElement;
-
-    function waitForConvex(): Promise<any> {
-        return new Promise((resolve) => {
-            const check = () => {
-                const convex = (window as any).__convex;
-                if (convex) {
-                    resolve(convex);
-                } else {
-                    setTimeout(check, 50);
-                }
-            };
-            check();
-        });
-    }
     
     // Google OAuth sign-up
     googleBtn?.addEventListener('click', async () => {
         googleBtn.disabled = true;
         googleBtn.textContent = 'Redirecting...';
         try {
-            const convex = await waitForConvex();
-            const result = await convex.action(api.auth.signIn, {
+            const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
-                params: { redirectTo: window.location.origin + '/auth/callback' }
+                options: {
+                    redirectTo: window.location.origin + '/auth/callback',
+                },
             });
-            // Store the verifier for the OAuth code exchange after redirect
-            if (result?.verifier) {
-                localStorage.setItem('convex_auth_verifier', result.verifier);
-            }
-            if (result?.redirect) {
-                window.location.href = result.redirect;
-            } else if (result?.tokens?.token) {
-                localStorage.setItem('convex_auth_token', result.tokens.token);
-                convex.setAuth(() => Promise.resolve(result.tokens.token));
-                window.location.href = '/dashboard';
-            }
+            if (error) throw error;
         } catch (error: any) {
             console.error('Google sign-up error:', error);
             errorMessage.textContent = 'Google sign-up failed. Please try again.';
@@ -173,22 +150,17 @@ import Layout from "../layouts/Layout.astro";
         submitBtn.textContent = 'Creating account...';
 
         try {
-            const convex = await waitForConvex();
-
-            // Sign up with email and password using the signIn action
-            const result = await convex.action(api.auth.signIn, {
-                provider: 'password',
-                params: { email, password, name, flow: 'signUp' }
+            const { error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: {
+                        full_name: name,
+                    }
+                }
             });
             
-            console.log('Sign up result:', result);
-            
-            // Store auth token if returned (check various possible structures)
-            const token = result?.token || result?.tokens?.token;
-            if (token) {
-                localStorage.setItem('convex_auth_token', token);
-                convex.setAuth(() => Promise.resolve(token));
-            }
+            if (error) throw error;
             
             // Redirect to email verification
             window.location.href = '/verify-email?email=' + encodeURIComponent(email);

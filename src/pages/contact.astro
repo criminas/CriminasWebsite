@@ -167,23 +167,8 @@ import Layout from "../layouts/Layout.astro";
         </div>
     </section>
 
-    <!-- Form Handling Script -->
     <script>
-        import { api } from "../../convex/_generated/api";
-
-        function waitForConvex(): Promise<any> {
-            return new Promise((resolve) => {
-                const check = () => {
-                    const convex = (window as any).__convex;
-                    if (convex) {
-                        resolve(convex);
-                    } else {
-                        setTimeout(check, 50);
-                    }
-                };
-                check();
-            });
-        }
+        import { supabase } from "../lib/supabase";
 
         const form = document.getElementById("contactForm") as HTMLFormElement;
         const btn = form?.querySelector(".form-submit") as HTMLButtonElement;
@@ -205,14 +190,14 @@ import Layout from "../layouts/Layout.astro";
             btn.textContent = "Sending...";
 
             try {
-                const convex = await waitForConvex();
-                
-                await convex.mutation(api.contact.submit, {
+                const { error } = await supabase.from('contact_submissions').insert({
                     name,
                     email,
-                    subject: subject || undefined,
+                    subject: subject || null,
                     message,
                 });
+
+                if (error) throw error;
 
                 btn.textContent = "Message Sent! ✓";
                 btn.style.background = "linear-gradient(135deg, #059669, #047857)";

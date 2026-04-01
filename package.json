@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "arcbase-website",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,11 +11,9 @@
   "dependencies": {
     "@astrojs/check": "^0.9.8",
     "@auth/core": "^0.37.4",
-    "@convex-dev/auth": "^0.0.90",
-    "@convex-dev/rate-limiter": "^0.3.2",
     "@oslojs/crypto": "^1.0.1",
+    "@supabase/supabase-js": "^2.101.1",
     "astro": "^6.1.2",
-    "convex": "^1.33.0",
     "resend": "^6.9.3",
     "typescript": "^5.9.3"
   },

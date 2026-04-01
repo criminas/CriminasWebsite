@@ -286,58 +286,36 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-    import { api } from "../../convex/_generated/api";
+    import { supabase } from "../lib/supabase";
 
-    let convex: any = null;
     let currentUser: any = null;
-
-    function waitForConvex(): Promise<any> {
-        return new Promise((resolve) => {
-            const check = () => {
-                const c = (window as any).__convex;
-                if (c) {
-                    resolve(c);
-                } else {
-                    setTimeout(check, 50);
-                }
-            };
-            check();
-        });
-    }
+    let userProfile: any = null;
 
     async function loadDashboard() {
         try {
-            convex = await waitForConvex();
-
-            // Try to restore auth from localStorage and apply to Convex client
-            try {
-                const storedToken = localStorage.getItem('convex_auth_token');
-                console.debug('Dashboard: stored token present=', !!storedToken);
-                if (storedToken) {
-                    try {
-                        await convex.setAuth(() => Promise.resolve(storedToken));
-                        console.debug('Dashboard: convex.setAuth applied');
-                    } catch (e) {
-                        console.warn('Dashboard: convex.setAuth failed', e);
-                    }
-                }
-            } catch (e) {
-                console.warn('Dashboard: could not access localStorage', e);
-            }
-
             // Check authentication
-            currentUser = await convex.query(api.users.current);
+            const { data: { user } } = await supabase.auth.getUser();
             
-            if (!currentUser) {
+            if (!user) {
                 console.debug('Dashboard: currentUser not found — redirecting to /login');
                 window.location.href = '/login';
                 return;
             }
+            currentUser = user;
+
+            // Fetch extra profile data
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', user.id)
+                .single();
+            
+            userProfile = profile || {};
 
             // Update welcome message
             const welcomeMsg = document.getElementById('welcomeMessage');
             if (welcomeMsg) {
-                welcomeMsg.textContent = `Welcome back, ${currentUser.name || 'there'}!`;
+                welcomeMsg.textContent = `Welcome back, ${userProfile.name || user.user_metadata?.full_name || 'there'}!`;
             }
 
             // Update profile card
@@ -362,8 +340,8 @@ import Layout from "../layouts/Layout.astro";
 
         // Member since
         const memberSince = document.getElementById('memberSince');
-        if (memberSince && currentUser._creationTime) {
-            const date = new Date(currentUser._creationTime);
+        if (memberSince && currentUser.created_at) {
+            const date = new Date(currentUser.created_at);
             memberSince.textContent = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
         }
 
@@ -382,18 +360,23 @@ import Layout from "../layouts/Layout.astro";
         // Account type
         const accountType = document.getElementById('accountTypeDisplay');
         if (accountType) {
-            accountType.textContent = currentUser.role ? (currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1)) : 'Community';
+            const role = userProfile.role || 'Community';
+            accountType.textContent = role.charAt(0).toUpperCase() + role.slice(1);
         }
 
         // Account created time in activity feed
         const accountCreatedTime = document.getElementById('accountCreatedTime');
-        if (accountCreatedTime && currentUser._creationTime) {
-            const date = new Date(currentUser._creationTime);
+        const activityFeed = document.getElementById('activityFeed');
+        
+        if (accountCreatedTime && currentUser.created_at) {
+            const date = new Date(currentUser.created_at);
             accountCreatedTime.textContent = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        } else if (activityFeed) {
+            // Fallback clear
+            activityFeed.innerHTML = '';
         }
 
         // Add starred activity items
-        const activityFeed = document.getElementById('activityFeed');
         if (activityFeed && starredData && starredData.length > 0) {
             const starItem = document.createElement('div');
             starItem.className = 'activity-item';
@@ -404,7 +387,7 @@ import Layout from "../layouts/Layout.astro";
             activityFeed.insertBefore(starItem, activityFeed.firstChild);
         }
 
-        if (currentUser.newsletterSubscribed) {
+        if (userProfile.newsletter_subscribed) {
             const nlItem = document.createElement('div');
             nlItem.className = 'activity-item';
             nlItem.innerHTML = `
@@ -421,22 +404,25 @@ import Layout from "../layouts/Layout.astro";
         const avatar = document.getElementById('profileAvatar');
         const name = document.getElementById('profileName');
         const email = document.getElementById('profileEmail');
+        
+        const displayName = userProfile.name || currentUser.user_metadata?.full_name || 'User';
+        const displayImage = userProfile.image || currentUser.user_metadata?.avatar_url;
 
         if (avatar) {
-            if (currentUser.image) {
-                avatar.innerHTML = `<img src="${currentUser.image}" alt="${currentUser.name || 'User'}" />`;
+            if (displayImage) {
+                avatar.innerHTML = `<img src="${displayImage}" alt="${displayName}" />`;
             } else {
-                avatar.innerHTML = `<span>${(currentUser.name || currentUser.email || 'U')[0].toUpperCase()}</span>`;
+                avatar.innerHTML = `<span>${displayName[0].toUpperCase()}</span>`;
             }
         }
 
-        if (name) name.textContent = currentUser.name || 'User';
+        if (name) name.textContent = displayName;
         if (email) email.textContent = currentUser.email || '';
 
         const roleBadge = document.getElementById('roleBadge');
         if (roleBadge) {
-            if (currentUser.role) {
-                roleBadge.textContent = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+            if (userProfile.role) {
+                roleBadge.textContent = userProfile.role.charAt(0).toUpperCase() + userProfile.role.slice(1);
                 roleBadge.style.display = 'inline-block';
             } else {
                 roleBadge.style.display = 'none';
@@ -453,7 +439,7 @@ import Layout from "../layouts/Layout.astro";
     async function handleAvatarUpload(e: Event) {
         const input = e.target as HTMLInputElement;
         const file = input.files?.[0];
-        if (!file || !convex) return;
+        if (!file || !currentUser) return;
 
         // Validate
         if (!file.type.startsWith('image/')) {
@@ -474,25 +460,36 @@ import Layout from "../layouts/Layout.astro";
                 msgEl.style.display = 'block';
             }
 
-            // Get upload URL from Convex
-            const uploadUrl = await convex.mutation(api.users.generateUploadUrl, {});
+            // Upload via Supabase Storage
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${currentUser.id}-${Math.random()}.${fileExt}`;
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('avatars')
+                .upload(fileName, file, { upsert: true });
 
-            // Upload file
-            const result = await fetch(uploadUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': file.type },
-                body: file,
-            });
-            const { storageId } = await result.json();
+            if (uploadError) throw uploadError;
 
-            // Update user profile with storage URL
-            const { url } = await convex.mutation(api.users.updateProfileImage, { storageId });
+            // Get public URL
+            const { data: publicUrlData } = supabase.storage
+                .from('avatars')
+                .getPublicUrl(uploadData.path);
+            
+            const url = publicUrlData.publicUrl;
+
+            // Update user profile
+            const { error: updateError } = await supabase
+                .from('profiles')
+                .update({ image: url })
+                .eq('id', currentUser.id);
+
+            if (updateError) throw updateError;
 
             // Update UI
-            currentUser.image = url;
+            userProfile.image = url;
             const avatar = document.getElementById('profileAvatar');
+            const displayName = userProfile.name || currentUser.user_metadata?.full_name || 'User';
             if (avatar) {
-                avatar.innerHTML = `<img src="${url}" alt="${currentUser.name || 'User'}" />`;
+                avatar.innerHTML = `<img src="${url}" alt="${displayName}" />`;
             }
 
             if (msgEl) {
@@ -520,12 +517,17 @@ import Layout from "../layouts/Layout.astro";
 
     async function loadStarredProjects() {
         const container = document.getElementById('starredProjects');
-        if (!container) return [];
+        if (!container || !currentUser) return [];
 
         try {
-            const starred = await convex.query(api.users.getStarredProjects);
+            const { data: starred, error } = await supabase
+                .from('starred_projects')
+                .select('*')
+                .order('starred_at', { ascending: false });
 
-            if (starred.length === 0) {
+            if (error) throw error;
+
+            if (!starred || starred.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
                         <p>No starred projects yet</p>
@@ -538,10 +540,10 @@ import Layout from "../layouts/Layout.astro";
             container.innerHTML = starred.slice(0, 5).map((project: any) => `
                 <div class="starred-item">
                     <div class="starred-info">
-                        <h4>${escapeHtml(project.projectName)}</h4>
-                        <p class="starred-date">${formatDate(project.starredAt)}</p>
+                        <h4>${escapeHtml(project.project_name)}</h4>
+                        <p class="starred-date">${formatDate(project.starred_at)}</p>
                     </div>
-                    <button class="unstar-btn" data-project-id="${escapeHtml(project.projectId)}">
+                    <button class="unstar-btn" data-project-id="${escapeHtml(project.project_id)}">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
                             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                         </svg>
@@ -555,10 +557,12 @@ import Layout from "../layouts/Layout.astro";
                 btn.addEventListener('click', async (e) => {
                     const projectId = (e.currentTarget as HTMLButtonElement).dataset.projectId;
                     if (projectId) {
-                        await convex.mutation(api.users.starProject, { 
-                            projectId,
-                            projectName: ''
-                        });
+                        await supabase
+                            .from('starred_projects')
+                            .delete()
+                            .eq('project_id', projectId)
+                            .eq('user_id', currentUser.id);
+                            
                         const newData = await loadStarredProjects();
                         loadAccountStats(newData);
                     }
@@ -578,9 +582,10 @@ import Layout from "../layouts/Layout.astro";
         const badge = document.getElementById('newsletterBadge');
         const label = document.getElementById('newsletterLabel');
         const toggle = document.getElementById('newsletterToggle') as HTMLButtonElement;
-        if (!statusEl || !badge || !label || !toggle) return;
+        
+        if (!statusEl || !badge || !label || !toggle || !currentUser) return;
 
-        const isSubscribed = currentUser?.newsletterSubscribed ?? false;
+        let isSubscribed = userProfile?.newsletter_subscribed ?? false;
         statusEl.style.display = 'flex';
 
         updateNewsletterUI(isSubscribed, badge, label, toggle);
@@ -589,14 +594,31 @@ import Layout from "../layouts/Layout.astro";
             toggle.disabled = true;
             try {
                 if (isSubscribed) {
-                    await convex.mutation(api.newsletter.unsubscribe, {});
-                    currentUser.newsletterSubscribed = false;
+                    await supabase
+                        .from('newsletter_subscriptions')
+                        .delete()
+                        .eq('email', currentUser.email);
+                        
+                    await supabase
+                        .from('profiles')
+                        .update({ newsletter_subscribed: false })
+                        .eq('id', currentUser.id);
+                        
+                    isSubscribed = false;
                 } else {
-                    const email = currentUser.email || '';
-                    await convex.mutation(api.newsletter.subscribe, { email });
-                    currentUser.newsletterSubscribed = true;
+                    await supabase
+                        .from('newsletter_subscriptions')
+                        .upsert({ email: currentUser.email });
+                        
+                    await supabase
+                        .from('profiles')
+                        .update({ newsletter_subscribed: true })
+                        .eq('id', currentUser.id);
+                        
+                    isSubscribed = true;
                 }
-                updateNewsletterUI(currentUser.newsletterSubscribed, badge, label, toggle);
+                userProfile.newsletter_subscribed = isSubscribed;
+                updateNewsletterUI(isSubscribed, badge, label, toggle);
             } catch (error) {
                 console.error('Error toggling newsletter:', error);
                 showAlert('Failed to update newsletter preference.', 'error');
@@ -632,7 +654,7 @@ import Layout from "../layouts/Layout.astro";
         return div.innerHTML;
     }
 
-    function formatDate(timestamp: number): string {
+    function formatDate(timestamp: string | number): string {
         const date = new Date(timestamp);
         const now = new Date();
         const diff = now.getTime() - date.getTime();
@@ -654,7 +676,7 @@ import Layout from "../layouts/Layout.astro";
         if (content && form && editName) {
             content.style.display = 'none';
             form.style.display = 'block';
-            editName.value = currentUser?.name || '';
+            editName.value = userProfile?.name || currentUser?.user_metadata?.full_name || '';
         }
     });
 
@@ -672,10 +694,14 @@ import Layout from "../layouts/Layout.astro";
         const editName = document.getElementById('editName') as HTMLInputElement;
         const name = editName?.value;
         
-        if (name) {
+        if (name && currentUser) {
             try {
-                await convex.mutation(api.users.updateProfile, { name });
-                currentUser.name = name;
+                await supabase
+                    .from('profiles')
+                    .update({ name })
+                    .eq('id', currentUser.id);
+
+                userProfile.name = name;
                 updateProfileCard();
                 
                 const content = document.getElementById('profileContent');
@@ -695,15 +721,10 @@ import Layout from "../layouts/Layout.astro";
     // Sign out
     document.getElementById('signOutAction')?.addEventListener('click', async () => {
         try {
-            if (convex) {
-                await convex.action(api.auth.signOut);
-            }
-            // Clear stored auth token
-            localStorage.removeItem('convex_auth_token');
+            await supabase.auth.signOut();
             window.location.href = '/';
         } catch (error) {
             console.error('Error signing out:', error);
-            localStorage.removeItem('convex_auth_token');
             window.location.href = '/';
         }
     });
@@ -711,17 +732,19 @@ import Layout from "../layouts/Layout.astro";
     // Delete account
     document.getElementById('deleteAccountAction')?.addEventListener('click', async () => {
         try {
-            if (convex) {
-                await convex.mutation(api.users.deleteAccount, {});
-                showAlert('Account deleted successfully. Redirecting...', 'success');
-                setTimeout(() => {
-                    localStorage.removeItem('convex_auth_token');
-                    window.location.href = '/';
-                }, 1500);
-            }
+            if (!currentUser) return;
+            // Best effort delete profiles/auth user via standard tools might fail without an admin API
+            // we will drop their profile info or user_metadata at minimum
+            await supabase.from('profiles').delete().eq('id', currentUser.id);
+            await supabase.auth.signOut();
+            
+            showAlert('Account information deleted successfully. Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1500);
         } catch (error) {
             console.error('Error deleting account:', error);
-            showAlert('Failed to delete account. Please try again.', 'error');
+            showAlert('Failed to delete account data. Please try again.', 'error');
         }
     });
 
@@ -742,7 +765,7 @@ import Layout from "../layouts/Layout.astro";
     }
 
     // Load dashboard on page load
-    loadDashboard();
+    document.addEventListener("DOMContentLoaded", loadDashboard);
 </script>
 
 <style is:global>
