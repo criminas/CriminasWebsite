@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.8",
     "@auth/core": "^0.37.4",
+    "@datadog/browser-rum": "^6.32.0",
     "@oslojs/crypto": "^1.0.1",
     "@supabase/supabase-js": "^2.101.1",
     "astro": "^6.1.2",

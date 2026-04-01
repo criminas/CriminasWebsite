@@ -95,8 +95,36 @@ const siteUrl = "https://arcbase.one";
         },
       })}
     />
+    <!-- Supabase Client -->
     <script>
       import { supabase } from "../lib/supabase";
+    </script>
+    
+    <!-- Datadog RUM -->
+    <script>
+      import { datadogRum } from '@datadog/browser-rum';
+
+      // Initialize Datadog RUM in a client-side block so it runs exactly once upon load
+      const applicationId = import.meta.env.PUBLIC_DATADOG_APPLICATION_ID;
+      const clientToken = import.meta.env.PUBLIC_DATADOG_CLIENT_TOKEN;
+      const site = import.meta.env.PUBLIC_DATADOG_SITE || 'datadoghq.com';
+
+      if (applicationId && clientToken) {
+          datadogRum.init({
+              applicationId,
+              clientToken,
+              site,
+              service: 'arcbase-website',
+              env: import.meta.env.MODE || 'development',
+              version: '1.0.0', 
+              sessionSampleRate: 100,
+              sessionReplaySampleRate: 20,
+              trackUserInteractions: true,
+              trackResources: true,
+              trackLongTasks: true,
+              defaultPrivacyLevel: 'mask-user-input',
+          });
+      }
     </script>
   </head>
 

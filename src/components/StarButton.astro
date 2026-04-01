@@ -61,12 +61,12 @@ const { projectId, projectName } = Astro.props;
                     .select('id')
                     .eq('project_id', this.projectId)
                     .eq('user_id', user.id)
-                    .single();
+                    .maybeSingle();
 
                 this.isStarred = !!starred;
                 this.updateButton(this.isStarred);
             } catch (error) {
-                // If single() finds 0 rows, it throws an error in some versions, but that just means not starred
+                // If maybeSingle() hits a real error (like network), catch it here
                 this.isStarred = false;
                 this.updateButton(false);
             }

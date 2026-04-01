@@ -38,7 +38,7 @@ CREATE TABLE public.profiles (
 );
 
 CREATE TABLE public.starred_projects (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
     project_id TEXT NOT NULL,
     project_name TEXT NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE public.starred_projects (
 );
 
 CREATE TABLE public.contact_submissions (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     name TEXT NOT NULL,
     email TEXT NOT NULL,
     subject TEXT,
@@ -57,7 +57,7 @@ CREATE TABLE public.contact_submissions (
 );
 
 CREATE TABLE public.newsletter_subscriptions (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
     subscribed_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -82,7 +82,9 @@ CREATE POLICY "Anyone can submit contact form" ON public.contact_submissions FOR
 
 -- Newsletter: Anyone can insert
 CREATE POLICY "Anyone can subscribe to newsletter" ON public.newsletter_subscriptions FOR INSERT WITH CHECK (true);
-CREATE POLICY "Users can read own subscription" ON public.newsletter_subscriptions FOR SELECT USING (email IN (SELECT email FROM auth.users WHERE id = auth.uid()));
+CREATE POLICY "Users can read own subscription" ON public.newsletter_subscriptions FOR SELECT USING (email = (auth.jwt() ->> 'email'));
+CREATE POLICY "Users can update own subscription" ON public.newsletter_subscriptions FOR UPDATE USING (email = (auth.jwt() ->> 'email'));
+CREATE POLICY "Users can delete own subscription" ON public.newsletter_subscriptions FOR DELETE USING (email = (auth.jwt() ->> 'email'));
 
 -- Automatically create profile on user signup
 CREATE OR REPLACE FUNCTION public.handle_new_user()
