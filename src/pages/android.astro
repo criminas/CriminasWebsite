@@ -1,0 +1,1524 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Keep Android Open — arcbase"
+  description="Android's open-source future is under threat. Learn what's happening, why it matters, and what you can do to help the #KeepAndroidOpen movement."
+  keywords="keepandroidopen, android open source, AOSP, F-Droid, developer freedom, Google android policy, android walled garden"
+  activePage="android"
+>
+  <!-- HERO -->
+  <section class="kao-hero">
+    <!---     <div class="kao-hero-bg" aria-hidden="true">
+      <div class="kao-orb kao-orb-1"></div>
+      <div class="kao-orb kao-orb-2"></div>
+      <div class="kao-orb kao-orb-3"></div>
+    </div> --->
+    <div class="kao-hero-content fade-up">
+      <div class="kao-tag">
+        <span class="kao-tag-dot"></span>
+        Active Campaign
+      </div>
+      <h1 class="kao-hero-title">
+        Keep Android <span class="kao-struck-text">Open</span>
+      </h1>
+      <p class="kao-hero-sub">
+        Google is quietly dismantling the open-source foundation of Android.
+        Billions of users and millions of developers are at risk of losing the
+        freedom to choose what runs on their own devices.
+      </p>
+      <div class="kao-hero-actions">
+        <a
+          href="https://www.keepandroidopen.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+        >
+          Sign the Open Letter ↗
+        </a>
+        <a href="#what-is-happening" class="btn-outline"
+          >Learn what's happening</a
+        >
+      </div>
+      <div class="kao-stats">
+        <div class="kao-stat">
+          <span class="kao-stat-num">3B+</span>
+          <span class="kao-stat-label">Android users affected</span>
+        </div>
+        <div class="kao-stat-divider"></div>
+        <div class="kao-stat">
+          <span class="kao-stat-num">∞</span>
+          <span class="kao-stat-label">FOSS apps at risk</span>
+        </div>
+        <div class="kao-stat-divider"></div>
+        <div class="kao-stat">
+          <span class="kao-stat-num">1</span>
+          <span class="kao-stat-label">gatekeeper deciding it all</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS HAPPENING -->
+  <section class="kao-section" id="what-is-happening">
+    <div class="kao-container">
+      <div class="kao-section-label">The Problem</div>
+      <h2 class="kao-section-title">What is happening to Android?</h2>
+      <p class="kao-section-intro">
+        Android was built on a promise: an open platform where anyone could
+        build, distribute, and run software without asking permission. Google is
+        breaking that promise — and doing it piece by piece.
+      </p>
+
+      <div class="kao-cards">
+        <div class="kao-card kao-card-red fade-up">
+          <div class="kao-card-icon">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              ><rect x="3" y="11" width="18" height="11" rx="2" ry="2"
+              ></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg
+            >
+          </div>
+          <h3>Mandatory Developer Registration</h3>
+          <p>
+            Google now requires <em>all</em> Android app developers — including independent,
+            hobbyist, and FOSS developers — to register centrally with Google using
+            government-issued ID and pay a fee, even if they never use the Play Store.
+            Non-registered apps will not run on "certified" devices.
+          </p>
+        </div>
+
+        <div class="kao-card kao-card-orange fade-up">
+          <div class="kao-card-icon">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              ><line x1="3" y1="22" x2="21" y2="22"></line><line
+                x1="6"
+                y1="18"
+                x2="6"
+                y2="11"></line><line x1="10" y1="18" x2="10" y2="11"
+              ></line><line x1="14" y1="18" x2="14" y2="11"></line><line
+                x1="18"
+                y1="18"
+                x2="18"
+                y2="11"></line><polygon points="12 2 2 7 22 7"></polygon></svg
+            >
+          </div>
+          <h3>FOSS Ecosystems Under Threat</h3>
+          <p>
+            Projects like <strong>F-Droid</strong> — which provide a privacy-respecting,
+            Google-free alternative app store — are directly threatened. Student developers,
+            privacy advocates, and open-source maintainers who cannot or will not
+            comply face being locked out of the platform entirely.
+          </p>
+        </div>
+
+        <div class="kao-card kao-card-yellow fade-up">
+          <div class="kao-card-icon">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              ><rect x="2" y="3" width="20" height="14" rx="2" ry="2"
+              ></rect><line x1="8" y1="21" x2="16" y2="21"></line><line
+                x1="12"
+                y1="17"
+                x2="12"
+                y2="21"></line></svg
+            >
+          </div>
+          <h3>A Walled Garden in the Making</h3>
+          <p>
+            These policies are transforming Android into an iOS-style walled
+            garden where Google is the sole arbiter of what software users can
+            install. Combined with reduced AOSP update frequency and
+            closed-source creep into core system components, the open Android of
+            old is disappearing fast.
+          </p>
+        </div>
+
+        <div class="kao-card kao-card-purple fade-up">
+          <div class="kao-card-icon">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              ><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"
+              ></polyline><polyline points="17 18 23 18 23 12"></polyline></svg
+            >
+          </div>
+          <h3>Slower AOSP, Wider Gaps</h3>
+          <p>
+            Google shifted AOSP releases from quarterly to twice-yearly. This
+            widens the gap between Google's internal development and the
+            open-source community, making it harder for custom ROM developers
+            and independent maintainers to keep pace — effectively starving the
+            open ecosystem.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section class="kao-section kao-section-alt">
+    <div class="kao-container">
+      <div class="kao-section-label">Why It Matters</div>
+      <h2 class="kao-section-title">
+        This affects everyone — not just developers
+      </h2>
+
+      <div class="kao-two-col">
+        <div class="kao-prose fade-up">
+          <p>
+            You might think this is only a developer problem. It isn't. Every
+            person who uses an Android device is affected when the platform that
+            powers their phone becomes a controlled, permission-gated
+            environment.
+          </p>
+          <p>
+            Open Android has always meant <strong>user choice</strong>: the
+            freedom to install apps from any source, to run custom firmware, to
+            use a device you legally own however you choose. When developers
+            need Google's blessing to distribute software, that freedom is gone
+            — and your device effectively becomes Google's property.
+          </p>
+          <p>
+            The open-source ecosystem also underpins the security and privacy
+            tools <em>millions</em> rely on daily: ad blockers, VPNs, encrypted messengers,
+            parental controls, accessibility tools. Many of these exist outside the
+            Play Store precisely because Google would not allow them. Under the new
+            regime, they disappear.
+          </p>
+        </div>
+        <div class="kao-impact-list fade-up">
+          <div class="kao-impact-item">
+            <span class="kao-impact-icon" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                ></path><circle cx="12" cy="7" r="4"></circle></svg
+              >
+            </span>
+            <div>
+              <strong>Regular users</strong>
+              <p>
+                Lose the ability to install apps outside of Google's approved
+                marketplace.
+              </p>
+            </div>
+          </div>
+          <div class="kao-impact-item">
+            <span class="kao-impact-icon" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><polyline points="16 18 22 12 16 6"></polyline><polyline
+                  points="8 6 2 12 8 18"></polyline></svg
+              >
+            </span>
+            <div>
+              <strong>Indie & FOSS developers</strong>
+              <p>
+                Face mandatory registration, fees, and identity disclosure just
+                to ship code.
+              </p>
+            </div>
+          </div>
+          <div class="kao-impact-item">
+            <span class="kao-impact-icon" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                ></path></svg
+              >
+            </span>
+            <div>
+              <strong>Privacy-focused tools</strong>
+              <p>
+                Many cannot meet Play Store policies — they will vanish from
+                certified devices.
+              </p>
+            </div>
+          </div>
+          <div class="kao-impact-item">
+            <span class="kao-impact-icon" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><circle cx="12" cy="12" r="10"></circle><line
+                  x1="2"
+                  y1="12"
+                  x2="22"
+                  y2="12"></line><path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                ></path></svg
+              >
+            </span>
+            <div>
+              <strong>Global digital sovereignty</strong>
+              <p>
+                Nations and communities building on Android as a free platform
+                lose that foundation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU CAN DO -->
+  <section class="kao-section" id="take-action">
+    <div class="kao-container">
+      <div class="kao-section-label">Take Action</div>
+      <h2 class="kao-section-title">What you can do right now</h2>
+      <p class="kao-section-intro">
+        You don't need to be a developer to make a difference. Every voice,
+        every share, and every message to a lawmaker counts.
+      </p>
+
+      <div class="kao-actions-grid">
+        <div class="kao-action-card fade-up">
+          <div class="kao-action-number">01</div>
+          <h3>Sign the Open Letter</h3>
+          <p>
+            The #KeepAndroidOpen coalition has drafted an open letter to Google
+            and regulators demanding they reverse these policies. Add your name
+            alongside thousands of developers and users.
+          </p>
+          <a
+            href="https://www.keepandroidopen.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="kao-action-link">Sign now ↗</a
+          >
+        </div>
+
+        <div class="kao-action-card fade-up">
+          <div class="kao-action-number">02</div>
+          <h3>Contact Your Lawmakers</h3>
+          <p>
+            Especially if you're in the EU, US, or UK — regulators are actively
+            scrutinizing big tech platform control. Write to your representative
+            and tell them you want open platforms protected by law.
+          </p>
+          <a
+            href="https://www.keepandroidopen.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="kao-action-link">Find your rep ↗</a
+          >
+        </div>
+
+        <div class="kao-action-card fade-up">
+          <div class="kao-action-number">03</div>
+          <h3>Spread the Word</h3>
+          <p>
+            Share <strong>#KeepAndroidOpen</strong> on social media. Most people have
+            no idea this is happening. The more noise we make, the harder it is for
+            Google to quietly close the platform.
+          </p>
+          <a
+            href="https://twitter.com/intent/tweet?text=Android%27s%20open-source%20future%20is%20under%20threat.%20Join%20me%20in%20supporting%20%23KeepAndroidOpen%20%E2%86%92%20https%3A%2F%2Fwww.keepandroidopen.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="kao-action-link">Share on X ↗</a
+          >
+        </div>
+
+        <div class="kao-action-card fade-up">
+          <div class="kao-action-number">04</div>
+          <h3>Support F-Droid &amp; Alternatives</h3>
+          <p>
+            Use and donate to F-Droid and other open-source app ecosystems.
+            Showing there is demand for open distribution channels strengthens
+            the argument for keeping Android free.
+          </p>
+          <a
+            href="https://f-droid.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="kao-action-link">Visit F-Droid ↗</a
+          >
+        </div>
+
+        <div class="kao-action-card fade-up">
+          <div class="kao-action-number">05</div>
+          <h3>Don't Register Under Protest</h3>
+          <p>
+            If you're a developer, the coalition urges you not to participate in
+            Google's mandatory registration program and to continue distributing
+            your software through independent channels.
+          </p>
+          <a
+            href="https://www.keepandroidopen.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="kao-action-link">Read the guidance ↗</a
+          >
+        </div>
+
+        <div class="kao-action-card fade-up">
+          <div class="kao-action-number">06</div>
+          <h3>Stay Informed</h3>
+          <p>
+            Follow the official campaign hub for the latest news, action items,
+            and resources. This situation is evolving — staying informed means
+            you can respond when it matters most.
+          </p>
+          <a
+            href="https://www.keepandroidopen.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="kao-action-link">keepandroidopen.com ↗</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCBASE STANCE -->
+  <section class="kao-section kao-section-stance">
+    <div class="kao-container">
+      <div class="kao-stance-card fade-up">
+        <div class="kao-stance-icon" aria-hidden="true">
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+          >
+        </div>
+        <div class="kao-stance-content">
+          <h2>Arcbase stands with the open-source community</h2>
+          <p>
+            At Arcbase, we believe that the future of computing depends on open
+            platforms and free software. Android's open foundation has enabled
+            an entire generation of developers, privacy tools, and alternative
+            ecosystems to thrive. We refuse to stand by while that foundation is
+            eroded.
+          </p>
+          <p>
+            We are proud to support the <strong>#KeepAndroidOpen</strong> movement
+            and encourage everyone in our community to do the same. Open source is
+            not just a development model — it's a statement about who gets to decide
+            what technology does.
+          </p>
+          <a
+            href="https://www.keepandroidopen.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Join the movement ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="kao-section" id="faq">
+    <div class="kao-container">
+      <div class="kao-section-label">Email Templates</div>
+      <div class="kao-faq">
+        <details class="kao-faq-item">
+          <summary class="kao-faq-summary">
+            <span>DMA Team Email Template</span>
+            <div class="kao-faq-icon">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                ><polyline points="6 9 12 15 18 9"></polyline></svg
+              >
+            </div>
+          </summary>
+          <div class="kao-faq-body">
+            <div class="email-template">
+              <div class="email-header">
+                <div class="email-field">
+                  <span class="email-label">To</span>
+                  <span class="email-value">EC-DMA@ec.europa.eu</span>
+                </div>
+                <div class="email-field">
+                  <span class="email-label">CC</span>
+                  <span class="email-value email-placeholder"
+                    >your-email@example.com</span
+                  >
+                </div>
+                <div class="email-field">
+                  <span class="email-label">Subject</span>
+                  <span class="email-value"
+                    >DMA Complaint: Google Android Developer Verification
+                    Program</span
+                  >
+                </div>
+              </div>
+              <div class="email-body">
+                <p>Dear Antitrust Division,</p>
+                <p>
+                  Dear DMA Team, I am writing to formally raise concerns about
+                  Google's "Android Developer Verification" program, announced
+                  August 2025 and scheduled for September 2026.
+                </p>
+                <p>
+                  This program requires all developers to register with Google,
+                  pay fees, submit government identification, and surrender
+                  signing keys before their apps can be installed on Android
+                  devices — including via sideloading. This effectively
+                  eliminates the ability to freely install software on Android
+                  devices, which is a core functionality that consumers relied
+                  upon when purchasing these devices. It constitutes a
+                  gatekeeper leveraging its dominant position to restrict
+                  competition and consumer choice — precisely what the Digital
+                  Markets Act was designed to prevent. I urge you to investigate
+                  this program under Articles 5 and 6 of the DMA and take
+                  enforcement action before the September 2026 deadline. Thank
+                  you for your attention. Best regards
+                </p>
+                <p>Thank you for your time.</p>
+                <p>Best regards</p>
+              </div>
+              <div class="email-actions">
+                <button class="email-copy-btn" id="copyDmaEmail" type="button">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    ><rect x="9" y="9" width="13" height="13" rx="2" ry="2"
+                    ></rect><path
+                      d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                    ></path></svg
+                  >
+                  Copy email body
+                </button>
+                <a
+                  href="mailto:COMP-GREFFE-ANTITRUST@ec.europa.eu?subject=Antitrust%20Complaint%3A%20Google%20Android%20Developer%20Verification%20Program"
+                  class="email-open-btn"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    ><path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    ></path><polyline points="22,6 12,13 2,6"></polyline></svg
+                  >
+                  Open in mail app
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="kao-faq-item">
+          <summary class="kao-faq-summary">
+            <span>Antitrust Division Email Template</span>
+            <div class="kao-faq-icon">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                ><polyline points="6 9 12 15 18 9"></polyline></svg
+              >
+            </div>
+          </summary>
+          <div class="kao-faq-body">
+            <div class="email-template">
+              <div class="email-header">
+                <div class="email-field">
+                  <span class="email-label">To</span>
+                  <span class="email-value"
+                    >COMP-GREFFE-ANTITRUST@ec.europa.eu</span
+                  >
+                </div>
+                <div class="email-field">
+                  <span class="email-label">CC</span>
+                  <span class="email-value email-placeholder"
+                    >your-email@example.com</span
+                  >
+                </div>
+                <div class="email-field">
+                  <span class="email-label">Subject</span>
+                  <span class="email-value"
+                    >Antitrust Complaint: Google Android Developer Verification
+                    Program</span
+                  >
+                </div>
+              </div>
+              <div class="email-body">
+                <p>Dear Antitrust Division,</p>
+                <p>
+                  I am writing to raise a formal antitrust concern regarding
+                  Google's "Android Developer Verification" program, set to take
+                  effect September 2026.
+                </p>
+                <p>
+                  This program will require all app developers to register with
+                  Google, pay fees, and submit government identification before
+                  their apps can be installed on any Android device — even
+                  outside the Play Store.
+                </p>
+                <p>
+                  Google controls approximately 75% of the global mobile OS
+                  market. Using this dominance to impose mandatory registration
+                  and fees on all software distribution — including channels
+                  that bypass Google's own store — constitutes an abuse of
+                  dominant market position and erects barriers to entry for
+                  independent developers.
+                </p>
+                <p>
+                  This eliminates the last remaining open major mobile platform
+                  and removes meaningful competition in app distribution.
+                </p>
+                <p>
+                  I urge the Commission to investigate this under Articles 101
+                  and 102 TFEU.
+                </p>
+                <p>Thank you.</p>
+                <p>Best regards</p>
+              </div>
+              <div class="email-actions">
+                <button
+                  class="email-copy-btn"
+                  id="copyAntitrustEmail"
+                  type="button"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    ><rect x="9" y="9" width="13" height="13" rx="2" ry="2"
+                    ></rect><path
+                      d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                    ></path></svg
+                  >
+                  Copy email body
+                </button>
+                <a
+                  href="mailto:COMP-GREFFE-ANTITRUST@ec.europa.eu?subject=Antitrust%20Complaint%3A%20Google%20Android%20Developer%20Verification%20Program"
+                  class="email-open-btn"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    ><path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    ></path><polyline points="22,6 12,13 2,6"></polyline></svg
+                  >
+                  Open in mail app
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== KAO PAGE STYLES ===== */
+
+  /* FAQ */
+  .kao-faq {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .kao-faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition:
+      border-color 0.25s,
+      box-shadow 0.25s;
+  }
+
+  .kao-faq-item:hover {
+    border-color: rgba(249, 115, 22, 0.4);
+  }
+
+  .kao-faq-item[open] {
+    border-color: rgba(249, 115, 22, 0.5);
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.06);
+  }
+
+  .kao-faq-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 24px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-primary);
+    transition: color 0.2s;
+  }
+
+  .kao-faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .kao-faq-item[open] .kao-faq-summary {
+    color: #f97316;
+  }
+
+  .kao-faq-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition:
+      background 0.25s,
+      transform 0.3s ease,
+      color 0.25s;
+  }
+
+  .kao-faq-item[open] .kao-faq-icon {
+    background: rgba(249, 115, 22, 0.12);
+    color: #f97316;
+    border-color: rgba(249, 115, 22, 0.3);
+    transform: rotate(180deg);
+  }
+
+  .kao-faq-body {
+    padding: 0 24px 22px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    font-size: 0.95rem;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+  }
+
+  .kao-faq-body p {
+    margin: 0;
+  }
+
+  /* Email Template */
+  .email-template {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.875rem;
+  }
+
+  .email-header {
+    background: rgba(249, 115, 22, 0.04);
+    border-bottom: 1px solid var(--border);
+    padding: 4px 0;
+  }
+
+  .email-field {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 8px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .email-field:last-child {
+    border-bottom: none;
+  }
+
+  .email-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #f97316;
+    min-width: 52px;
+    flex-shrink: 0;
+  }
+
+  .email-value {
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    word-break: break-all;
+  }
+
+  .email-placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .email-body {
+    padding: 20px 18px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 0.9rem;
+  }
+
+  .email-body p {
+    margin: 0 0 12px;
+  }
+
+  .email-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .email-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-top: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.02);
+    flex-wrap: wrap;
+  }
+
+  .email-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+    font-family: inherit;
+  }
+
+  .email-copy-btn:hover {
+    border-color: #f97316;
+    color: #f97316;
+  }
+
+  .email-copy-btn.copied {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #16a34a;
+  }
+
+  .email-open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #ea580c, #f97316);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .email-open-btn:hover {
+    opacity: 0.85;
+  }
+
+  /* Hero */
+  .kao-hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 120px 24px 80px;
+  }
+
+  .kao-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .kao-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+  }
+
+  .kao-orb-1 {
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, #f97316, #ea580c);
+    top: -120px;
+    right: -100px;
+    animation: orb-float 8s ease-in-out infinite;
+  }
+
+  .kao-orb-2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, #3b82f6, #6366f1);
+    bottom: 60px;
+    left: -80px;
+    animation: orb-float 11s ease-in-out infinite reverse;
+  }
+
+  .kao-orb-3 {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, #a855f7, #ec4899);
+    top: 40%;
+    left: 50%;
+    animation: orb-float 14s ease-in-out infinite;
+  }
+
+  @keyframes orb-float {
+    0%,
+    100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-30px) scale(1.05);
+    }
+  }
+
+  .kao-hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .kao-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(249, 115, 22, 0.15);
+    border: 1px solid rgba(249, 115, 22, 0.4);
+    color: #f97316;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .kao-tag-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f97316;
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+    animation: pulse-dot 1.8s ease-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0% {
+      box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 8px rgba(249, 115, 22, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+    }
+  }
+
+  .kao-hero-title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+  }
+
+  .kao-struck-text {
+    color: #8b1a1a;
+    font-style: italic;
+    position: relative;
+    display: inline-block;
+  }
+
+  .kao-struck-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 0.1em;
+    background: #8b1a1a;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .kao-hero-sub {
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .kao-hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  .kao-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .kao-stat {
+    text-align: center;
+  }
+
+  .kao-stat-num {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .kao-stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .kao-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  /* Sections */
+  .kao-section {
+    padding: 96px 24px;
+  }
+
+  .kao-section-alt {
+    background: var(--surface);
+  }
+
+  .kao-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .kao-section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f97316;
+    margin-bottom: 12px;
+  }
+
+  .kao-section-title {
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .kao-section-intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* Problem cards */
+  .kao-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .kao-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition:
+      transform 0.25s,
+      box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .kao-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .kao-card-red::before {
+    background: linear-gradient(90deg, #ef4444, #f97316);
+  }
+  .kao-card-orange::before {
+    background: linear-gradient(90deg, #f97316, #fb923c);
+  }
+  .kao-card-yellow::before {
+    background: linear-gradient(90deg, #fb923c, #fbbf24);
+  }
+  .kao-card-purple::before {
+    background: linear-gradient(90deg, #a855f7, #6366f1);
+  }
+
+  .kao-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .kao-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    color: #f97316;
+  }
+
+  .kao-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .kao-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Two-col */
+  .kao-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .kao-prose p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+
+  .kao-prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .kao-impact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .kao-impact-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .kao-impact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.1);
+    border-radius: 8px;
+    padding: 6px;
+  }
+
+  .kao-impact-item strong {
+    display: block;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .kao-impact-item p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Action cards */
+  .kao-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .kao-action-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    position: relative;
+    transition:
+      transform 0.25s,
+      box-shadow 0.25s;
+  }
+
+  .kao-action-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .kao-action-number {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #f97316;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .kao-action-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .kao-action-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .kao-action-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #f97316;
+    text-decoration: none;
+    transition:
+      opacity 0.2s,
+      gap 0.2s;
+  }
+
+  .kao-action-link:hover {
+    opacity: 0.75;
+  }
+
+  /* Arcbase stance */
+  .kao-section-stance {
+    background: linear-gradient(
+      135deg,
+      rgba(249, 115, 22, 0.06) 0%,
+      rgba(99, 102, 241, 0.06) 100%
+    );
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kao-stance-card {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
+  .kao-stance-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.1);
+    border-radius: 16px;
+    padding: 12px;
+  }
+
+  .kao-stance-content h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .kao-stance-content p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    font-size: 1rem;
+  }
+
+  .kao-stance-content p:last-of-type {
+    margin-bottom: 28px;
+  }
+
+  /* Shared btn styles (fallback if not in global) */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #ea580c, #f97316);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.35);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(234, 88, 12, 0.45);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text-primary);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: var(--surface);
+    border-color: var(--text-secondary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .kao-two-col {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .kao-stance-card {
+      flex-direction: column;
+      gap: 20px;
+      padding: 32px 24px;
+    }
+
+    .kao-stat-divider {
+      display: none;
+    }
+    .kao-stats {
+      gap: 24px;
+    }
+  }
+</style>
+
+<script>
+  const copyBtn = document.getElementById("copyDmaEmail");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const body = copyBtn
+        .closest(".email-template")
+        ?.querySelector(".email-body") as HTMLElement | null;
+      if (!body) return;
+      const text = body.innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.classList.add("copied");
+        copyBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+        setTimeout(() => {
+          copyBtn.classList.remove("copied");
+          copyBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy email body`;
+        }, 2000);
+      } catch {
+        copyBtn.textContent = "Copy failed";
+      }
+    });
+  }
+
+  function setupCopyBtn(id: string) {
+    const btn = document.getElementById(id) as HTMLButtonElement | null;
+    if (!btn) return;
+    btn.addEventListener("click", async () => {
+      const body = btn
+        .closest(".email-template")
+        ?.querySelector(".email-body") as HTMLElement | null;
+      if (!body) return;
+      try {
+        await navigator.clipboard.writeText(body.innerText);
+        btn.classList.add("copied");
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove("copied");
+          btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy email body`;
+        }, 2000);
+      } catch {
+        btn.textContent = "Copy failed";
+      }
+    });
+  }
+
+  setupCopyBtn("copyAntitrustEmail");
+</script>
