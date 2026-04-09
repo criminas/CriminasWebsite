@@ -20,7 +20,7 @@ If you find a bug, please search the project's issue tracker first. If it's a ne
 - Environment details (OS, version, etc.)
 
 > [!IMPORTANT]
-> **Security Vulnerabilities**: Please do not report security vulnerabilities via public issues. Instead, email us directly at [security@arcbase.one](mailto:security@arcbase.one).
+> **Security Vulnerabilities**: Please do not report security vulnerabilities via public issues. Instead, email us directly at [arcbase@tuta.io](mailto:arcbase@tuta.io).
 
 ### Feature Requests
 
@@ -68,6 +68,6 @@ Since each project has its own environment, please always refer to the `README.m
 Join the conversation and stay updated:
 
 - **GitHub**: [https://github.com/arcbasehq/criminas](https://github.com/arcbasehq)
-- **Email**: [hello@arcbase.one](mailto:hello@arcbase.one)
+- **Email**: [arcbase@tuta.io](mailto:arcbase@tuta.io)
 
 Thank you for being part of arcbase!

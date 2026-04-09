@@ -51,4 +51,4 @@ This project is open-source. See individual projects for specific licensing deta
 
 ## Contact
 
-Questions? Reach out to us at [hello@arcbase.one](mailto:hello@arcbase.one) or visit our [Contact page](https://arcbase.one/contact).
+Questions? Reach out to us at [arcbase@tuta.io](mailto:arcbase@tuta.io) or visit our [Contact page](https://arcbase.one/contact).
