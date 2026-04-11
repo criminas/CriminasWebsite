@@ -3,9 +3,9 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout
-    title="Criminas Learning — Master Code on Android"
+    title="Arcbase Learning — Master Code on Android"
     description="The ultimate open source learning companion. Master Linux, Python, and Web Development with interactive lessons built specifically for your Android device."
-    keywords="Criminas Learning, Android learning app, learn to code, coding app, interactive lessons"
+    keywords="Arcbase Learning, Android learning app, learn to code, coding app, interactive lessons"
     activePage="projects"
     ogType="article"
 >
@@ -15,7 +15,7 @@ import Layout from "../../layouts/Layout.astro";
         <div class="hero-glow"></div>
         <div class="project-hero-content fade-up">
             <div class="project-title-group">
-                <h1>Criminas <span class="highlight">Learning</span></h1>
+                <h1>Arcbase <span class="highlight">Learning</span></h1>
             </div>
             <p class="project-subtitle">
                 Master open source development from anywhere. Interactive
@@ -23,11 +23,10 @@ import Layout from "../../layouts/Layout.astro";
                 exclusively for Android.
             </p>
             <div class="project-actions">
-                <a href="#" class="btn-primary">
-                    Get on Play Store
-                </a>
+                <a href="#" class="btn-primary"> Get on Play Store </a>
                 <a
-                    href="https://github.com/arcbasehq/criminasapp" target="_blank"
+                    href="https://github.com/arcbasehq/arcbase-learning"
+                    target="_blank"
                     class="btn-secondary"
                 >
                     Source Code
@@ -117,7 +116,7 @@ import Layout from "../../layouts/Layout.astro";
                     </h2>
                     <p class="section-desc">
                         We believe that the best mobile experience is a native
-                        one. Criminas Learning is built with Kotlin and Jetpack
+                        one. Arcbase Learning is built with Kotlin and Jetpack
                         Compose to deliver silky smooth performance and Material
                         You design.
                     </p>
@@ -484,7 +483,9 @@ import Layout from "../../layouts/Layout.astro";
             border: 1px solid var(--border);
             padding: 2.5rem;
             border-radius: 16px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
         .feature-card:hover {
@@ -857,13 +858,13 @@ import Layout from "../../layouts/Layout.astro";
         }
     </style>
 
-    <!-- Structured Data for Criminas Learning -->
+    <!-- Structured Data for Arcbase Learning -->
     <script
         type="application/ld+json"
         set:html={JSON.stringify({
             "@context": "https://schema.org",
             "@type": "EducationalApplication",
-            name: "Criminas Learning",
+            name: "Arcbase Learning",
             applicationCategory: "EducationalApplication",
             operatingSystem: "Android",
             offers: {
@@ -881,7 +882,7 @@ import Layout from "../../layouts/Layout.astro";
             ],
             author: {
                 "@type": "Organization",
-                name: "Criminas",
+                name: "arcbase",
             },
         })}
     />

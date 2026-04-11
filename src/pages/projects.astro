@@ -1,19 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import StarButton from "../components/StarButton.astro";
 
 const projects = [
+    {
+        name: "CryFox",
+        slug: "cryfox",
+        tagline: "A private, secure, and fast Firefox fork.",
+        description:
+            "CryFox is a privacy-first Firefox fork that strips away telemetry, blocks trackers by default, and hardens your browser against fingerprinting. Built for users who value speed and security without sacrificing usability.",
+        tag: "Browser",
+        inDev: false,
+        icon: "www",
+        featured: true,
+        features: [
+            "Enhanced privacy protection",
+            "Tracker blocking",
+            "Fingerprint hardening",
+            "Performance optimized",
+        ],
+    },
     {
         name: "Sentinel",
         slug: "sentinel",
         tagline: "Open source security for the modern web.",
         description:
-            "Sentinel provides a comprehensive security toolkit for modern applications. From dependency scanning to runtime protection, keep your projects safe without the enterprise price tag.",
+            "Comprehensive security toolkit for modern applications. From dependency scanning to runtime protection, keep your projects safe without the enterprise price tag.",
         tag: "Security",
-        tagColor: "#ef4444",
-        tagBg: "rgba(239, 68, 68, 0.1)",
-        headerBg: "linear-gradient(135deg, #0a0a1a, #1a1a3e)",
         inDev: false,
+        icon: "shield",
         features: [
             "Dependency vulnerability scanning",
             "Runtime threat detection",
@@ -26,88 +40,90 @@ const projects = [
         slug: "security",
         tagline: "Advanced OSINT in a secure, modern terminal UI.",
         description:
-            "ArcOSINT is a terminal-based OSINT framework for ethical security research. Email, username, IP, domain, phone, and metadata intelligence in one modern TUI.",
+            "Terminal-based OSINT framework for ethical security research. Email, username, IP, domain, phone, and metadata intelligence in one modern TUI.",
         tag: "OSINT",
-        tagColor: "#f97316",
-        tagBg: "rgba(249, 115, 22, 0.12)",
-        headerBg: "linear-gradient(135deg, #1a0f0a, #3b1d11)",
         inDev: false,
+        icon: "search",
         features: [
-            "Email intelligence and breach checks",
-            "Username enumeration across platforms",
-            "IP and ASN intelligence",
-            "Domain and DNS analysis",
+            "Email intelligence",
+            "Username enumeration",
+            "IP & ASN intelligence",
+            "Domain analysis",
         ],
     },
     {
-        name: "arcbase Learning",
+        name: "Arcbase Learning",
         slug: "app",
         tagline: "Master coding on the go. Exclusive to Android.",
         description:
             "The ultimate open source learning companion. Master Linux, Python, and Web Development with interactive lessons built specifically for your Android device.",
         tag: "Education",
-        tagColor: "#10b981",
-        tagBg: "rgba(16, 185, 129, 0.1)",
-        headerBg: "linear-gradient(135deg, #064e3b, #065f46)",
         inDev: true,
+        icon: "code",
         features: [
-            "Interactive coding lessons",
-            "Offline progress tracking",
-            "Android-native experience",
+            "Interactive lessons",
+            "Offline tracking",
+            "Android-native",
             "Community quizzes",
         ],
     },
-        {
+    {
         name: "Arc Manager",
         slug: "manager",
-        tagline: "Manage your arcbase projects with ease.",
+        tagline: "The ultimate Linux package manager frontend.",
         description:
-            "The ultimate open source manager for arcbase projects. Manage dependencies, build configurations, and project metadata with a simple and intuitive interface.",
+            "Manage pacman, apt, dnf, and the AUR under one professional interface. Simplifying complex system maintenance.",
         tag: "Productivity",
-        tagColor: "#10b981",
-        tagBg: "rgba(16, 185, 129, 0.1)",
-        headerBg: "linear-gradient(135deg, #dc2626, #7f1d1d)",
-        inDev: true,
+        inDev: false,
+        icon: "package",
         features: [
-            "Interactive project management",
+            "Multi-package support",
             "Dependency tracking",
-            "Build configuration editor",
+            "Config editor",
             "Metadata management",
         ],
     },
-            {
+    {
         name: "ArcOS",
         slug: "os",
         tagline: "The operating system for power users",
         description:
             "Optimized Windows 11 for developers and power users. Bloatware-free, privacy-focused, and built for performance.",
-        tag: "Beta release",
-        tagColor: "black",
-        tagBg: "lightyellow",
-        headerBg: "",
-        features: [
-            "Bloat Free",
-            "Privacy Focused",
-            "Performance Optimized",
-        ],
+        tag: "OS",
+        inDev: false,
+        icon: "monitor",
+        features: ["Bloat Free", "Privacy Focused", "Performance Optimized"],
     },
     {
         name: "OpenShelf",
         slug: "book",
         tagline: "The open source library for all your reading needs",
         description:
-            "OpenShelf is a free and open source online library providing universal access to knowledge. Browse, read, and share books without barriers.",
-        tag: "Online Library",
-        tagColor: "black",
-        tagBg: "lightblue",
-        headerBg: "",
+            "Free and open source cataloging tool for your digital collections. Manage books, audiobooks, and comics without proprietary trackers.",
+        tag: "Library",
+        inDev: false,
+        icon: "book",
         features: [
-            "40M+ Books available",
-            "Easy to use interface",
-            "Get started fast",
+            "Universal cataloging",
+            "Easy to use",
+            "No trackers",
+            "Open format",
         ],
     },
 ];
+
+const icons: Record<string, string> = {
+    www: '<circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>',
+    flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.43-2.28-5.3-2.68-8.68-.1-.97-.8-1.79-1.79-1.79a2.5 2.5 0 0 0-2.03 1.54C3.5 3.7 2.5 7.5 2.5 10c0 1.93.83 4.5 2.5 6.5.995 1.19 2.5 2.5 4.5 3.5L12 22l3-2"></path>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
+    search: '<circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>',
+    code: '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>',
+    package:
+        '<line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>',
+    monitor:
+        '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line>',
+    book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20"></path>',
+};
 ---
 
 <Layout
@@ -117,11 +133,8 @@ const projects = [
     activePage="projects"
     ogType="article"
 >
-    <!-- PAGE HERO -->
     <section class="page-hero">
-        <div class="hero-glow glow-1"></div>
-        <div class="hero-glow glow-2"></div>
-        <div class="page-hero-content fade-up">
+        <div class="page-hero-content">
             <h1>Our <span class="highlight">Projects</span></h1>
             <p>
                 We build products that innovate past the status quo. Everything
@@ -130,138 +143,86 @@ const projects = [
         </div>
     </section>
 
-    <!-- PROJECTS LIST -->
-    <section class="content-block">
-        <div class="content-container">
-            {
-                projects.map((project, i) => (
-                    <div
-                        class={`content-grid ${i % 2 !== 0 ? "reverse" : ""}`}
-                        style={`margin-bottom: ${i < projects.length - 1 ? "5rem" : "0"};`}
-                    >
-                        <div class="fade-up">
-                            <div class="section-number">
-                                {String(i).padStart(2, "0")}
+    <section class="section projects-section">
+        <div class="section-container">
+            <div class="projects-grid">
+                {
+                    projects.map((project, i) => (
+                        <a
+                            href={
+                                project.slug === "cryfox"
+                                    ? `/cryfox`
+                                    : `/projects/${project.slug}`
+                            }
+                            class={`project-card fade-up ${project.featured ? "featured" : ""}`}
+                        >
+                            <div class="project-icon">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    height="24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    set:html={icons[project.icon]}
+                                />
                             </div>
-                            <h2 class="section-title">
-                                {project.name}
+                            <div class="project-header">
+                                <h3>{project.name}</h3>
                                 {project.inDev && (
-                                    <span
-                                        class="dev-badge"
-                                        style="margin-left: 0.75rem; vertical-align: middle; font-size: 0.6rem;"
-                                    >
+                                    <span class="dev-badge">
                                         In Development
                                     </span>
                                 )}
-                            </h2>
-                            <p
-                                class="section-desc"
-                                style="font-style: italic; color: var(--accent); margin-bottom: 1rem;"
-                            >
-                                {project.tagline}
-                            </p>
-                            <p class="section-desc">{project.description}</p>
-                            <a
-                                href={`/projects/${project.slug}`}
-                                class="about-link"
-                                style="margin-top: 1.5rem; display: inline-flex;"
-                            >
-                                Learn more <span class="arrow">→</span>
-                            </a>
-                        </div>
-                        <div class="fade-up">
-                            <div class="project-detail-card">
-                                <div
-                                    class="project-detail-header"
-                                    style={`background: ${project.headerBg};`}
-                                >
-                                    <span
-                                        class="project-tag"
-                                        style={`color: ${project.tagColor}; background: ${project.tagBg};`}
-                                    >
-                                        {project.tag}
-                                    </span>
-                                    <h3
-                                        style={`color: ${project.headerBg.includes("#f0") ? "#1a1a2e" : "#fff"};`}
-                                    >
-                                        {project.name}
-                                    </h3>
-                                </div>
-                                <div class="project-detail-body">
-                                    <p style="margin-top: 1.5rem;">
-                                        {project.tagline}
-                                    </p>
-                                    <ul class="project-features">
-                                        {project.features.map((feature) => (
-                                            <li>{feature}</li>
-                                        ))}
-                                    </ul>
-                                    <div style="margin-top: 1.5rem;">
-                                        <StarButton
-                                            projectId={project.slug}
-                                            projectName={project.name}
-                                        />
-                                    </div>
-                                </div>
+                                {project.featured && (
+                                    <span class="featured-badge">Featured</span>
+                                )}
                             </div>
-                        </div>
-                    </div>
-                ))
-            }
+                            <p class="project-tagline">{project.tagline}</p>
+                            <p class="project-desc">{project.description}</p>
+                            <ul class="project-features">
+                                {project.features.slice(0, 3).map((feature) => (
+                                    <li>{feature}</li>
+                                ))}
+                            </ul>
+                        </a>
+                    ))
+                }
+            </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section
-        class="content-block alt"
-        style="text-align: center; padding-bottom: 6rem;"
-    >
-        <div class="content-container fade-up">
+    <section class="section content-block alt" style="text-align: center;">
+        <div class="section-container fade-up">
             <h2 class="section-title">Want to contribute?</h2>
-            <p class="section-desc" style="margin: 0 auto 2rem;">
+            <p class="section-desc" style="margin: 0 auto 24px;">
                 All of our projects are open source and welcome contributions.
                 Whether it's code, documentation, design, or testing — we'd love
                 your help.
             </p>
             <div
-                style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;"
+                style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;"
             >
                 <a
-                    href="https://https://github.com/arcbasehq"
+                    href="https://github.com/arcbasehq"
                     target="_blank"
                     rel="noopener"
-                    class="btn-primary"
+                    class="btn-primary">View on GitHub</a
                 >
-                    View on GitHub
-                    <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        ><path d="M7 17l9.2-9.2M17 17V7.8H7.8"></path></svg
-                    >
-                </a>
-                <a
-                    href="/contact"
-                    class="btn-secondary"
-                >
-                    Contact Us
-                </a>
+                <a href="/contact" class="btn-secondary">Contact Us</a>
             </div>
         </div>
     </section>
 
-    <!-- Structured Data for Projects -->
     <script
         type="application/ld+json"
         set:html={JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             name: "arcbase Open Source Projects",
-            description:
-                "Explore our open source projects including CrimiRepo, Forge, Nexus, and Sentinel.",
+            description: "Explore our open source projects.",
             mainEntity: {
                 "@type": "ItemList",
                 itemListElement: projects.map((p, i) => ({
@@ -284,3 +245,122 @@ const projects = [
         })}
     />
 </Layout>
+
+<style>
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+    }
+
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 28px;
+        transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+    }
+
+    .project-card.featured {
+        background: var(--accent-light);
+        border-color: var(--accent);
+    }
+
+    .project-card.featured:hover {
+        border-color: var(--accent-hover);
+    }
+
+    .project-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-md);
+        background: var(--accent-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: var(--accent);
+    }
+
+    .featured .project-icon {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+    }
+
+    .project-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+    }
+
+    .project-card h3 {
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        line-height: 1.3;
+    }
+
+    .featured-badge {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 4px 10px;
+        border-radius: 100px;
+        background: var(--accent);
+        color: #fff;
+    }
+
+    .project-tagline {
+        font-size: 0.9375rem;
+        color: var(--accent);
+        font-weight: 500;
+        margin-bottom: 12px;
+    }
+
+    .project-desc {
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 20px;
+        flex: 1;
+    }
+
+    .project-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .project-features li {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .project-features li::before {
+        content: "•";
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

@@ -65,30 +65,22 @@
             const result = await subscribeToNewsletter(email);
             
             if (result.alreadySubscribed) {
-                btn.innerHTML = `Already Subscribed! ✓`;
+                btn.innerHTML = `Already Subscribed!`;
             } else {
-                btn.innerHTML = `Thanks for joining! ✓`;
+                btn.innerHTML = `Thanks!`;
             }
-
-            btn.style.background = "linear-gradient(135deg, #059669, #047857)";
-            btn.style.borderColor = "#059669";
             emailInput.value = "";
 
             setTimeout(() => {
                 btn.innerHTML = originalText;
-                btn.style.background = "";
-                btn.style.borderColor = "";
                 btn.disabled = false;
-            }, 4000);
+            }, 3000);
         } catch (error: any) {
             console.error("Newsletter subscribe error:", error);
-            btn.innerHTML = `Error, try again`;
-            btn.style.background = "#dc2626";
+            btn.innerHTML = `Error`;
             
             setTimeout(() => {
                 btn.innerHTML = originalText;
-                btn.style.background = "";
-                btn.style.borderColor = "";
                 btn.disabled = false;
             }, 3000);
         }
@@ -100,18 +92,6 @@
         padding: 80px 24px;
         background: var(--bg-secondary);
         border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .newsletter-section::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image:
-            radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 6%, transparent) 0%, transparent 60%);
-        pointer-events: none;
     }
 
     .newsletter-container {
@@ -166,11 +146,11 @@
     .newsletter-input-group input {
         flex: 1;
         padding: 14px 18px;
-        border: 1px solid var(--border-strong);
+        border: 1px solid var(--border);
         border-radius: var(--radius-md);
         font-size: 0.9375rem;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--surface);
+        font-family: var(--font-sans);
+        background: var(--bg-primary);
         color: var(--text-primary);
         outline: none;
         transition: all 0.15s ease;
@@ -190,17 +170,16 @@
         align-items: center;
         gap: 8px;
         padding: 14px 24px;
-        background: var(--accent);
-        color: #fff;
-        border: 1px solid var(--accent);
+        background: var(--text-primary);
+        color: var(--bg-primary);
+        border: 1px solid var(--text-primary);
         border-radius: var(--radius-md);
-        font-weight: 600;
+        font-weight: 500;
         font-size: 0.9375rem;
         cursor: pointer;
-        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        transition: all 0.15s ease;
+        font-family: var(--font-sans);
         white-space: nowrap;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
     }
 
     .newsletter-btn:hover {

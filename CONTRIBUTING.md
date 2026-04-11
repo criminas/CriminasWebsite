@@ -67,7 +67,7 @@ Since each project has its own environment, please always refer to the `README.m
 
 Join the conversation and stay updated:
 
-- **GitHub**: [https://github.com/arcbasehq/criminas](https://github.com/arcbasehq)
+- **GitHub**: [https://github.com/arcbasehq](https://github.com/arcbasehq)
 - **Email**: [arcbase@tuta.io](mailto:arcbase@tuta.io)
 
 Thank you for being part of arcbase!

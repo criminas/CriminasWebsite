@@ -6,47 +6,37 @@ const posts = [
     {
         title: "Introducing arcbase: Our Mission to Democratize Open Source",
         date: "March 5, 2026",
-        excerpt:
-            "Today we're publicly sharing our vision: to bring open source software to the masses. Here's why we started arcbase, what we're building, and how you can be part of the movement.",
+        excerpt: "Today we're publicly sharing our vision: to bring open source software to the masses. Here's why we started arcbase, what we're building, and how you can be part of the movement.",
         tag: "Announcement",
-        tagColor: "var(--accent)",
         slug: "#",
         featured: true,
     },
     {
         title: "ArcOS 1.0 Beta: A Cleaner, Faster Windows Experience",
         date: "February 28, 2026",
-        excerpt:
-            "ArcOS strips away the bloat from Windows 11, giving you a privacy-focused, performance-optimized OS designed for power users and enthusiasts.",
+        excerpt: "ArcOS strips away the bloat from Windows 11, giving you a privacy-focused, performance-optimized OS designed for power users and enthusiasts.",
         tag: "Release",
-        tagColor: "#10b981",
         slug: "/projects/os",
     },
     {
         title: "How Sentinel Keeps Your Code Safe — Automatically",
         date: "February 14, 2026",
-        excerpt:
-            "Dependency vulnerabilities are one of the biggest threats to modern apps. Learn how Sentinel scans, audits, and monitors your projects so you don't have to.",
+        excerpt: "Dependency vulnerabilities are one of the biggest threats to modern apps. Learn how Sentinel scans, audits, and monitors your projects so you don't have to.",
         tag: "Guide",
-        tagColor: "#f59e0b",
         slug: "/projects/sentinel",
     },
     {
         title: "Contributor Spotlight: Building Arc Manager Together",
         date: "January 30, 2026",
-        excerpt:
-            "Meet the contributors behind Arc Manager — the unified Linux package manager frontend. See how open source collaboration is shaping the future of package management.",
+        excerpt: "Meet the contributors behind Arc Manager — the unified Linux package manager frontend. See how open source collaboration is shaping the future of package management.",
         tag: "Community",
-        tagColor: "#8b5cf6",
         slug: "/projects/manager",
     },
     {
         title: "2026 Roadmap: What's Next for arcbase",
         date: "January 15, 2026",
-        excerpt:
-            "From Arcbase Learning to Analysis AI, here's a look at everything we're building this year and how our community is driving the direction.",
+        excerpt: "From Arcbase Learning to Analysis AI, here's a look at everything we're building this year and how our community is driving the direction.",
         tag: "Roadmap",
-        tagColor: "#ec4899",
         slug: "/about",
     },
 ];
@@ -59,160 +49,95 @@ const posts = [
     activePage="blog"
     ogType="blog"
 >
-    <!-- PAGE HERO -->
     <section class="page-hero">
-        <div class="hero-glow glow-1"></div>
-        <div class="hero-glow glow-2"></div>
-        <div class="page-hero-content fade-up">
+        <div class="page-hero-content">
             <h1><span class="highlight">Blog</span></h1>
-            <p>
-                News, updates, guides, and stories from the arcbase community.
-            </p>
+            <p>News, updates, guides, and stories from the arcbase community.</p>
         </div>
     </section>
 
-    <!-- FEATURED POST -->
-    <section class="content-block">
-        <div class="content-container">
+    <section class="section content-block">
+        <div class="section-container">
             <a href={posts[0].slug} class="blog-featured-card fade-up">
-                <div class="blog-featured-content">
-                    <div class="blog-card-meta">
-                        <span
-                            class="blog-tag"
-                            style={`color: ${posts[0].tagColor}; background: color-mix(in srgb, ${posts[0].tagColor} 12%, transparent);`}
-                        >
-                            {posts[0].tag}
-                        </span>
-                        <span class="blog-date">{posts[0].date}</span>
-                    </div>
-                    <h2>{posts[0].title}</h2>
-                    <p>{posts[0].excerpt}</p>
-                    <span class="about-link">
-                        Read article <span class="arrow">→</span>
-                    </span>
+                <div class="blog-card-meta">
+                    <span class="blog-tag">{posts[0].tag}</span>
+                    <span class="blog-date">{posts[0].date}</span>
                 </div>
+                <h2>{posts[0].title}</h2>
+                <p>{posts[0].excerpt}</p>
+                <span class="about-link">Read article →</span>
             </a>
         </div>
     </section>
 
-    <!-- POSTS GRID -->
-    <section class="content-block alt">
-        <div class="content-container">
+    <section class="section content-block alt">
+        <div class="section-container">
             <h2 class="section-title fade-up">Latest Posts</h2>
             <div class="blog-grid">
-                {
-                    posts.slice(1).map((post) => (
-                        <a
-                            href={post.slug}
-                            class="blog-card fade-up"
-                        >
-                            <div class="blog-card-meta">
-                                <span
-                                    class="blog-tag"
-                                    style={`color: ${post.tagColor}; background: color-mix(in srgb, ${post.tagColor} 12%, transparent);`}
-                                >
-                                    {post.tag}
-                                </span>
-                                <span class="blog-date">{post.date}</span>
-                            </div>
-                            <h3>{post.title}</h3>
-                            <p>{post.excerpt}</p>
-                            <span class="about-link" style="margin-top: auto;">
-                                Read more <span class="arrow">→</span>
-                            </span>
-                        </a>
-                    ))
-                }
+                {posts.slice(1).map((post) => (
+                    <a href={post.slug} class="blog-card fade-up">
+                        <div class="blog-card-meta">
+                            <span class="blog-tag">{post.tag}</span>
+                            <span class="blog-date">{post.date}</span>
+                        </div>
+                        <h3>{post.title}</h3>
+                        <p>{post.excerpt}</p>
+                        <span class="about-link" style="margin-top: auto;">Read more →</span>
+                    </a>
+                ))}
             </div>
         </div>
     </section>
 
-    <!-- NEWSLETTER -->
     <NewsletterSignup />
 
-    <!-- Structured Data -->
     <script
         type="application/ld+json"
         set:html={JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Blog",
             name: "arcbase Blog",
-            description:
-                "News, updates, guides, and community stories from arcbase.",
+            description: "News, updates, guides, and community stories from arcbase.",
             url: "https://arcbase.one/blog",
-            publisher: {
-                "@type": "Organization",
-                name: "arcbase",
-                url: "https://arcbase.one",
-            },
-            blogPost: posts.map((p) => ({
-                "@type": "BlogPosting",
-                headline: p.title,
-                datePublished: p.date,
-                description: p.excerpt,
-            })),
+            publisher: { "@type": "Organization", name: "arcbase", url: "https://arcbase.one" },
         })}
     />
 </Layout>
 
 <style>
-    /* Featured blog card */
     .blog-featured-card {
         display: block;
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
-        padding: 3rem;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .blog-featured-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, var(--accent), #8b5cf6);
-        opacity: 0;
-        transition: opacity 0.25s ease;
+        padding: 32px;
+        transition: all 0.2s ease;
     }
 
     .blog-featured-card:hover {
-        border-color: var(--accent);
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-3px);
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow-md);
     }
 
-    .blog-featured-card:hover::before {
-        opacity: 1;
-    }
-
-    .blog-featured-content h2 {
+    .blog-featured-card h2 {
         font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 700;
+        font-weight: 600;
         color: var(--text-primary);
-        letter-spacing: -0.02em;
-        line-height: 1.3;
-        margin-bottom: 1rem;
+        margin-bottom: 12px;
     }
 
-    .blog-featured-content p {
-        font-size: 1.0625rem;
+    .blog-featured-card p {
+        font-size: 1rem;
         color: var(--text-secondary);
-        line-height: 1.65;
-        max-width: 720px;
-        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        margin-bottom: 16px;
     }
 
-    /* Blog grid */
     .blog-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
+        gap: 20px;
+        margin-top: 24px;
     }
 
     .blog-card {
@@ -221,61 +146,53 @@ const posts = [
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
-        padding: 2rem;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        gap: 0.75rem;
+        padding: 24px;
+        transition: all 0.2s ease;
     }
 
     .blog-card:hover {
-        border-color: var(--accent);
+        border-color: var(--border-strong);
         box-shadow: var(--shadow-md);
-        transform: translateY(-3px);
     }
 
     .blog-card h3 {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         font-weight: 600;
         color: var(--text-primary);
-        letter-spacing: -0.015em;
-        line-height: 1.35;
+        margin-bottom: 8px;
     }
 
     .blog-card p {
-        font-size: 0.9375rem;
+        font-size: 0.875rem;
         color: var(--text-secondary);
         line-height: 1.6;
     }
 
-    /* Blog meta */
     .blog-card-meta {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.5rem;
+        gap: 12px;
+        margin-bottom: 12px;
     }
 
     .blog-tag {
         font-size: 0.6875rem;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
-        padding: 0.25rem 0.65rem;
+        letter-spacing: 0.05em;
+        padding: 4px 10px;
         border-radius: 100px;
+        background: var(--accent-light);
+        color: var(--accent);
     }
 
     .blog-date {
         font-size: 0.8125rem;
         color: var(--text-tertiary);
-        font-weight: 500;
     }
 
     @media (max-width: 768px) {
-        .blog-featured-card {
-            padding: 2rem;
-        }
-
-        .blog-grid {
-            grid-template-columns: 1fr;
-        }
+        .blog-featured-card { padding: 24px; }
+        .blog-grid { grid-template-columns: 1fr; }
     }
 </style>
