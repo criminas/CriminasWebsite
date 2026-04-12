@@ -454,9 +454,9 @@ const siteUrl = "https://arcbase.one";
 
             // Close banner functionality
             function updateLayout() {
-                const banners = document.querySelectorAll(
-                    ".announcement-banner",
-                );
+                const banners = Array.from(
+                    document.querySelectorAll(".announcement-banner"),
+                ) as HTMLElement[];
                 const navbar = document.getElementById("navbar");
                 const body = document.body;
 
@@ -469,23 +469,20 @@ const siteUrl = "https://arcbase.one";
                     return;
                 }
 
-                let visibleCount = 0;
+                // Restack visible banners from the top so that closing any
+                // banner (not just the last one) never leaves a gap or overlap.
+                let runningTop = 0;
                 banners.forEach((banner) => {
-                    if ((banner as HTMLElement).style.display !== "none") {
-                        visibleCount++;
-                    }
+                    if (banner.style.display === "none") return;
+                    banner.style.top = runningTop + "px";
+                    runningTop += banner.offsetHeight;
                 });
 
-                // Calculate new offset
-                const offset = visibleCount * 34;
-
-                // Update navbar position
+                // runningTop now equals the total height of all visible banners
                 if (navbar) {
-                    navbar.style.top = offset + "px";
+                    navbar.style.top = runningTop + "px";
                 }
-
-                // Update body padding
-                body.style.paddingTop = offset + 60 + "px";
+                body.style.paddingTop = runningTop + 60 + "px";
             }
 
             // Also re-run layout logic when the viewport is resized
