@@ -1,0 +1,9 @@
+# Code Owners
+
+* @arcbasehq/core
+
+# Project-specific ownership
+/src/pages/* @arcbasehq/core
+/src/components/* @arcbasehq/core
+/src/layouts/* @arcbasehq/core
+/.github/* @arcbasehq/core

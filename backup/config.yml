@@ -1,0 +1,43 @@
+# Community Health Files Configuration
+
+contact_links:
+  - name: Email
+    url: "mailto:arcbase@tuta.io"
+    about: "General inquiries and support"
+  - name: Website
+    url: "https://arcbase.one"
+    about: "Visit our main website"
+  - name: Documentation
+    url: "https://arcbase.one/docs"
+    about: "Project documentation"
+
+# Enable issue templates
+blank_issues_enabled: true
+email_addresses:
+  - arcbase@tuta.io
+
+# Pull request template
+pull_request_template:
+  - prefix: "- [ ] "
+    list:
+      - "My code follows the project's style guidelines"
+      - "I have performed a self-review of my code"
+      - "I have commented my code, particularly in hard-to-understand areas"
+      - "I have made corresponding changes to the documentation"
+      - "My changes generate no new warnings"
+      - "I have added tests that prove my fix is effective or that my feature works"
+      - "All new and existing tests pass"
+
+# Welcome new contributors
+welcome:
+  - message: |
+      Welcome to arcbase! Thank you for your contribution.
+      
+      Our mission is to empower everyone by bringing open source software to the masses.
+      Please review our [CONTRIBUTING.md](https://github.com/arcbasehq/.github/blob/main/CONTRIBUTING.md) to get started.
+    second_message: |
+      Thanks for your contribution! After a maintainer reviews your PR, they'll provide feedback.
+      
+      Feel free to join our community if you have questions:
+      - GitHub: https://github.com/arcbasehq
+      - Email: arcbase@tuta.io

@@ -1,0 +1,61 @@
+name: Bug Report
+description: Report something that isn't working as expected.
+labels: bug
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for taking the time to report a bug! Please fill out this template to help us understand and fix the issue.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Which version of the project are you using?
+      placeholder: e.g., v1.2.0
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: List the steps to reproduce the bug.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happens?
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, browser, version, etc.
+      placeholder: |
+        - OS: 
+        - Browser: 
+        - Version: 
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Please paste any relevant logs here.
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.
