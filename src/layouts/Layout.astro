@@ -212,6 +212,13 @@ const siteUrl = "https://arcbase.one";
                         rel="noopener noreferrer">GitHub</a
                     >
                 </li>
+                <li class="nav-auth-divider" aria-hidden="true"></li>
+                <li class="nav-auth-item" id="navAuthPrimary">
+                    <a href="/login">Sign In</a>
+                </li>
+                <li class="nav-auth-item" id="navAuthSecondary">
+                    <a href="/register">Sign Up</a>
+                </li>
             </ul>
             <div class="nav-controls">
                 <AuthButton />
@@ -378,6 +385,29 @@ const siteUrl = "https://arcbase.one";
                         mobileToggle.setAttribute("aria-expanded", "false");
                     });
                 });
+
+                document.addEventListener("click", (e) => {
+                    if (
+                        navLinks.classList.contains("active") &&
+                        !navLinks.contains(e.target as Node) &&
+                        !mobileToggle.contains(e.target as Node)
+                    ) {
+                        navLinks.classList.remove("active");
+                        mobileToggle.classList.remove("active");
+                        mobileToggle.setAttribute("aria-expanded", "false");
+                    }
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (
+                        e.key === "Escape" &&
+                        navLinks.classList.contains("active")
+                    ) {
+                        navLinks.classList.remove("active");
+                        mobileToggle.classList.remove("active");
+                        mobileToggle.setAttribute("aria-expanded", "false");
+                    }
+                });
             }
 
             const fadeElements = document.querySelectorAll(".fade-up");
@@ -430,9 +460,18 @@ const siteUrl = "https://arcbase.one";
                 const navbar = document.getElementById("navbar");
                 const body = document.body;
 
+                // On mobile the navbar is pinned at top:0 via CSS and banners
+                // flow in the document — only the navbar height (60px) needs
+                // clearing. Let CSS handle the body offset.
+                if (window.innerWidth <= 768) {
+                    body.style.paddingTop = "60px";
+                    if (navbar) navbar.style.removeProperty("top");
+                    return;
+                }
+
                 let visibleCount = 0;
                 banners.forEach((banner) => {
-                    if (banner.style.display !== "none") {
+                    if ((banner as HTMLElement).style.display !== "none") {
                         visibleCount++;
                     }
                 });
@@ -449,6 +488,9 @@ const siteUrl = "https://arcbase.one";
                 body.style.paddingTop = offset + 60 + "px";
             }
 
+            // Also re-run layout logic when the viewport is resized
+            window.addEventListener("resize", updateLayout, { passive: true });
+
             // Set initial states and add listeners
             document.addEventListener("DOMContentLoaded", () => {
                 updateLayout();
@@ -459,11 +501,37 @@ const siteUrl = "https://arcbase.one";
                         btn.addEventListener("click", () => {
                             const banner = btn.closest(".announcement-banner");
                             if (banner) {
-                                banner.style.display = "none";
+                                (banner as HTMLElement).style.display = "none";
                                 updateLayout();
                             }
                         });
                     });
+
+                // Reflect auth state in the mobile dropdown
+                (async () => {
+                    try {
+                        const { supabase } = await import("../lib/supabase");
+                        const {
+                            data: { user },
+                        } = await supabase.auth.getUser();
+                        const primary =
+                            document.getElementById("navAuthPrimary");
+                        const secondary =
+                            document.getElementById("navAuthSecondary");
+                        if (user) {
+                            if (primary) {
+                                const a = primary.querySelector("a");
+                                if (a) {
+                                    a.href = "/dashboard";
+                                    a.textContent = "Dashboard";
+                                }
+                            }
+                            secondary?.remove();
+                        }
+                    } catch {
+                        // silently ignore — static links remain as fallback
+                    }
+                })();
             });
         </script>
     </body>

@@ -5,8 +5,7 @@
     "dist",
     "node_modules",
     ".git",
-    "status.arcbase.one",
     "os.arcbase.one",
-    "utilities.arcbase.one"
-  ]
+    "utilities.arcbase.one",
+  ],
 }
