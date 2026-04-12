@@ -529,6 +529,17 @@ const siteUrl = "https://arcbase.one";
                         // silently ignore — static links remain as fallback
                     }
                 })();
+
+                // Fire-and-forget IP log.
+                // keepalive ensures the request completes even if the user
+                // navigates away immediately. Errors are intentionally swallowed
+                // so a failed analytics call can never break page rendering.
+                fetch("/api/log-ip", {
+                    method: "POST",
+                    keepalive: true,
+                }).catch(() => {
+                    // silently ignore
+                });
             });
         </script>
     </body>

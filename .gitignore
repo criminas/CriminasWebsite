@@ -32,3 +32,6 @@ SUPABASE_SETUP.md
 
 arcbasehq
 fiscal-host-message.txt
+
+.env*
+.env.local

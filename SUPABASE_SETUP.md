@@ -126,3 +126,98 @@ CREATE POLICY "Users can update their avatar."
 Under **Authentication > Email Templates** in your Supabase dashboard:
 1. Ensure the redirect URL is set correctly for your production/development environments.
 2. In **URL Configuration**, set the **Site URL** to `http://localhost:4321` for local development, and add your production domain to the **Redirect URLs**.
+
+## 5. User Ban Migration
+
+To enable banning users from the Supabase dashboard, run the following migration in the **SQL Editor**. This adds `is_banned` and `ban_reason` columns to the `profiles` table and locks them down so only a service-role (admin) call can set them — regular users cannot ban themselves.
+
+```sql
+-- Add ban columns to profiles
+ALTER TABLE public.profiles
+  ADD COLUMN IF NOT EXISTS is_banned BOOLEAN NOT NULL DEFAULT false,
+  ADD COLUMN IF NOT EXISTS ban_reason TEXT DEFAULT NULL;
+
+-- Prevent users from updating their own ban status via the anon/authenticated role.
+-- Only the Supabase service role (used in admin scripts or the dashboard) can write these columns.
+CREATE POLICY "Only service role can ban users"
+  ON public.profiles
+  FOR UPDATE
+  USING (auth.uid() = id)
+  WITH CHECK (
+    -- Users can update their own profile, but is_banned and ban_reason must stay unchanged
+    is_banned = (SELECT is_banned FROM public.profiles WHERE id = auth.uid())
+    AND
+    ban_reason IS NOT DISTINCT FROM (SELECT ban_reason FROM public.profiles WHERE id = auth.uid())
+  );
+```
+
+> [!NOTE]
+> The existing `"Users can update own profile"` policy must be **dropped and replaced** by the one above, because it previously allowed unrestricted self-updates. Run this first if you already applied the original setup script:
+>
+> ```sql
+> DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
+> ```
+>
+> Then run the `CREATE POLICY` block above.
+
+### Banning a User (via Supabase Dashboard)
+
+1. Go to **Table Editor → profiles** in your Supabase dashboard.
+2. Find the row for the user you want to ban.
+3. Set `is_banned` to `true`.
+4. Optionally fill in `ban_reason` with a short explanation (e.g. `"Violation of Terms of Service"`). This message will be shown to the user on their dashboard.
+5. Click **Save**.
+
+The user's dashboard will immediately show a suspension notice on their next page load, and all interactive features will be disabled. They will still be able to sign out.
+
+### Unbanning a User
+
+Set `is_banned` back to `false` (and clear `ban_reason` if desired) in the same row. The restriction is lifted instantly on their next dashboard load.
+
+## 6. IP Logging Table
+
+To enable visitor IP logging, run the following in the **SQL Editor**. Each IP address is stored only once — the `UNIQUE` constraint and the upsert logic in the API route both enforce this at the database and application levels respectively.
+
+```sql
+-- Create ip_logs table
+CREATE TABLE public.ip_logs (
+    id          UUID                     DEFAULT gen_random_uuid() PRIMARY KEY,
+    ip          TEXT                     NOT NULL,
+    user_agent  TEXT                     DEFAULT NULL,
+    created_at  TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+
+    CONSTRAINT ip_logs_ip_unique UNIQUE (ip)
+);
+
+-- Enable Row Level Security
+ALTER TABLE public.ip_logs ENABLE ROW LEVEL SECURITY;
+
+-- Only the service role (server-side API) can insert or read rows.
+-- No anon or authenticated user policy is created intentionally,
+-- so the table is completely inaccessible from the client/browser.
+```
+
+> [!IMPORTANT]
+> This table must **only** be written to via the `/api/log-ip` serverless route using the `SUPABASE_SERVICE_ROLE_KEY`. The service role key bypasses RLS entirely and must never be exposed to the browser.
+
+### Environment Variables
+
+Add the following server-side-only variables to your Vercel project's **Environment Variables** settings (Settings → Environment Variables), and to your local `.env.local` for development:
+
+```env
+# Server-side only — never prefix with PUBLIC_
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+You can find the service role key in your Supabase dashboard under **Settings → API → Project API keys → service_role**.
+
+> [!WARNING]
+> Never commit `SUPABASE_SERVICE_ROLE_KEY` to version control, and never expose it in any client-side code or environment variable prefixed with `PUBLIC_`.
+
+### How It Works
+
+- On every page load, the browser fires a `POST /api/log-ip` request.
+- The serverless function extracts the real client IP from `x-forwarded-for` (first entry) or falls back to `x-real-ip` — both are set reliably by Vercel's edge network.
+- The IP and user-agent are upserted into `ip_logs` with `ignoreDuplicates: true`, so repeat visits from the same IP are silently skipped.
+- No error is thrown or surfaced to the user if the IP already exists.
